@@ -24,11 +24,10 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      # 3. Встановлюємо Flutter
+      # 3. Встановлюємо Flutter (з фіксацією версії для стабільності CI)
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          # Можна вказати конкретну версію, або залишіть 'stable'
           channel: 'stable'
           cache: true # Кешування прискорює наступні запуски
 
@@ -36,6 +35,16 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # 5. Перевіряємо форматування та якість коду (Linter)
+      # 5. Перевіряємо якість коду (Linter) з передачею секретів
       - name: Analyze code
-        run: flutter analyze
+        run: |
+          flutter analyze \
+            --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
+            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+
+      # 6. Запускаємо тести (додано для повноцінного CI)
+      - name: Run tests
+        run: |
+          flutter test \
+            --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
+            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
