@@ -1,0 +1,41 @@
+name: Flutter CI
+
+# Тригери: коли саме запускати автоматизацію
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    # Запускаємо на віртуальній машині з Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Стягуємо код репозиторію на віртуальну машину
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Встановлюємо Java (необхідно для збірки Android)
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # 3. Встановлюємо Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          # Можна вказати конкретну версію, або залишіть 'stable'
+          channel: 'stable'
+          cache: true # Кешування прискорює наступні запуски
+
+      # 4. Завантажуємо залежності (packages)
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 5. Перевіряємо форматування та якість коду (Linter)
+      - name: Analyze code
+        run: flutter analyze
