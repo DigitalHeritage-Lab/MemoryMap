@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:empty_template/l10n/l10n.dart';
 import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class GraveListTile extends StatelessWidget {
         contentPadding: const EdgeInsets.all(8),
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: CachedNetworkImage(
+          child: AppNetworkImage(
             imageUrl: grave.photoUrl,
             width: 50,
             height: 50,
@@ -110,11 +109,19 @@ class GraveListTile extends StatelessWidget {
                   Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: CachedNetworkImage(
+                      child: AppNetworkImage(
                         imageUrl: grave.photoUrl,
                         width: 150,
                         height: 150,
                         fit: BoxFit.cover,
+                        errorWidget: (context, url, error) => const ColoredBox(
+                          color: AppColors.slate700,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.white24,
+                            size: 60,
+                          ),
+                        ),
                       ),
                     ),
                   ),

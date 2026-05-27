@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:empty_template/components/cemeteries/bloc/cemeteries_bloc.dart';
 import 'package:empty_template/l10n/l10n.dart';
 import 'package:empty_template/shared/shared.dart';
@@ -98,7 +97,7 @@ class _CemeteriesBodyState extends State<CemeteriesBody> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CachedNetworkImage(
+                                AppNetworkImage(
                                   imageUrl: cemetery.photoUrl,
                                   height: 160,
                                   width: double.infinity,

@@ -3,6 +3,7 @@ import 'package:empty_template/l10n/l10n.dart';
 import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class DigitizeBody extends StatefulWidget {
@@ -68,6 +69,7 @@ class _DigitizeBodyState extends State<DigitizeBody> {
     return BlocConsumer<DigitizeBloc, DigitizeState>(
       listener: (context, state) {
         if (state.status == LoadingStatus.loaded) {
+          final cemeteryId = state.selectedCemetery?.id;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(context.l10n.saveSuccess),
@@ -75,6 +77,9 @@ class _DigitizeBodyState extends State<DigitizeBody> {
             ),
           );
           _clearForm(context);
+          if (cemeteryId != null) {
+            context.go('/cemeteries/$cemeteryId');
+          }
         }
       },
       builder: (context, state) {

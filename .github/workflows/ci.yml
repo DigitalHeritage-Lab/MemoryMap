@@ -35,12 +35,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # 5. Перевіряємо якість коду (Linter) з передачею секретів
+      # 5. Перевіряємо якість коду (Linter)
       - name: Analyze code
-        run: |
-          flutter analyze \
-            --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
-            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+        run: flutter analyze
 
       # 6. Запускаємо тести (додано для повноцінного CI)
       - name: Run tests

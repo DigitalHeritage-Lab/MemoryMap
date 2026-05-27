@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:empty_template/components/cemeteries/bloc/cemetery_detail_bloc.dart';
 import 'package:empty_template/components/cemeteries/widget/grave_list_tile.dart';
 import 'package:empty_template/l10n/l10n.dart';
@@ -53,7 +52,7 @@ class CemeteryDetailBody extends StatelessWidget {
                 onPressed: () => context.pop(),
               ),
               flexibleSpace: FlexibleSpaceBar(
-                background: CachedNetworkImage(
+                background: AppNetworkImage(
                   imageUrl: cemetery.photoUrl,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => const ColoredBox(
