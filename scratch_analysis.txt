@@ -1,0 +1,179 @@
+Analyzing MemoryMap...                                          
+
+   info • The diagnostic 'public_member_api_docs' isn't produced in this file so it doesn't need to be ignored • lib/bootstrap.dart:3:21 • unnecessary_ignore
+   info • Missing a required trailing comma • lib/components/cemeteries/bloc/cemeteries_bloc.dart:70:8 • require_trailing_commas
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/components/cemeteries/bloc/cemeteries_bloc.dart:71:7 • avoid_catches_without_on_clauses
+   info • Missing a required trailing comma • lib/components/cemeteries/bloc/cemeteries_bloc.dart:75:8 • require_trailing_commas
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/bloc/cemetery_detail_bloc.dart:59:81 • lines_longer_than_80_chars
+   info • Missing a required trailing comma • lib/components/cemeteries/bloc/cemetery_detail_bloc.dart:92:8 • require_trailing_commas
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/components/cemeteries/bloc/cemetery_detail_bloc.dart:93:7 • avoid_catches_without_on_clauses
+   info • Missing a required trailing comma • lib/components/cemeteries/bloc/cemetery_detail_bloc.dart:97:8 • require_trailing_commas
+   info • The import of 'package:empty_template/shared/di/injection.dart' is unnecessary because all of the used elements are also provided by the import of 'package:empty_template/shared/shared.dart' • lib/components/cemeteries/view/cemeteries_page.dart:4:8 • unnecessary_import
+   info • Unnecessary use of a 'double' literal • lib/components/cemeteries/view/cemeteries_page.dart:56:43 • prefer_int_literals
+   info • The value of the argument is redundant because it matches the default value • lib/components/cemeteries/view/cemeteries_page.dart:107:36 • avoid_redundant_argument_values
+   info • Use a 'ColoredBox' rather than a 'Container' with only a 'Color' • lib/components/cemeteries/view/cemeteries_page.dart:131:75 • use_colored_box
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemeteries_page.dart:131:81 • lines_longer_than_80_chars
+   info • Unnecessary use of a 'double' literal • lib/components/cemeteries/view/cemeteries_page.dart:141:67 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemeteries_page.dart:143:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemeteries_page.dart:159:81 • lines_longer_than_80_chars
+   info • The import of 'package:empty_template/shared/di/injection.dart' is unnecessary because all of the used elements are also provided by the import of 'package:empty_template/shared/shared.dart' • lib/components/cemeteries/view/cemetery_detail_page.dart:4:8 • unnecessary_import
+   info • The import of 'package:empty_template/shared/models/grave.dart' is unnecessary because all of the used elements are also provided by the import of 'package:empty_template/shared/shared.dart' • lib/components/cemeteries/view/cemetery_detail_page.dart:5:8 • unnecessary_import
+   info • The import of 'package:skeletonizer/skeletonizer.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/components/cemeteries/view/cemetery_detail_page.dart:10:8 • unnecessary_import
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:23:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:37:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:50:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:75:81 • lines_longer_than_80_chars
+   info • Use a 'ColoredBox' rather than a 'Container' with only a 'Color' • lib/components/cemeteries/view/cemetery_detail_page.dart:76:59 • use_colored_box
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:78:81 • lines_longer_than_80_chars
+   info • Unnecessary use of a 'double' literal • lib/components/cemeteries/view/cemetery_detail_page.dart:85:49 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:100:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:105:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:113:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:116:81 • lines_longer_than_80_chars
+   info • Unnecessary use of a 'double' literal • lib/components/cemeteries/view/cemetery_detail_page.dart:161:62 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:214:81 • lines_longer_than_80_chars
+   info • Use a 'ColoredBox' rather than a 'Container' with only a 'Color' • lib/components/cemeteries/view/cemetery_detail_page.dart:215:51 • use_colored_box
+   info • Unnecessary use of a 'double' literal • lib/components/cemeteries/view/cemetery_detail_page.dart:230:47 • prefer_int_literals
+   info • 'Future'-returning calls in a non-'async' function • lib/components/cemeteries/view/cemetery_detail_page.dart:252:5 • discarded_futures
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:329:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/cemeteries/view/cemetery_detail_page.dart:332:81 • lines_longer_than_80_chars
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/components/digitize/bloc/digitize_bloc.dart:177:7 • avoid_catches_without_on_clauses
+   info • The line length exceeds the 80-character limit • lib/components/digitize/bloc/digitize_bloc.dart:184:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/bloc/digitize_bloc.dart:188:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/bloc/digitize_bloc.dart:196:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/bloc/digitize_bloc.dart:200:81 • lines_longer_than_80_chars
+   info • Unnecessary type annotation on a local variable • lib/components/digitize/bloc/digitize_bloc.dart:204:7 • omit_local_variable_types
+   info • Missing a required trailing comma • lib/components/digitize/bloc/digitize_bloc.dart:224:8 • require_trailing_commas
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/components/digitize/bloc/digitize_bloc.dart:225:7 • avoid_catches_without_on_clauses
+   info • Missing a required trailing comma • lib/components/digitize/bloc/digitize_bloc.dart:231:8 • require_trailing_commas
+   info • The line length exceeds the 80-character limit • lib/components/digitize/bloc/digitize_bloc.dart:235:81 • lines_longer_than_80_chars
+   info • Unnecessary escape of ''' • lib/components/digitize/bloc/digitize_bloc.dart:241:23 • avoid_escaping_inner_quotes
+   info • Missing a required trailing comma • lib/components/digitize/bloc/digitize_bloc.dart:242:8 • require_trailing_commas
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/components/digitize/bloc/digitize_bloc.dart:263:7 • avoid_catches_without_on_clauses
+   info • Missing a required trailing comma • lib/components/digitize/bloc/digitize_bloc.dart:267:8 • require_trailing_commas
+   info • The import of 'package:empty_template/shared/di/injection.dart' is unnecessary because all of the used elements are also provided by the import of 'package:empty_template/shared/shared.dart' • lib/components/digitize/view/digitize_page.dart:3:8 • unnecessary_import
+   info • The import of 'package:empty_template/shared/models/cemetery.dart' is unnecessary because all of the used elements are also provided by the import of 'package:empty_template/shared/shared.dart' • lib/components/digitize/view/digitize_page.dart:4:8 • unnecessary_import
+   info • Unnecessary use of a 'double' literal • lib/components/digitize/view/digitize_page.dart:81:43 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:91:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:93:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:110:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:113:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:123:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:126:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:128:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:133:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:149:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:164:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:166:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:176:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:178:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:192:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:210:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:215:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:222:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:225:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:236:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:240:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:252:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:257:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:259:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:265:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:269:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/digitize/view/digitize_page.dart:283:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/graves/bloc/graves_bloc.dart:46:81 • lines_longer_than_80_chars
+   info • Missing a required trailing comma • lib/components/graves/bloc/graves_bloc.dart:88:6 • require_trailing_commas
+   info • Missing a required trailing comma • lib/components/graves/bloc/graves_bloc.dart:101:8 • require_trailing_commas
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/components/graves/bloc/graves_bloc.dart:102:7 • avoid_catches_without_on_clauses
+   info • Missing a required trailing comma • lib/components/graves/bloc/graves_bloc.dart:106:8 • require_trailing_commas
+   info • Missing a required trailing comma • lib/components/graves/bloc/graves_bloc.dart:135:8 • require_trailing_commas
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/components/graves/bloc/graves_bloc.dart:136:7 • avoid_catches_without_on_clauses
+   info • Missing a required trailing comma • lib/components/graves/bloc/graves_bloc.dart:141:8 • require_trailing_commas
+   info • The import of 'package:empty_template/shared/di/injection.dart' is unnecessary because all of the used elements are also provided by the import of 'package:empty_template/shared/shared.dart' • lib/components/graves/view/graves_page.dart:4:8 • unnecessary_import
+   info • The import of 'package:empty_template/shared/models/grave.dart' is unnecessary because all of the used elements are also provided by the import of 'package:empty_template/shared/shared.dart' • lib/components/graves/view/graves_page.dart:5:8 • unnecessary_import
+   info • Unnecessary duplication of receiver • lib/components/graves/view/graves_page.dart:43:5 • cascade_invocations
+   info • Unnecessary use of a 'double' literal • lib/components/graves/view/graves_page.dart:78:43 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/components/graves/view/graves_page.dart:92:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/graves/view/graves_page.dart:120:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/graves/view/graves_page.dart:131:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/graves/view/graves_page.dart:155:81 • lines_longer_than_80_chars
+   info • Use a 'ColoredBox' rather than a 'Container' with only a 'Color' • lib/components/graves/view/graves_page.dart:156:69 • use_colored_box
+   info • The line length exceeds the 80-character limit • lib/components/graves/view/graves_page.dart:158:81 • lines_longer_than_80_chars
+   info • Unnecessary use of a 'double' literal • lib/components/graves/view/graves_page.dart:171:65 • prefer_int_literals
+   info • 'Future'-returning calls in a non-'async' function • lib/components/graves/view/graves_page.dart:204:5 • discarded_futures
+   info • The line length exceeds the 80-character limit • lib/components/graves/view/graves_page.dart:281:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/graves/view/graves_page.dart:284:81 • lines_longer_than_80_chars
+   info • Unnecessary type annotation on a local variable • lib/components/home/view/home_page.dart:18:5 • omit_local_variable_types
+   info • Unnecessary 'break' statement • lib/components/home/view/home_page.dart:35:15 • unnecessary_breaks
+   info • Unnecessary 'break' statement • lib/components/home/view/home_page.dart:38:15 • unnecessary_breaks
+   info • Unnecessary 'break' statement • lib/components/home/view/home_page.dart:41:15 • unnecessary_breaks
+   info • The line length exceeds the 80-character limit • lib/components/home/view/home_page.dart:47:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/components/home/view/home_page.dart:48:81 • lines_longer_than_80_chars
+  error • Target of URI doesn't exist: 'package:flutter_gen/gen_l10n/app_localizations.dart' • lib/l10n/l10n.dart:2:8 • uri_does_not_exist
+  error • Undefined class 'AppLocalizations' • lib/l10n/l10n.dart:5:3 • undefined_class
+  error • Undefined name 'AppLocalizations' • lib/l10n/l10n.dart:5:32 • undefined_identifier
+  error • Target of URI doesn't exist: 'package:flutter_gen/gen_l10n/app_localizations.dart' • lib/main.dart:4:8 • uri_does_not_exist
+   info • 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre • lib/main.dart:34:15 • deprecated_member_use
+  error • The values in a const list literal must be constants • lib/main.dart:50:13 • non_constant_list_element
+  error • Undefined name 'AppLocalizations' • lib/main.dart:50:13 • undefined_identifier
+  error • Undefined name 'AppLocalizations' • lib/main.dart:55:29 • undefined_identifier
+   info • A type annotation is needed because it isn't obvious • lib/shared/di/injection.dart:5:1 • specify_nonobvious_property_types
+   info • The value of the argument is redundant because it matches the default value • lib/shared/di/injection.dart:8:20 • avoid_redundant_argument_values
+   info • The value of the argument is redundant because it matches the default value • lib/shared/di/injection.dart:10:16 • avoid_redundant_argument_values
+   info • The line length exceeds the 80-character limit • lib/shared/models/cemetery.dart:23:81 • lines_longer_than_80_chars
+   info • Constructor declarations should be before non-constructor declarations • lib/shared/models/cemetery.dart:25:11 • sort_constructors_first
+   info • The line length exceeds the 80-character limit • lib/shared/models/grave.dart:27:81 • lines_longer_than_80_chars
+   info • Constructor declarations should be before non-constructor declarations • lib/shared/models/grave.dart:29:11 • sort_constructors_first
+   info • The line length exceeds the 80-character limit • lib/shared/navigation/app_router.dart:10:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/cemetery_repository.dart:16:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/cemetery_repository.dart:25:81 • lines_longer_than_80_chars
+   info • Unnecessary escape of ''' • lib/shared/repositories/cemetery_repository.dart:32:13 • avoid_escaping_inner_quotes
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/cemetery_repository.dart:34:81 • lines_longer_than_80_chars
+   info • Missing a required trailing comma • lib/shared/repositories/cemetery_repository.dart:52:62 • require_trailing_commas
+   info • Catch clause should use 'on' to specify the type of exception being caught • lib/shared/repositories/cemetery_repository.dart:61:7 • avoid_catches_without_on_clauses
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:61:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:62:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:63:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:64:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:65:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:66:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:67:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:68:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:69:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:71:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:73:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:74:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/repositories/grave_repository.dart:75:81 • lines_longer_than_80_chars
+   info • Missing a required trailing comma • lib/shared/repositories/grave_repository.dart:117:38 • require_trailing_commas
+   info • Unnecessary escape of ''' • lib/shared/repositories/grave_repository.dart:136:23 • avoid_escaping_inner_quotes
+warning • The value of the local variable 'defaultBgColor' isn't used • lib/shared/widget/app_button.dart:26:11 • unused_local_variable
+   info • Use 'const' for final variables initialized to a constant value • lib/shared/widget/app_button.dart:27:5 • prefer_const_declarations
+   info • The line length exceeds the 80-character limit • lib/shared/widget/app_button.dart:35:81 • lines_longer_than_80_chars
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/shared/widget/app_button.dart:42:54 • deprecated_member_use
+   info • The line length exceeds the 80-character limit • lib/shared/widget/app_button.dart:42:81 • lines_longer_than_80_chars
+   info • The value of the argument is redundant because it matches the default value • lib/shared/widget/app_button.dart:43:18 • avoid_redundant_argument_values
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/shared/widget/app_button.dart:48:50 • deprecated_member_use
+   info • Missing a required trailing comma • lib/shared/widget/app_button.dart:52:15 • require_trailing_commas
+   info • The line length exceeds the 80-character limit • lib/shared/widget/app_button.dart:61:81 • lines_longer_than_80_chars
+   info • Unnecessary use of a 'double' literal • lib/shared/widget/app_button.dart:62:59 • prefer_int_literals
+   info • Unnecessary use of a 'double' literal • lib/shared/widget/app_button.dart:62:77 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/shared/widget/app_button.dart:62:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/widget/app_button.dart:84:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/widget/sending_text_widget.dart:36:81 • lines_longer_than_80_chars
+   info • Unnecessary 'break' statement • lib/shared/widget/sending_text_widget.dart:49:9 • unnecessary_breaks
+   info • Unnecessary 'break' statement • lib/shared/widget/sending_text_widget.dart:70:9 • unnecessary_breaks
+   info • Unnecessary 'break' statement • lib/shared/widget/sending_text_widget.dart:94:9 • unnecessary_breaks
+   info • Unnecessary 'break' statement • lib/shared/widget/sending_text_widget.dart:97:9 • unnecessary_breaks
+   info • Unnecessary use of a 'double' literal • lib/shared/widget/sending_text_widget.dart:101:53 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/shared/widget/text_field_widget.dart:35:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/widget/text_field_widget.dart:68:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/widget/text_field_widget.dart:69:81 • lines_longer_than_80_chars
+   info • The line length exceeds the 80-character limit • lib/shared/widget/text_field_widget.dart:75:81 • lines_longer_than_80_chars
+   info • The value of the argument is redundant because it matches the default value • lib/shared/widget/text_field_widget.dart:76:24 • avoid_redundant_argument_values
+   info • The line length exceeds the 80-character limit • lib/shared/widget/text_field_widget.dart:82:81 • lines_longer_than_80_chars
+   info • The value of the argument is redundant because it matches the default value • lib/shared/widget/text_field_widget.dart:90:24 • avoid_redundant_argument_values
+   info • Unnecessary use of a 'double' literal • lib/shared/widget/try_again_widget.dart:17:39 • prefer_int_literals
+   info • The line length exceeds the 80-character limit • lib/shared/widget/try_again_widget.dart:41:81 • lines_longer_than_80_chars
+   info • Dependencies not sorted alphabetically • pubspec.yaml:16:3 • sort_pub_dependencies
+   info • Dependencies not sorted alphabetically • pubspec.yaml:40:3 • sort_pub_dependencies
+
+175 issues found. (ran in 0.8s)

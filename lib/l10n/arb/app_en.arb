@@ -1,0 +1,62 @@
+{
+  "@@locale": "en",
+  "appTitle": "MemoryMap",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "navCemeteries": "Cemeteries",
+  "navGraves": "Search",
+  "navDigitize": "Digitize",
+  "searchCemeteriesHint": "Search cemeteries...",
+  "searchGravesHint": "Search graves by name...",
+  "birthDate": "Birth Date",
+  "deathDate": "Death Date",
+  "gpsCoordinates": "GPS Coordinates",
+  "getGps": "Get GPS",
+  "save": "Save",
+  "saving": "Saving...",
+  "saveSuccess": "Saved successfully!",
+  "saveError": "Failed to save: {error}",
+  "@saveError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "fullName": "Full Name",
+  "cemetery": "Cemetery",
+  "selectCemetery": "Select Cemetery",
+  "bio": "Biography / Epitaph",
+  "addGrave": "Digitize Grave",
+  "requiredField": "This field is required",
+  "invalidDate": "Invalid date format",
+  "tryAgain": "Try Again",
+  "loading": "Loading...",
+  "emptyGraves": "No graves found",
+  "emptyCemeteries": "No cemeteries found",
+  "graveDetails": "Grave Details",
+  "cemeteryDetails": "Cemetery Details",
+  "gpsAquired": "GPS coordinates acquired",
+  "gpsError": "Failed to get GPS. Make sure location services are enabled.",
+  
+  "cemeteryLabel": "Cemetery",
+  "gpsLocationLabel": "Location (GPS)",
+  "coordinatesNotDetermined": "Coordinates not determined",
+  "determine": "Determine",
+  "aboutCemetery": "About Cemetery",
+  "digitizedGravesCount": "Digitized graves ({count})",
+  "@digitizedGravesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noInformation": "No information available.",
+  "fullNameHint": "John Doe",
+  "bioHint": "Enter epitaph or biographical details...",
+  "fillAllRequiredFields": "Please fill in all required fields",
+  "dateFormatHint": "YYYY-MM-DD",
+  "defaultError": "Something went wrong. Please try again."
+}
