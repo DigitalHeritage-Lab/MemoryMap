@@ -128,6 +128,12 @@ abstract class AppLocalizations {
   /// **'Map'**
   String get navMap;
 
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
   /// No description provided for @searchCemeteriesHint.
   ///
   /// In en, this message translates to:

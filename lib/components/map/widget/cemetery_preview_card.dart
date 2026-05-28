@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:empty_template/l10n/l10n.dart';
 import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 
@@ -44,81 +45,93 @@ class CemeteryPreviewCard extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const SizedBox(width: 14),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          cemetery.name,
-                          style: const TextStyle(
-                            color: AppColors.slate50,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.location_on,
-                              color: AppColors.emerald,
-                              size: 14,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            cemetery.name,
+                            style: const TextStyle(
+                              color: AppColors.slate50,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(width: 4),
-                            Expanded(
-                              child: Text(
-                                cemetery.location,
-                                style: const TextStyle(
-                                  color: AppColors.slate400,
-                                  fontSize: 12,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on,
+                                  color: AppColors.emerald,
+                                  size: 14,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 4),
+                                    child: Text(
+                                      cemetery.location,
+                                      style: const TextStyle(
+                                        color: AppColors.slate400,
+                                        fontSize: 12,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          cemetery.description,
-                          style: const TextStyle(
-                            color: AppColors.slate500,
-                            fontSize: 12,
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6),
+                            child: Text(
+                              cemetery.description,
+                              style: const TextStyle(
+                                color: AppColors.slate500,
+                                fontSize: 12,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 14),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: onClose,
-                    icon: const Icon(
-                      Icons.close,
-                      color: AppColors.slate400,
+              Padding(
+                padding: const EdgeInsets.only(top: 14),
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: onClose,
+                      icon: const Icon(
+                        Icons.close,
+                        color: AppColors.slate400,
+                      ),
+                      style: IconButton.styleFrom(
+                        backgroundColor:
+                            AppColors.slate900.withValues(alpha: 0.6),
+                      ),
                     ),
-                    style: IconButton.styleFrom(
-                      backgroundColor:
-                          AppColors.slate900.withValues(alpha: 0.6),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: AppButton(
+                          onPressed: onOpenDetails,
+                          text: context.l10n.details,
+                          icon: Icons.arrow_forward,
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: AppButton(
-                      onPressed: onOpenDetails,
-                      text: 'Детальніше',
-                      icon: Icons.arrow_forward,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
