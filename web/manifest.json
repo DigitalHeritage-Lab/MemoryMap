@@ -1,6 +1,6 @@
 {
-    "name": "empty_template",
-    "short_name": "empty_template",
+    "name": "Memory Map",
+    "short_name": "Memory Map",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
