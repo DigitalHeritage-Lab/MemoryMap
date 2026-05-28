@@ -128,7 +128,7 @@ class _MapBodyState extends State<MapBody> {
                     urlTemplate:
                         'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
                     subdomains: const ['a', 'b', 'c', 'd'],
-                    userAgentPackageName: 'com.memorymap.app',
+                    userAgentPackageName: 'com.digitalheritagelab.memorymap',
                   ),
                   MarkerLayer(
                     markers: markers,
