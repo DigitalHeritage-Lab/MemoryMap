@@ -1,4 +1,4 @@
-name: Deploy Supabase Migrations
+name: Test and Deploy Supabase Migrations
 
 on:
   push:
@@ -6,9 +6,39 @@ on:
       - main
     paths:
       - 'supabase/migrations/**'
+      - '.github/workflows/deploy_supabase.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'supabase/migrations/**'
+      - '.github/workflows/deploy_supabase.yml'
 
 jobs:
-  deploy:
+  test-migrations:
+    name: Verify Migrations (Local Test)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      # supabase start requires Docker. GitHub-hosted runners have Docker pre-installed.
+      - name: Start Supabase Local Stack (Applies Migrations)
+        run: supabase start
+
+      - name: Verify Database Reset
+        run: supabase db reset
+
+  deploy-migrations:
+    name: Deploy Migrations to Production
+    needs: test-migrations
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
