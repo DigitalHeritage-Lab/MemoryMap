@@ -284,6 +284,36 @@ abstract class AppLocalizations {
   /// **'Failed to get GPS. Make sure location services are enabled.'**
   String get gpsError;
 
+  /// No description provided for @invalidDateRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth date cannot be after death date'**
+  String get invalidDateRange;
+
+  /// No description provided for @dateInFuture.
+  ///
+  /// In en, this message translates to:
+  /// **'Date cannot be in the future'**
+  String get dateInFuture;
+
+  /// No description provided for @invalidLifespan.
+  ///
+  /// In en, this message translates to:
+  /// **'Age cannot exceed 120 years'**
+  String get invalidLifespan;
+
+  /// No description provided for @fullNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter at least first and last name'**
+  String get fullNameTooShort;
+
+  /// No description provided for @coordinatesTooFar.
+  ///
+  /// In en, this message translates to:
+  /// **'Coordinates are too far from the selected cemetery'**
+  String get coordinatesTooFar;
+
   /// No description provided for @cemeteryLabel.
   ///
   /// In en, this message translates to:

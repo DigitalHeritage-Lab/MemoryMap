@@ -105,6 +105,22 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to get GPS. Make sure location services are enabled.';
 
   @override
+  String get invalidDateRange => 'Birth date cannot be after death date';
+
+  @override
+  String get dateInFuture => 'Date cannot be in the future';
+
+  @override
+  String get invalidLifespan => 'Age cannot exceed 120 years';
+
+  @override
+  String get fullNameTooShort => 'Please enter at least first and last name';
+
+  @override
+  String get coordinatesTooFar =>
+      'Coordinates are too far from the selected cemetery';
+
+  @override
   String get cemeteryLabel => 'Cemetery';
 
   @override

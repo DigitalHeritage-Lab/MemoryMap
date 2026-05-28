@@ -105,6 +105,24 @@ class AppLocalizationsUk extends AppLocalizations {
       'Не вдалося отримати GPS. Перевірте дозволи геопозиції.';
 
   @override
+  String get invalidDateRange =>
+      'Дата народження не може бути пізнішою за дату смерті';
+
+  @override
+  String get dateInFuture => 'Дата не може бути в майбутньому';
+
+  @override
+  String get invalidLifespan => 'Вік не може перевищувати 120 років';
+
+  @override
+  String get fullNameTooShort =>
+      'Будь ласка, введіть щонайменше ім\'я та прізвище';
+
+  @override
+  String get coordinatesTooFar =>
+      'Координати знаходяться занадто далеко від вибраного цвинтаря';
+
+  @override
   String get cemeteryLabel => 'Цвинтар';
 
   @override

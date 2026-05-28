@@ -41,7 +41,11 @@
   "cemeteryDetails": "Cemetery Details",
   "gpsAquired": "GPS coordinates acquired",
   "gpsError": "Failed to get GPS. Make sure location services are enabled.",
-  
+  "invalidDateRange": "Birth date cannot be after death date",
+  "dateInFuture": "Date cannot be in the future",
+  "invalidLifespan": "Age cannot exceed 120 years",
+  "fullNameTooShort": "Please enter at least first and last name",
+  "coordinatesTooFar": "Coordinates are too far from the selected cemetery",
   "cemeteryLabel": "Cemetery",
   "gpsLocationLabel": "Location (GPS)",
   "coordinatesNotDetermined": "Coordinates not determined",
