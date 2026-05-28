@@ -1,6 +1,43 @@
 import 'package:empty_template/components/digitize/bloc/digitize_bloc.dart';
 import 'package:empty_template/shared/shared.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+class MockGeolocatorPlatform extends GeolocatorPlatform
+    with MockPlatformInterfaceMixin {
+  Position? mockPosition;
+  LocationPermission mockPermission = LocationPermission.always;
+
+  @override
+  Future<LocationPermission> checkPermission() async {
+    return mockPermission;
+  }
+
+  @override
+  Future<LocationPermission> requestPermission() async {
+    return mockPermission;
+  }
+
+  @override
+  Future<Position> getCurrentPosition({
+    LocationSettings? locationSettings,
+  }) async {
+    return mockPosition ??
+        Position(
+          latitude: 50.4162,
+          longitude: 30.5097,
+          timestamp: DateTime.now(),
+          accuracy: 0,
+          altitude: 0,
+          altitudeAccuracy: 0,
+          heading: 0,
+          headingAccuracy: 0,
+          speed: 0,
+          speedAccuracy: 0,
+        );
+  }
+}
 
 class MockCemeteryRepository implements CemeteryRepository {
   List<Cemetery> cemeteriesResult = [];
@@ -50,10 +87,13 @@ void main() {
 
   late MockCemeteryRepository mockCemeteryRepo;
   late MockGraveRepository mockGraveRepo;
+  late MockGeolocatorPlatform mockGeolocator;
 
   setUp(() {
     mockCemeteryRepo = MockCemeteryRepository();
     mockGraveRepo = MockGraveRepository();
+    mockGeolocator = MockGeolocatorPlatform();
+    GeolocatorPlatform.instance = mockGeolocator;
   });
 
   group('DigitizeState Validation Tests', () {

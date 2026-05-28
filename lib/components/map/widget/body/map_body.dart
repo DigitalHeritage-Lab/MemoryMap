@@ -16,6 +16,7 @@ class MapBody extends StatefulWidget {
 
 class _MapBodyState extends State<MapBody> {
   final MapController _mapController = MapController();
+  double _currentZoom = 11;
 
   @override
   void dispose() {
@@ -58,54 +59,101 @@ class _MapBodyState extends State<MapBody> {
 
         final markers = state.cemeteries.map((cemetery) {
           final isSelected = state.selectedCemetery?.id == cemetery.id;
-          return Marker(
-            point: LatLng(cemetery.latitude, cemetery.longitude),
-            width: 50,
-            height: 50,
-            child: GestureDetector(
-              onTap: () {
-                context.read<MapBloc>().add(MapEvent.selectCemetery(cemetery));
-                _moveToCemetery(cemetery.latitude, cemetery.longitude);
-              },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  color: (isSelected ? AppColors.emerald : AppColors.slate700)
-                      .withValues(alpha: 0.25),
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: isSelected ? AppColors.emerald : AppColors.slate400,
-                    width: isSelected ? 3 : 1.5,
-                  ),
-                  boxShadow: isSelected
-                      ? [
-                          BoxShadow(
-                            color: AppColors.emerald.withValues(alpha: 0.4),
-                            blurRadius: 10,
-                            spreadRadius: 2,
-                          ),
-                        ]
-                      : null,
-                ),
-                child: Center(
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
+          final isZoomedIn = _currentZoom >= 11.0;
+
+          if (isZoomedIn) {
+            return Marker(
+              point: LatLng(cemetery.latitude, cemetery.longitude),
+              width: 50,
+              height: 50,
+              child: GestureDetector(
+                onTap: () {
+                  context
+                      .read<MapBloc>()
+                      .add(MapEvent.selectCemetery(cemetery));
+                  _moveToCemetery(cemetery.latitude, cemetery.longitude);
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                    color: (isSelected ? AppColors.emerald : AppColors.slate700)
+                        .withValues(alpha: 0.25),
+                    shape: BoxShape.circle,
+                    border: Border.all(
                       color:
-                          isSelected ? AppColors.emerald : AppColors.slate800,
-                      shape: BoxShape.circle,
+                          isSelected ? AppColors.emerald : AppColors.slate400,
+                      width: isSelected ? 3 : 1.5,
                     ),
-                    child: Icon(
-                      Icons.account_balance_outlined,
-                      color: isSelected ? Colors.white : AppColors.slate400,
-                      size: 16,
+                    boxShadow: isSelected
+                        ? [
+                            BoxShadow(
+                              color: AppColors.emerald.withValues(alpha: 0.4),
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: Center(
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? AppColors.emerald
+                            : AppColors.slate800,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.account_balance_outlined,
+                        color: isSelected ? Colors.white : AppColors.slate400,
+                        size: 16,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
+            );
+          } else {
+            final dotSize = isSelected ? 14.0 : 8.0;
+            return Marker(
+              point: LatLng(cemetery.latitude, cemetery.longitude),
+              width: 24,
+              height: 24,
+              child: GestureDetector(
+                onTap: () {
+                  context
+                      .read<MapBloc>()
+                      .add(MapEvent.selectCemetery(cemetery));
+                  _moveToCemetery(cemetery.latitude, cemetery.longitude);
+                },
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: dotSize,
+                    height: dotSize,
+                    decoration: BoxDecoration(
+                      color:
+                          isSelected ? AppColors.emerald : AppColors.slate400,
+                      shape: BoxShape.circle,
+                      border: isSelected
+                          ? Border.all(color: Colors.white, width: 1.5)
+                          : null,
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: AppColors.emerald.withValues(alpha: 0.6),
+                                blurRadius: 6,
+                                spreadRadius: 1.5,
+                              ),
+                            ]
+                          : null,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
         }).toList();
 
         return Column(
@@ -118,6 +166,13 @@ class _MapBodyState extends State<MapBody> {
                   initialZoom: 11,
                   minZoom: 3,
                   maxZoom: 18,
+                  onPositionChanged: (camera, hasGesture) {
+                    if (camera.zoom != _currentZoom) {
+                      setState(() {
+                        _currentZoom = camera.zoom;
+                      });
+                    }
+                  },
                   onTap: (_, __) {
                     // Deselect when tapping on empty map area
                     context
