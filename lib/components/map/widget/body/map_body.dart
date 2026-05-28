@@ -108,37 +108,41 @@ class _MapBodyState extends State<MapBody> {
           );
         }).toList();
 
-        return Stack(
+        return Column(
           children: [
-            FlutterMap(
-              mapController: _mapController,
-              options: MapOptions(
-                initialCenter: initialCenter,
-                initialZoom: 11,
-                onTap: (_, __) {
-                  // Deselect when tapping on empty map area
-                  context
-                      .read<MapBloc>()
-                      .add(const MapEvent.selectCemetery(null));
-                },
+            Expanded(
+              child: FlutterMap(
+                mapController: _mapController,
+                options: MapOptions(
+                  initialCenter: initialCenter,
+                  initialZoom: 11,
+                  onTap: (_, __) {
+                    // Deselect when tapping on empty map area
+                    context
+                        .read<MapBloc>()
+                        .add(const MapEvent.selectCemetery(null));
+                  },
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate:
+                        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+                    subdomains: const ['a', 'b', 'c', 'd'],
+                    userAgentPackageName: 'com.memorymap.app',
+                  ),
+                  MarkerLayer(
+                    markers: markers,
+                  ),
+                ],
               ),
-              children: [
-                TileLayer(
-                  urlTemplate:
-                      'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-                  subdomains: const ['a', 'b', 'c', 'd'],
-                  userAgentPackageName: 'com.memorymap.app',
-                ),
-                MarkerLayer(
-                  markers: markers,
-                ),
-              ],
             ),
             if (state.selectedCemetery != null)
-              Positioned(
-                left: 16,
-                right: 16,
-                bottom: 24,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
+                ),
                 child: CemeteryPreviewCard(
                   cemetery: state.selectedCemetery!,
                   onClose: () {
