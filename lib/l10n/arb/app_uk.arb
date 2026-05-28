@@ -4,6 +4,8 @@
   "navCemeteries": "Цвинтарі",
   "navGraves": "Пошук",
   "navDigitize": "Оцифрувати",
+  "navMap": "Карта",
+  "details": "Детальніше",
   "searchCemeteriesHint": "Пошук цвинтарів...",
   "searchGravesHint": "Пошук могил за ПІБ...",
   "birthDate": "Дата народження",

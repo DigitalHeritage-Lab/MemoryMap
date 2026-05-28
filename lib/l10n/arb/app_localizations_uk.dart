@@ -21,6 +21,12 @@ class AppLocalizationsUk extends AppLocalizations {
   String get navDigitize => 'Оцифрувати';
 
   @override
+  String get navMap => 'Карта';
+
+  @override
+  String get details => 'Детальніше';
+
+  @override
   String get searchCemeteriesHint => 'Пошук цвинтарів...';
 
   @override

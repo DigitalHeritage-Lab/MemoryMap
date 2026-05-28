@@ -17,6 +17,7 @@ import 'package:empty_template/components/digitize/bloc/digitize_bloc.dart'
     as _i140;
 import 'package:empty_template/components/graves/bloc/graves_bloc.dart'
     as _i607;
+import 'package:empty_template/components/map/bloc/map_bloc.dart' as _i953;
 import 'package:empty_template/shared/repositories/cemetery_repository.dart'
     as _i359;
 import 'package:empty_template/shared/repositories/grave_repository.dart'
@@ -49,6 +50,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i607.GravesBloc(gh<_i525.GraveRepository>()));
     gh.factory<_i705.CemeteriesBloc>(
         () => _i705.CemeteriesBloc(gh<_i525.CemeteryRepository>()));
+    gh.factory<_i953.MapBloc>(
+        () => _i953.MapBloc(gh<_i525.CemeteryRepository>()));
     gh.factory<_i599.CemeteryDetailBloc>(() => _i599.CemeteryDetailBloc(
           gh<_i525.CemeteryRepository>(),
           gh<_i525.GraveRepository>(),

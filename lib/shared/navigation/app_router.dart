@@ -3,6 +3,7 @@ import 'package:empty_template/components/cemeteries/view/cemetery_detail_view.d
 import 'package:empty_template/components/digitize/view/digitize_view.dart';
 import 'package:empty_template/components/graves/view/graves_view.dart';
 import 'package:empty_template/components/home/view/home_page.dart';
+import 'package:empty_template/components/map/view/map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,6 +33,10 @@ final appRouter = GoRouter(
               },
             ),
           ],
+        ),
+        GoRoute(
+          path: '/map',
+          builder: (context, state) => const MapScreen(),
         ),
         GoRoute(
           path: '/graves',
