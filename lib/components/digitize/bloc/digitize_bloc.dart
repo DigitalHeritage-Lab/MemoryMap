@@ -93,7 +93,8 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
     emit(
       state.copyWith(gpsStatus: GpsStatus.loading),
     );
-    try {
+
+    final result = await eitherFutureHelper(() async {
       var permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
@@ -103,29 +104,34 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
         throw Exception('Location permission denied forever');
       }
 
-      final position = await Geolocator.getCurrentPosition(
+      return Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
           timeLimit: Duration(seconds: 5),
         ),
       );
+    });
 
-      emit(
-        state.copyWith(
-          gpsStatus: GpsStatus.success,
-          latitude: position.latitude,
-          longitude: position.longitude,
-        ),
-      );
-    } on Exception catch (_) {
-      emit(
-        state.copyWith(
-          gpsStatus: GpsStatus.success,
-          latitude: 50.4162 + (0.005 * (DateTime.now().second % 10)),
-          longitude: 30.5097 + (0.005 * (DateTime.now().second % 10)),
-        ),
-      );
-    }
+    result.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            gpsStatus: GpsStatus.success,
+            latitude: 50.4162 + (0.005 * (DateTime.now().second % 10)),
+            longitude: 30.5097 + (0.005 * (DateTime.now().second % 10)),
+          ),
+        );
+      },
+      (position) {
+        emit(
+          state.copyWith(
+            gpsStatus: GpsStatus.success,
+            latitude: position.latitude,
+            longitude: position.longitude,
+          ),
+        );
+      },
+    );
   }
 
   Future<void> _onSubmitGrave(

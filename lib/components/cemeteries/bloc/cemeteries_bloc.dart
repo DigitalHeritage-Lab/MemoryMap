@@ -58,7 +58,8 @@ class CemeteriesBloc extends SafeBloc<CemeteriesEvent, CemeteriesState> {
 
   Future<void> _fetchGpsLocation(Emitter<CemeteriesState> emit) async {
     emit(state.copyWith(status: LoadingStatus.loading, gpsError: null));
-    try {
+
+    final result = await eitherFutureHelper(() async {
       var permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
@@ -66,46 +67,45 @@ class CemeteriesBloc extends SafeBloc<CemeteriesEvent, CemeteriesState> {
 
       if (permission == LocationPermission.deniedForever ||
           permission == LocationPermission.denied) {
+        throw Exception('Доступ до геопозиції заблоковано');
+      }
+
+      return Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+          timeLimit: Duration(seconds: 5),
+        ),
+      );
+    });
+
+    result.fold(
+      (failure) {
+        final rawMsg = failure.message;
+        final cleanMsg = rawMsg.startsWith('Exception: ')
+            ? rawMsg.replaceFirst('Exception: ', '')
+            : rawMsg;
         emit(
           state.copyWith(
             status: LoadingStatus.loaded,
             locationMode: LocationFilterMode.none,
             userLatitude: null,
             userLongitude: null,
-            gpsError: 'Доступ до геопозиції заблоковано',
+            gpsError: cleanMsg,
           ),
         );
         add(const CemeteriesEvent.loadCemeteries());
-        return;
-      }
-
-      final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.high,
-          timeLimit: Duration(seconds: 5),
-        ),
-      );
-
-      emit(
-        state.copyWith(
-          userLatitude: position.latitude,
-          userLongitude: position.longitude,
-          gpsError: null,
-        ),
-      );
-      add(const CemeteriesEvent.loadCemeteries());
-    } on Exception catch (e) {
-      emit(
-        state.copyWith(
-          status: LoadingStatus.loaded,
-          locationMode: LocationFilterMode.none,
-          userLatitude: null,
-          userLongitude: null,
-          gpsError: 'Не вдалося отримати координати: $e',
-        ),
-      );
-      add(const CemeteriesEvent.loadCemeteries());
-    }
+      },
+      (position) {
+        emit(
+          state.copyWith(
+            userLatitude: position.latitude,
+            userLongitude: position.longitude,
+            gpsError: null,
+          ),
+        );
+        add(const CemeteriesEvent.loadCemeteries());
+      },
+    );
   }
 
   Future<void> _onLoadCemeteries(
@@ -117,21 +117,26 @@ class CemeteriesBloc extends SafeBloc<CemeteriesEvent, CemeteriesState> {
 
     if ((event.refreshLocation ?? false) &&
         state.locationMode == LocationFilterMode.gps) {
-      try {
-        final position = await Geolocator.getCurrentPosition(
+      final gpsResult = await eitherFutureHelper(
+        () => Geolocator.getCurrentPosition(
           locationSettings: const LocationSettings(
             accuracy: LocationAccuracy.high,
             timeLimit: Duration(seconds: 5),
           ),
-        );
-        emit(
-          state.copyWith(
-            userLatitude: position.latitude,
-            userLongitude: position.longitude,
-            gpsError: null,
-          ),
-        );
-      } on Exception catch (_) {}
+        ),
+      );
+      gpsResult.fold(
+        (_) {},
+        (position) {
+          emit(
+            state.copyWith(
+              userLatitude: position.latitude,
+              userLongitude: position.longitude,
+              gpsError: null,
+            ),
+          );
+        },
+      );
     }
 
     final result = await _cemeteryRepository.getCemeteries(
