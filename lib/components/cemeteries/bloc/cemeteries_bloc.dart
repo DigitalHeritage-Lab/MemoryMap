@@ -13,9 +13,8 @@ class CemeteriesBloc extends SafeBloc<CemeteriesEvent, CemeteriesState> {
   CemeteriesBloc(this._cemeteryRepository) : super(const CemeteriesState()) {
     on<_LoadCemeteries>(
       _onLoadCemeteries,
-      transformer: (events, mapper) => events
-          .debounce(const Duration(milliseconds: 300))
-          .switchMap(mapper),
+      transformer: (events, mapper) =>
+          events.debounce(const Duration(milliseconds: 300)).switchMap(mapper),
     );
   }
 

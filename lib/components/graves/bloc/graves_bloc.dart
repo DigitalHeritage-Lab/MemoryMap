@@ -13,9 +13,8 @@ class GravesBloc extends SafeBloc<GravesEvent, GravesState> {
   GravesBloc(this._graveRepository) : super(const GravesState()) {
     on<_LoadGraves>(
       _onLoadGraves,
-      transformer: (events, mapper) => events
-          .debounce(const Duration(milliseconds: 300))
-          .switchMap(mapper),
+      transformer: (events, mapper) =>
+          events.debounce(const Duration(milliseconds: 300)).switchMap(mapper),
     );
     on<_LoadMoreGraves>(_onLoadMoreGraves);
   }

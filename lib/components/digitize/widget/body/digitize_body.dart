@@ -181,8 +181,8 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                     child: _DatePickerField(
                       label: context.l10n.birthDate,
                       value: state.birthDate,
-                      hasError: state.showErrors &&
-                          state.birthDate.trim().isEmpty,
+                      hasError:
+                          state.showErrors && state.birthDate.trim().isEmpty,
                       errorText: context.l10n.requiredField,
                       enabled: !isReadOnly,
                       onTap: () => _pickDate(
@@ -196,8 +196,8 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                     child: _DatePickerField(
                       label: context.l10n.deathDate,
                       value: state.deathDate,
-                      hasError: state.showErrors &&
-                          state.deathDate.trim().isEmpty,
+                      hasError:
+                          state.showErrors && state.deathDate.trim().isEmpty,
                       errorText: context.l10n.requiredField,
                       enabled: !isReadOnly,
                       onTap: () => _pickDate(
@@ -372,9 +372,7 @@ class _DatePickerField extends StatelessWidget {
                   child: Text(
                     hasValue ? value : 'рррр-мм-дд',
                     style: TextStyle(
-                      color: hasValue
-                          ? AppColors.slate50
-                          : AppColors.slate600,
+                      color: hasValue ? AppColors.slate50 : AppColors.slate600,
                       fontSize: 15,
                     ),
                   ),
