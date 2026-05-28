@@ -230,9 +230,8 @@ class _CemeteryDetailBodyState extends State<CemeteryDetailBody> {
                       final grave = graves[index];
                       return GraveListTile(grave: grave);
                     },
-                    childCount: state.hasReachedMax
-                        ? graves.length
-                        : graves.length + 1,
+                    childCount:
+                        state.hasReachedMax ? graves.length : graves.length + 1,
                   ),
                 ),
               ),
