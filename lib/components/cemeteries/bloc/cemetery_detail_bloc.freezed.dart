@@ -14,64 +14,25 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CemeteryDetailEvent {
-  String get id;
-
-  /// Create a copy of CemeteryDetailEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $CemeteryDetailEventCopyWith<CemeteryDetailEvent> get copyWith =>
-      _$CemeteryDetailEventCopyWithImpl<CemeteryDetailEvent>(
-          this as CemeteryDetailEvent, _$identity);
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is CemeteryDetailEvent &&
-            (identical(other.id, id) || other.id == id));
+        (other.runtimeType == runtimeType && other is CemeteryDetailEvent);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'CemeteryDetailEvent(id: $id)';
+    return 'CemeteryDetailEvent()';
   }
 }
 
 /// @nodoc
-abstract mixin class $CemeteryDetailEventCopyWith<$Res> {
-  factory $CemeteryDetailEventCopyWith(
-          CemeteryDetailEvent value, $Res Function(CemeteryDetailEvent) _then) =
-      _$CemeteryDetailEventCopyWithImpl;
-  @useResult
-  $Res call({String id});
-}
-
-/// @nodoc
-class _$CemeteryDetailEventCopyWithImpl<$Res>
-    implements $CemeteryDetailEventCopyWith<$Res> {
-  _$CemeteryDetailEventCopyWithImpl(this._self, this._then);
-
-  final CemeteryDetailEvent _self;
-  final $Res Function(CemeteryDetailEvent) _then;
-
-  /// Create a copy of CemeteryDetailEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+class $CemeteryDetailEventCopyWith<$Res> {
+  $CemeteryDetailEventCopyWith(
+      CemeteryDetailEvent _, $Res Function(CemeteryDetailEvent) __);
 }
 
 /// Adds pattern-matching-related methods to [CemeteryDetailEvent].
@@ -91,12 +52,15 @@ extension CemeteryDetailEventPatterns on CemeteryDetailEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadCemeteryDetail value)? loadCemeteryDetail,
+    TResult Function(_LoadMoreGraves value)? loadMoreGraves,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _LoadCemeteryDetail() when loadCemeteryDetail != null:
         return loadCemeteryDetail(_that);
+      case _LoadMoreGraves() when loadMoreGraves != null:
+        return loadMoreGraves(_that);
       case _:
         return orElse();
     }
@@ -118,11 +82,14 @@ extension CemeteryDetailEventPatterns on CemeteryDetailEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadCemeteryDetail value) loadCemeteryDetail,
+    required TResult Function(_LoadMoreGraves value) loadMoreGraves,
   }) {
     final _that = this;
     switch (_that) {
       case _LoadCemeteryDetail():
         return loadCemeteryDetail(_that);
+      case _LoadMoreGraves():
+        return loadMoreGraves(_that);
     }
   }
 
@@ -141,11 +108,14 @@ extension CemeteryDetailEventPatterns on CemeteryDetailEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadCemeteryDetail value)? loadCemeteryDetail,
+    TResult? Function(_LoadMoreGraves value)? loadMoreGraves,
   }) {
     final _that = this;
     switch (_that) {
       case _LoadCemeteryDetail() when loadCemeteryDetail != null:
         return loadCemeteryDetail(_that);
+      case _LoadMoreGraves() when loadMoreGraves != null:
+        return loadMoreGraves(_that);
       case _:
         return null;
     }
@@ -166,12 +136,15 @@ extension CemeteryDetailEventPatterns on CemeteryDetailEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? loadCemeteryDetail,
+    TResult Function()? loadMoreGraves,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _LoadCemeteryDetail() when loadCemeteryDetail != null:
         return loadCemeteryDetail(_that.id);
+      case _LoadMoreGraves() when loadMoreGraves != null:
+        return loadMoreGraves();
       case _:
         return orElse();
     }
@@ -193,11 +166,14 @@ extension CemeteryDetailEventPatterns on CemeteryDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) loadCemeteryDetail,
+    required TResult Function() loadMoreGraves,
   }) {
     final _that = this;
     switch (_that) {
       case _LoadCemeteryDetail():
         return loadCemeteryDetail(_that.id);
+      case _LoadMoreGraves():
+        return loadMoreGraves();
     }
   }
 
@@ -216,11 +192,14 @@ extension CemeteryDetailEventPatterns on CemeteryDetailEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? loadCemeteryDetail,
+    TResult? Function()? loadMoreGraves,
   }) {
     final _that = this;
     switch (_that) {
       case _LoadCemeteryDetail() when loadCemeteryDetail != null:
         return loadCemeteryDetail(_that.id);
+      case _LoadMoreGraves() when loadMoreGraves != null:
+        return loadMoreGraves();
       case _:
         return null;
     }
@@ -232,12 +211,10 @@ extension CemeteryDetailEventPatterns on CemeteryDetailEvent {
 class _LoadCemeteryDetail implements CemeteryDetailEvent {
   const _LoadCemeteryDetail(this.id);
 
-  @override
   final String id;
 
   /// Create a copy of CemeteryDetailEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   _$LoadCemeteryDetailCopyWith<_LoadCemeteryDetail> get copyWith =>
@@ -266,7 +243,6 @@ abstract mixin class _$LoadCemeteryDetailCopyWith<$Res>
   factory _$LoadCemeteryDetailCopyWith(
           _LoadCemeteryDetail value, $Res Function(_LoadCemeteryDetail) _then) =
       __$LoadCemeteryDetailCopyWithImpl;
-  @override
   @useResult
   $Res call({String id});
 }
@@ -281,7 +257,6 @@ class __$LoadCemeteryDetailCopyWithImpl<$Res>
 
   /// Create a copy of CemeteryDetailEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
@@ -296,11 +271,33 @@ class __$LoadCemeteryDetailCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
+class _LoadMoreGraves implements CemeteryDetailEvent {
+  const _LoadMoreGraves();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _LoadMoreGraves);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'CemeteryDetailEvent.loadMoreGraves()';
+  }
+}
+
+/// @nodoc
 mixin _$CemeteryDetailState {
   LoadingStatus get status;
   Cemetery? get cemetery;
   List<Grave> get graves;
   String? get errorMessage;
+  bool get hasReachedMax;
+  bool get isLoadingMore;
 
   /// Create a copy of CemeteryDetailState
   /// with the given fields replaced by the non-null parameter values.
@@ -320,16 +317,26 @@ mixin _$CemeteryDetailState {
                 other.cemetery == cemetery) &&
             const DeepCollectionEquality().equals(other.graves, graves) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.hasReachedMax, hasReachedMax) ||
+                other.hasReachedMax == hasReachedMax) &&
+            (identical(other.isLoadingMore, isLoadingMore) ||
+                other.isLoadingMore == isLoadingMore));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, cemetery,
-      const DeepCollectionEquality().hash(graves), errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      cemetery,
+      const DeepCollectionEquality().hash(graves),
+      errorMessage,
+      hasReachedMax,
+      isLoadingMore);
 
   @override
   String toString() {
-    return 'CemeteryDetailState(status: $status, cemetery: $cemetery, graves: $graves, errorMessage: $errorMessage)';
+    return 'CemeteryDetailState(status: $status, cemetery: $cemetery, graves: $graves, errorMessage: $errorMessage, hasReachedMax: $hasReachedMax, isLoadingMore: $isLoadingMore)';
   }
 }
 
@@ -343,7 +350,9 @@ abstract mixin class $CemeteryDetailStateCopyWith<$Res> {
       {LoadingStatus status,
       Cemetery? cemetery,
       List<Grave> graves,
-      String? errorMessage});
+      String? errorMessage,
+      bool hasReachedMax,
+      bool isLoadingMore});
 }
 
 /// @nodoc
@@ -363,6 +372,8 @@ class _$CemeteryDetailStateCopyWithImpl<$Res>
     Object? cemetery = freezed,
     Object? graves = null,
     Object? errorMessage = freezed,
+    Object? hasReachedMax = null,
+    Object? isLoadingMore = null,
   }) {
     return _then(_self.copyWith(
       status: null == status
@@ -381,6 +392,14 @@ class _$CemeteryDetailStateCopyWithImpl<$Res>
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasReachedMax: null == hasReachedMax
+          ? _self.hasReachedMax
+          : hasReachedMax // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingMore: null == isLoadingMore
+          ? _self.isLoadingMore
+          : isLoadingMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -476,16 +495,21 @@ extension CemeteryDetailStatePatterns on CemeteryDetailState {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(LoadingStatus status, Cemetery? cemetery,
-            List<Grave> graves, String? errorMessage)?
+    TResult Function(
+            LoadingStatus status,
+            Cemetery? cemetery,
+            List<Grave> graves,
+            String? errorMessage,
+            bool hasReachedMax,
+            bool isLoadingMore)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _CemeteryDetailState() when $default != null:
-        return $default(
-            _that.status, _that.cemetery, _that.graves, _that.errorMessage);
+        return $default(_that.status, _that.cemetery, _that.graves,
+            _that.errorMessage, _that.hasReachedMax, _that.isLoadingMore);
       case _:
         return orElse();
     }
@@ -506,15 +530,20 @@ extension CemeteryDetailStatePatterns on CemeteryDetailState {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(LoadingStatus status, Cemetery? cemetery,
-            List<Grave> graves, String? errorMessage)
+    TResult Function(
+            LoadingStatus status,
+            Cemetery? cemetery,
+            List<Grave> graves,
+            String? errorMessage,
+            bool hasReachedMax,
+            bool isLoadingMore)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CemeteryDetailState():
-        return $default(
-            _that.status, _that.cemetery, _that.graves, _that.errorMessage);
+        return $default(_that.status, _that.cemetery, _that.graves,
+            _that.errorMessage, _that.hasReachedMax, _that.isLoadingMore);
     }
   }
 
@@ -532,15 +561,20 @@ extension CemeteryDetailStatePatterns on CemeteryDetailState {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(LoadingStatus status, Cemetery? cemetery,
-            List<Grave> graves, String? errorMessage)?
+    TResult? Function(
+            LoadingStatus status,
+            Cemetery? cemetery,
+            List<Grave> graves,
+            String? errorMessage,
+            bool hasReachedMax,
+            bool isLoadingMore)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CemeteryDetailState() when $default != null:
-        return $default(
-            _that.status, _that.cemetery, _that.graves, _that.errorMessage);
+        return $default(_that.status, _that.cemetery, _that.graves,
+            _that.errorMessage, _that.hasReachedMax, _that.isLoadingMore);
       case _:
         return null;
     }
@@ -554,7 +588,9 @@ class _CemeteryDetailState implements CemeteryDetailState {
       {this.status = LoadingStatus.initial,
       this.cemetery,
       final List<Grave> graves = const [],
-      this.errorMessage})
+      this.errorMessage,
+      this.hasReachedMax = false,
+      this.isLoadingMore = false})
       : _graves = graves;
 
   @override
@@ -573,6 +609,12 @@ class _CemeteryDetailState implements CemeteryDetailState {
 
   @override
   final String? errorMessage;
+  @override
+  @JsonKey()
+  final bool hasReachedMax;
+  @override
+  @JsonKey()
+  final bool isLoadingMore;
 
   /// Create a copy of CemeteryDetailState
   /// with the given fields replaced by the non-null parameter values.
@@ -593,16 +635,26 @@ class _CemeteryDetailState implements CemeteryDetailState {
                 other.cemetery == cemetery) &&
             const DeepCollectionEquality().equals(other._graves, _graves) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.hasReachedMax, hasReachedMax) ||
+                other.hasReachedMax == hasReachedMax) &&
+            (identical(other.isLoadingMore, isLoadingMore) ||
+                other.isLoadingMore == isLoadingMore));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, cemetery,
-      const DeepCollectionEquality().hash(_graves), errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      cemetery,
+      const DeepCollectionEquality().hash(_graves),
+      errorMessage,
+      hasReachedMax,
+      isLoadingMore);
 
   @override
   String toString() {
-    return 'CemeteryDetailState(status: $status, cemetery: $cemetery, graves: $graves, errorMessage: $errorMessage)';
+    return 'CemeteryDetailState(status: $status, cemetery: $cemetery, graves: $graves, errorMessage: $errorMessage, hasReachedMax: $hasReachedMax, isLoadingMore: $isLoadingMore)';
   }
 }
 
@@ -618,7 +670,9 @@ abstract mixin class _$CemeteryDetailStateCopyWith<$Res>
       {LoadingStatus status,
       Cemetery? cemetery,
       List<Grave> graves,
-      String? errorMessage});
+      String? errorMessage,
+      bool hasReachedMax,
+      bool isLoadingMore});
 }
 
 /// @nodoc
@@ -638,6 +692,8 @@ class __$CemeteryDetailStateCopyWithImpl<$Res>
     Object? cemetery = freezed,
     Object? graves = null,
     Object? errorMessage = freezed,
+    Object? hasReachedMax = null,
+    Object? isLoadingMore = null,
   }) {
     return _then(_CemeteryDetailState(
       status: null == status
@@ -656,6 +712,14 @@ class __$CemeteryDetailStateCopyWithImpl<$Res>
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasReachedMax: null == hasReachedMax
+          ? _self.hasReachedMax
+          : hasReachedMax // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingMore: null == isLoadingMore
+          ? _self.isLoadingMore
+          : isLoadingMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

@@ -6,8 +6,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class CemeteryDetailBody extends StatelessWidget {
+class CemeteryDetailBody extends StatefulWidget {
   const CemeteryDetailBody({super.key});
+
+  @override
+  State<CemeteryDetailBody> createState() => _CemeteryDetailBodyState();
+}
+
+class _CemeteryDetailBodyState extends State<CemeteryDetailBody> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_isBottom) {
+      context.read<CemeteryDetailBloc>().add(
+            const CemeteryDetailEvent.loadMoreGraves(),
+          );
+    }
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +58,7 @@ class CemeteryDetailBody extends StatelessWidget {
           );
         }
 
-        if (state.status == LoadingStatus.error) {
+        if (state.status == LoadingStatus.error && state.graves.isEmpty) {
           return TryAgainWidget(
             message: state.errorMessage,
             onRetry: () {
@@ -42,6 +78,7 @@ class CemeteryDetailBody extends StatelessWidget {
         final graves = state.graves;
 
         return CustomScrollView(
+          controller: _scrollController,
           slivers: [
             SliverAppBar(
               expandedHeight: 220,
@@ -173,10 +210,29 @@ class CemeteryDetailBody extends StatelessWidget {
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
+                      if (index >= graves.length) {
+                        return const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 24),
+                            child: SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppColors.emerald,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
                       final grave = graves[index];
                       return GraveListTile(grave: grave);
                     },
-                    childCount: graves.length,
+                    childCount: state.hasReachedMax
+                        ? graves.length
+                        : graves.length + 1,
                   ),
                 ),
               ),

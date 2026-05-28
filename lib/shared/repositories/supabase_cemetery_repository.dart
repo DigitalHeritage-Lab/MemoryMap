@@ -34,13 +34,14 @@ class SupabaseCemeteryRepository implements CemeteryRepository {
     return eitherFutureHelper(() async {
       final response = await _supabase.rpc<dynamic>(
         'rpc_get_cemeteries',
+        params: {
+          'p_id': id,
+        },
       );
 
       final rows = response as List<dynamic>;
-      final match = rows
-          .map((row) => Cemetery.fromJson(row as Map<String, dynamic>))
-          .where((c) => c.id == id);
-      return match.isEmpty ? null : match.first;
+      if (rows.isEmpty) return null;
+      return Cemetery.fromJson(rows.first as Map<String, dynamic>);
     });
   }
 }
