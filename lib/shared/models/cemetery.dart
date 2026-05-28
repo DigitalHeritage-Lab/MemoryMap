@@ -9,6 +9,7 @@ class Cemetery extends Equatable {
     required this.latitude,
     required this.longitude,
     required this.photoUrl,
+    this.distanceKm,
   });
 
   factory Cemetery.fromJson(Map<String, dynamic> json) {
@@ -20,6 +21,9 @@ class Cemetery extends Equatable {
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
       photoUrl: (json['photo_url'] as String?) ?? '',
+      distanceKm: json['distance_km'] != null
+          ? (json['distance_km'] as num).toDouble()
+          : null,
     );
   }
 
@@ -30,10 +34,19 @@ class Cemetery extends Equatable {
   final double latitude;
   final double longitude;
   final String photoUrl;
+  final double? distanceKm;
 
   @override
-  List<Object?> get props =>
-      [id, name, location, description, latitude, longitude, photoUrl];
+  List<Object?> get props => [
+        id,
+        name,
+        location,
+        description,
+        latitude,
+        longitude,
+        photoUrl,
+        distanceKm,
+      ];
 
   Map<String, dynamic> toJson() {
     return {
@@ -44,6 +57,7 @@ class Cemetery extends Equatable {
       'latitude': latitude,
       'longitude': longitude,
       'photo_url': photoUrl,
+      'distance_km': distanceKm,
     };
   }
 }

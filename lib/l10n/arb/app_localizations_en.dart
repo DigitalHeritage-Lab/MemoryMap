@@ -141,4 +141,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get defaultError => 'Something went wrong. Please try again.';
+
+  @override
+  String get locationFilterAll => 'All';
+
+  @override
+  String get locationFilterGps => 'My Geolocation';
+
+  @override
+  String get locationFilterCustom => 'Select on Map';
+
+  @override
+  String distanceAwayKm(String distance) {
+    return '$distance km';
+  }
+
+  @override
+  String distanceAwayM(String distance) {
+    return '$distance m';
+  }
+
+  @override
+  String get selectCustomLocation => 'Select Point on Map';
+
+  @override
+  String get confirmLocation => 'Confirm Location';
+
+  @override
+  String mapLocationLabel(String lat, String lng) {
+    return 'Map ($lat, $lng)';
+  }
 }

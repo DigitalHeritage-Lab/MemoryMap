@@ -355,6 +355,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get defaultError;
+
+  /// No description provided for @locationFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get locationFilterAll;
+
+  /// No description provided for @locationFilterGps.
+  ///
+  /// In en, this message translates to:
+  /// **'My Geolocation'**
+  String get locationFilterGps;
+
+  /// No description provided for @locationFilterCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Select on Map'**
+  String get locationFilterCustom;
+
+  /// No description provided for @distanceAwayKm.
+  ///
+  /// In en, this message translates to:
+  /// **'{distance} km'**
+  String distanceAwayKm(String distance);
+
+  /// No description provided for @distanceAwayM.
+  ///
+  /// In en, this message translates to:
+  /// **'{distance} m'**
+  String distanceAwayM(String distance);
+
+  /// No description provided for @selectCustomLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Point on Map'**
+  String get selectCustomLocation;
+
+  /// No description provided for @confirmLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Location'**
+  String get confirmLocation;
+
+  /// No description provided for @mapLocationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Map ({lat}, {lng})'**
+  String mapLocationLabel(String lat, String lng);
 }
 
 class _AppLocalizationsDelegate
