@@ -147,6 +147,8 @@ class _MapLocationPickerDialogState extends State<MapLocationPickerDialog> {
                   options: MapOptions(
                     initialCenter: _selectedLatLng,
                     initialZoom: widget.initialLatitude != null ? 14 : 7,
+                    minZoom: 3,
+                    maxZoom: 18,
                     onTap: (_, latLng) {
                       setState(() {
                         _selectedLatLng = latLng;

@@ -116,6 +116,8 @@ class _MapBodyState extends State<MapBody> {
                 options: MapOptions(
                   initialCenter: initialCenter,
                   initialZoom: 11,
+                  minZoom: 3,
+                  maxZoom: 18,
                   onTap: (_, __) {
                     // Deselect when tapping on empty map area
                     context
