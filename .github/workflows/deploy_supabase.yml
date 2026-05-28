@@ -6,17 +6,19 @@ on:
       - main
     paths:
       - 'supabase/migrations/**'
+      - 'supabase/tests/**'
       - '.github/workflows/deploy_supabase.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'supabase/migrations/**'
+      - 'supabase/tests/**'
       - '.github/workflows/deploy_supabase.yml'
 
 jobs:
   test-migrations:
-    name: Verify Migrations (Local Test)
+    name: Verify Migrations & Run Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -34,6 +36,17 @@ jobs:
 
       - name: Verify Database Reset
         run: supabase db reset
+
+      - name: Verify Presence of Database Tests
+        run: |
+          if [ ! -d "supabase/tests" ] || [ -z "$(find supabase/tests -type f -name '*.sql')" ]; then
+            echo "Error: No database test files (*.sql) found under supabase/tests/!"
+            exit 1
+          fi
+          echo "Database test files found."
+
+      - name: Run Database Tests (pgTAP)
+        run: supabase db test
 
   deploy-migrations:
     name: Deploy Migrations to Production
