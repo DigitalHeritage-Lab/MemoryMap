@@ -96,9 +96,8 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                 labelText: context.l10n.fullName,
                 hintText: context.l10n.fullNameHint,
                 readOnly: isReadOnly,
-                showErrorText:
-                    state.showErrors && state.fullName.trim().isEmpty,
-                errorText: context.l10n.requiredField,
+                showErrorText: state.showErrors && state.nameError != null,
+                errorText: _getLocalizedError(context, state.nameError) ?? '',
                 onChanged: (val) => context
                     .read<DigitizeBloc>()
                     .add(DigitizeEvent.fullNameChanged(val)),
@@ -121,7 +120,7 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   color: isReadOnly ? AppColors.slate900 : AppColors.slate800,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: (state.showErrors && state.selectedCemetery == null)
+                    color: (state.showErrors && state.cemeteryError != null)
                         ? AppColors.red
                         : AppColors.slate700,
                   ),
@@ -164,10 +163,10 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   ),
                 ),
               ),
-              if (state.showErrors && state.selectedCemetery == null) ...[
+              if (state.showErrors && state.cemeteryError != null) ...[
                 const SizedBox(height: 6),
                 Text(
-                  context.l10n.requiredField,
+                  _getLocalizedError(context, state.cemeteryError) ?? '',
                   style: const TextStyle(color: AppColors.red, fontSize: 12),
                 ),
               ],
@@ -182,8 +181,12 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                       label: context.l10n.birthDate,
                       value: state.birthDate,
                       hasError:
-                          state.showErrors && state.birthDate.trim().isEmpty,
-                      errorText: context.l10n.requiredField,
+                          state.showErrors && state.birthDateError != null,
+                      errorText: _getLocalizedError(
+                            context,
+                            state.birthDateError,
+                          ) ??
+                          '',
                       enabled: !isReadOnly,
                       onTap: () => _pickDate(
                         context: context,
@@ -197,8 +200,12 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                       label: context.l10n.deathDate,
                       value: state.deathDate,
                       hasError:
-                          state.showErrors && state.deathDate.trim().isEmpty,
-                      errorText: context.l10n.requiredField,
+                          state.showErrors && state.deathDateError != null,
+                      errorText: _getLocalizedError(
+                            context,
+                            state.deathDateError,
+                          ) ??
+                          '',
                       enabled: !isReadOnly,
                       onTap: () => _pickDate(
                         context: context,
@@ -245,9 +252,7 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                         color: AppColors.slate900,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: (state.showErrors &&
-                                  (state.latitude == null ||
-                                      state.longitude == null))
+                          color: (state.showErrors && state.gpsError != null)
                               ? AppColors.red
                               : AppColors.slate700,
                         ),
@@ -281,11 +286,10 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   ),
                 ],
               ),
-              if (state.showErrors &&
-                  (state.latitude == null || state.longitude == null)) ...[
+              if (state.showErrors && state.gpsError != null) ...[
                 const SizedBox(height: 6),
                 Text(
-                  context.l10n.requiredField,
+                  _getLocalizedError(context, state.gpsError) ?? '',
                   style: const TextStyle(color: AppColors.red, fontSize: 12),
                 ),
               ],
@@ -294,7 +298,9 @@ class _DigitizeBodyState extends State<DigitizeBody> {
               // Error feedback or status messages
               SendingTextWidget(
                 status: state.status,
-                errorText: state.errorMessage,
+                errorText: state.errorMessage == 'fillAllRequiredFields'
+                    ? context.l10n.fillAllRequiredFields
+                    : state.errorMessage,
               ),
               const SizedBox(height: 8),
 
@@ -398,5 +404,27 @@ class _DatePickerField extends StatelessWidget {
         ],
       ],
     );
+  }
+}
+
+String? _getLocalizedError(BuildContext context, String? errorCode) {
+  if (errorCode == null) return null;
+  switch (errorCode) {
+    case 'requiredField':
+      return context.l10n.requiredField;
+    case 'fullNameTooShort':
+      return context.l10n.fullNameTooShort;
+    case 'invalidDate':
+      return context.l10n.invalidDate;
+    case 'invalidDateRange':
+      return context.l10n.invalidDateRange;
+    case 'dateInFuture':
+      return context.l10n.dateInFuture;
+    case 'invalidLifespan':
+      return context.l10n.invalidLifespan;
+    case 'coordinatesTooFar':
+      return context.l10n.coordinatesTooFar;
+    default:
+      return null;
   }
 }
