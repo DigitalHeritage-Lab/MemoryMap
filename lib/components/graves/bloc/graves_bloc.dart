@@ -2,6 +2,7 @@ import 'package:empty_template/shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 part 'graves_bloc.freezed.dart';
 part 'graves_event.dart';
@@ -10,7 +11,12 @@ part 'graves_state.dart';
 @injectable
 class GravesBloc extends SafeBloc<GravesEvent, GravesState> {
   GravesBloc(this._graveRepository) : super(const GravesState()) {
-    on<_LoadGraves>(_onLoadGraves);
+    on<_LoadGraves>(
+      _onLoadGraves,
+      transformer: (events, mapper) => events
+          .debounce(const Duration(milliseconds: 300))
+          .switchMap(mapper),
+    );
     on<_LoadMoreGraves>(_onLoadMoreGraves);
   }
 

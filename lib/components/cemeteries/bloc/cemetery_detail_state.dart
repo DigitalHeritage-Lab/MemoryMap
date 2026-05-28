@@ -7,5 +7,7 @@ sealed class CemeteryDetailState with _$CemeteryDetailState {
     Cemetery? cemetery,
     @Default([]) List<Grave> graves,
     String? errorMessage,
+    @Default(false) bool hasReachedMax,
+    @Default(false) bool isLoadingMore,
   }) = _CemeteryDetailState;
 }
