@@ -60,5 +60,37 @@
   "bioHint": "Enter epitaph or biographical details...",
   "fillAllRequiredFields": "Please fill in all required fields",
   "dateFormatHint": "YYYY-MM-DD",
-  "defaultError": "Something went wrong. Please try again."
+  "defaultError": "Something went wrong. Please try again.",
+  "locationFilterAll": "All",
+  "locationFilterGps": "My Geolocation",
+  "locationFilterCustom": "Select on Map",
+  "distanceAwayKm": "{distance} km",
+  "@distanceAwayKm": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "distanceAwayM": "{distance} m",
+  "@distanceAwayM": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "selectCustomLocation": "Select Point on Map",
+  "confirmLocation": "Confirm Location",
+  "mapLocationLabel": "Map ({lat}, {lng})",
+  "@mapLocationLabel": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  }
 }

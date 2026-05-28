@@ -13,12 +13,16 @@ class SupabaseCemeteryRepository implements CemeteryRepository {
   @override
   Future<Either<Failure, List<Cemetery>>> getCemeteries({
     String? query,
+    double? latitude,
+    double? longitude,
   }) {
     return eitherFutureHelper(() async {
       final response = await _supabase.rpc<dynamic>(
         'rpc_get_cemeteries',
         params: {
           if (query != null && query.isNotEmpty) 'p_query': query,
+          if (latitude != null) 'p_latitude': latitude,
+          if (longitude != null) 'p_longitude': longitude,
         },
       );
 

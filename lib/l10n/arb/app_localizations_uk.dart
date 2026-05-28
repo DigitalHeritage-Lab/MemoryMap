@@ -142,4 +142,34 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get defaultError => 'Щось пішло не так. Будь ласка, спробуйте ще раз.';
+
+  @override
+  String get locationFilterAll => 'Усі';
+
+  @override
+  String get locationFilterGps => 'Моя геопозиція';
+
+  @override
+  String get locationFilterCustom => 'Вибрати на карті';
+
+  @override
+  String distanceAwayKm(String distance) {
+    return '$distance км';
+  }
+
+  @override
+  String distanceAwayM(String distance) {
+    return '$distance м';
+  }
+
+  @override
+  String get selectCustomLocation => 'Вибір точки на карті';
+
+  @override
+  String get confirmLocation => 'Підтвердити локацію';
+
+  @override
+  String mapLocationLabel(String lat, String lng) {
+    return 'Мапа ($lat, $lng)';
+  }
 }

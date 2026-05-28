@@ -43,5 +43,37 @@
   "bioHint": "Введіть епітафію чи біографічні відомості...",
   "fillAllRequiredFields": "Будь ласка, заповніть всі обов'язкові поля",
   "dateFormatHint": "РРРР-ММ-ДД",
-  "defaultError": "Щось пішло не так. Будь ласка, спробуйте ще раз."
+  "defaultError": "Щось пішло не так. Будь ласка, спробуйте ще раз.",
+  "locationFilterAll": "Усі",
+  "locationFilterGps": "Моя геопозиція",
+  "locationFilterCustom": "Вибрати на карті",
+  "distanceAwayKm": "{distance} км",
+  "@distanceAwayKm": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "distanceAwayM": "{distance} м",
+  "@distanceAwayM": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "selectCustomLocation": "Вибір точки на карті",
+  "confirmLocation": "Підтвердити локацію",
+  "mapLocationLabel": "Мапа ({lat}, {lng})",
+  "@mapLocationLabel": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:empty_template/components/cemeteries/bloc/cemeteries_bloc.dart';
+import 'package:empty_template/components/cemeteries/widget/location_filter_bar.dart';
+import 'package:empty_template/components/cemeteries/widget/map_location_picker_dialog.dart';
 import 'package:empty_template/l10n/l10n.dart';
 import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +42,31 @@ class _CemeteriesBodyState extends State<CemeteriesBody> {
             },
           ),
         ),
+        LocationFilterBar(
+          onChooseOnMap: () async {
+            final bloc = context.read<CemeteriesBloc>();
+            final l10n = context.l10n;
+            final result = await MapLocationPickerDialog.show(
+              context,
+              initialLatitude: bloc.state.userLatitude,
+              initialLongitude: bloc.state.userLongitude,
+            );
+            if (result != null) {
+              bloc.add(
+                CemeteriesEvent.changeLocationMode(
+                  LocationFilterMode.custom,
+                  latitude: result.latitude,
+                  longitude: result.longitude,
+                  name: l10n.mapLocationLabel(
+                    result.latitude.toStringAsFixed(2),
+                    result.longitude.toStringAsFixed(2),
+                  ),
+                ),
+              );
+            }
+          },
+        ),
+        const SizedBox(height: 12),
         Expanded(
           child: BlocBuilder<CemeteriesBloc, CemeteriesState>(
             builder: (context, state) {
@@ -77,6 +104,12 @@ class _CemeteriesBodyState extends State<CemeteriesBody> {
                   itemCount: list.length,
                   itemBuilder: (context, index) {
                     final cemetery = list[index];
+                    final distance = cemetery.distanceKm;
+                    final distanceStr = distance != null
+                        ? (distance >= 1.0
+                            ? distance.toStringAsFixed(1)
+                            : (distance * 1000).toInt().toString())
+                        : '';
                     return Container(
                       margin: const EdgeInsets.only(bottom: 16),
                       decoration: BoxDecoration(
@@ -151,6 +184,53 @@ class _CemeteriesBodyState extends State<CemeteriesBody> {
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
+                                          if (distance != null) ...[
+                                            const SizedBox(width: 8),
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 8,
+                                                vertical: 3,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: AppColors.deepEmerald,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border: Border.all(
+                                                  color: AppColors.emerald
+                                                      .withValues(alpha: 0.3),
+                                                ),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.navigation,
+                                                    size: 10,
+                                                    color: AppColors.emerald,
+                                                  ),
+                                                  const SizedBox(width: 4),
+                                                  Text(
+                                                    distance >= 1.0
+                                                        ? context.l10n
+                                                            .distanceAwayKm(
+                                                            distanceStr,
+                                                          )
+                                                        : context.l10n
+                                                            .distanceAwayM(
+                                                            distanceStr,
+                                                          ),
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 11,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ],
                                       ),
                                       const SizedBox(height: 8),
