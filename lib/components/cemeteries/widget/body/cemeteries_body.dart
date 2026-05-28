@@ -57,7 +57,9 @@ class _CemeteriesBodyState extends State<CemeteriesBody> {
               }
 
               final isLoading = state.status == LoadingStatus.loading;
-              final list = isLoading ? _mockCemeteries : state.cemeteries;
+              final list = (isLoading && state.cemeteries.isEmpty)
+                  ? _mockCemeteries
+                  : state.cemeteries;
 
               if (state.status == LoadingStatus.loaded && list.isEmpty) {
                 return Center(
@@ -188,15 +190,6 @@ class _CemeteriesBodyState extends State<CemeteriesBody> {
       description: 'Один із найстаріших та найпрестижніших некрополів Києва.',
       latitude: 50.4162,
       longitude: 30.5097,
-      photoUrl: '',
-    ),
-    Cemetery(
-      id: 'mock-2',
-      name: 'Личаківський цвинтар',
-      location: 'Львів, вул. Мечникова, 33',
-      description: 'Державний історико-культурний музей-заповідник.',
-      latitude: 49.8328,
-      longitude: 24.0552,
       photoUrl: '',
     ),
   ];
