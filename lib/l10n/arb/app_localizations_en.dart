@@ -21,6 +21,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navDigitize => 'Digitize';
 
   @override
+  String get navMap => 'Map';
+
+  @override
   String get searchCemeteriesHint => 'Search cemeteries...';
 
   @override

@@ -18,10 +18,12 @@ class HomePage extends StatelessWidget {
     var currentIndex = 0;
     if (location.startsWith('/cemeteries')) {
       currentIndex = 0;
-    } else if (location.startsWith('/graves')) {
+    } else if (location.startsWith('/map')) {
       currentIndex = 1;
-    } else if (location.startsWith('/digitize')) {
+    } else if (location.startsWith('/graves')) {
       currentIndex = 2;
+    } else if (location.startsWith('/digitize')) {
+      currentIndex = 3;
     }
 
     return AppScaffold(
@@ -33,14 +35,18 @@ class HomePage extends StatelessWidget {
             case 0:
               context.go('/cemeteries');
             case 1:
-              context.go('/graves');
+              context.go('/map');
             case 2:
+              context.go('/graves');
+            case 3:
               context.go('/digitize');
           }
         },
         backgroundColor: const Color(0xFF1E293B), // Slate 800
         selectedItemColor: const Color(0xFF10B981), // Emerald 500
         unselectedItemColor: const Color(0xFF64748B), // Slate 500
+        type: BottomNavigationBarType
+            .fixed, // Ensure bar stays stable with 4 items
         selectedLabelStyle:
             const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
         unselectedLabelStyle:
@@ -50,6 +56,11 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.account_balance_outlined),
             activeIcon: const Icon(Icons.account_balance),
             label: context.l10n.navCemeteries,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.map_outlined),
+            activeIcon: const Icon(Icons.map),
+            label: context.l10n.navMap,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.search_outlined),

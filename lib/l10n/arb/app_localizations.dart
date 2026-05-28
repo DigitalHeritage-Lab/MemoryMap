@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'Digitize'**
   String get navDigitize;
 
+  /// No description provided for @navMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get navMap;
+
   /// No description provided for @searchCemeteriesHint.
   ///
   /// In en, this message translates to:
