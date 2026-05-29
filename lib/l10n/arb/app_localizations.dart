@@ -395,7 +395,7 @@ abstract class AppLocalizations {
   /// No description provided for @locationFilterGps.
   ///
   /// In en, this message translates to:
-  /// **'My Geolocation'**
+  /// **'Near me'**
   String get locationFilterGps;
 
   /// No description provided for @locationFilterCustom.

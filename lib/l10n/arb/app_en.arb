@@ -66,7 +66,7 @@
   "dateFormatHint": "YYYY-MM-DD",
   "defaultError": "Something went wrong. Please try again.",
   "locationFilterAll": "All",
-  "locationFilterGps": "My Geolocation",
+  "locationFilterGps": "Near me",
   "locationFilterCustom": "Select on Map",
   "distanceAwayKm": "{distance} km",
   "@distanceAwayKm": {
