@@ -1,0 +1,33 @@
+name: 💡 Feature request
+description: Запропонуйте нову ідею або покращення для проєкту MemoryMap
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Маєте ідею для покращення MemoryMap? Поділіться нею з нами!
+  - type: textarea
+    id: problem
+    attributes:
+      label: З якою проблемою ви зіткнулися?
+      description: Чіткий опис того, які незручності ви маєте при поточній реалізації.
+      placeholder: Мені не вистачає можливості...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Бажане рішення
+      description: Детальний опис того, як, на вашу думку, має працювати новий функціонал.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Альтернативні варіанти (якщо є)
+      description: Будь-які альтернативні рішення чи обхідні шляхи, які ви розглядали.
+  - type: textarea
+    id: context
+    attributes:
+      label: Додатковий контекст
+      description: Будь-яка інша інформація, скріншоти або приклади з інших систем.

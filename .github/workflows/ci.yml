@@ -1,48 +1,42 @@
-name: Flutter CI
+name: CI
 
-# Тригери: коли саме запускати автоматизацію
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
-  build:
-    # Запускаємо на віртуальній машині з Ubuntu
+  analyze_and_test:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Стягуємо код репозиторію на віртуальну машину
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2. Встановлюємо Java (необхідно для збірки Android)
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      # 3. Встановлюємо Flutter (з фіксацією версії для стабільності CI)
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.41.6'
+          flutter-version: '3.22.x'
           channel: 'stable'
-          cache: true # Кешування прискорює наступні запуски
+          cache: true
 
-      # 4. Завантажуємо залежності (packages)
-      - name: Install dependencies
+      - name: Install Dependencies
         run: flutter pub get
 
-      # 5. Перевіряємо якість коду (Linter)
-      - name: Analyze code
-        run: flutter analyze
+      - name: Run Build Runner
+        run: dart run build_runner build --delete-conflicting-outputs
 
-      # 6. Запускаємо тести (додано для повноцінного CI)
-      - name: Run tests
-        run: |
-          flutter test \
-            --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
-            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+      - name: Check Formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze Project
+        run: flutter analyze --fatal-warnings --fatal-infos
+
+      - name: Run Tests
+        run: flutter test --coverage

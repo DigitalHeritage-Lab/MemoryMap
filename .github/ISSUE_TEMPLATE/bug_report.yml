@@ -1,0 +1,44 @@
+name: 🐛 Bug report
+description: Повідомте про помилку чи некоректну роботу додатку MemoryMap
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Дякуємо, що знайшли час повідомити про проблему! 
+        Спробуйте надати якомога більше деталей, щоб допомогти нам швидко локалізувати її.
+  - type: textarea
+    id: description
+    attributes:
+      label: Опис проблеми
+      description: Чіткий і лаконічний опис того, в чому полягає помилка.
+      placeholder: Наприклад, при відкритті карти додаток вилітає...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Кроки для відтворення проблеми
+      description: Опишіть кроки, які потрібно зробити, щоб відтворити помилку.
+      value: |
+        1. Перейти на вкладку '...'
+        2. Натиснути на кнопку '...'
+        3. Побачити помилку...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Середовище виконання
+      description: Де саме виникла проблема?
+      value: |
+        - ОС / Платформа: [напр. Android 13, iOS 17, Web]
+        - Версія Flutter SDK: [напр. 3.22.2]
+        - Модель пристрою: [напр. Pixel 6, iPhone 14]
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Логи або Скріншоти (опціонально)
+      description: Додайте скріншоти або логи терміналу, якщо вони є.
