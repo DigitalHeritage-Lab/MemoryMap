@@ -25,26 +25,17 @@ class LocationFilterBar extends StatelessWidget {
               child: Row(
                 children: [
                   _FilterChip(
-                    label: context.l10n.locationFilterAll,
-                    icon: Icons.language,
-                    isSelected: state.locationMode == LocationFilterMode.none,
-                    onTap: () {
-                      context.read<CemeteriesBloc>().add(
-                            const CemeteriesEvent.changeLocationMode(
-                              LocationFilterMode.none,
-                            ),
-                          );
-                    },
-                  ),
-                  const SizedBox(width: 8),
-                  _FilterChip(
                     label: context.l10n.locationFilterGps,
                     icon: Icons.my_location,
                     isSelected: state.locationMode == LocationFilterMode.gps,
                     onTap: () {
+                      final isSelected =
+                          state.locationMode == LocationFilterMode.gps;
                       context.read<CemeteriesBloc>().add(
-                            const CemeteriesEvent.changeLocationMode(
-                              LocationFilterMode.gps,
+                            CemeteriesEvent.changeLocationMode(
+                              isSelected
+                                  ? LocationFilterMode.none
+                                  : LocationFilterMode.gps,
                             ),
                           );
                     },
@@ -55,7 +46,19 @@ class LocationFilterBar extends StatelessWidget {
                         context.l10n.locationFilterCustom,
                     icon: Icons.map_outlined,
                     isSelected: state.locationMode == LocationFilterMode.custom,
-                    onTap: onChooseOnMap,
+                    onTap: () {
+                      final isSelected =
+                          state.locationMode == LocationFilterMode.custom;
+                      if (isSelected) {
+                        context.read<CemeteriesBloc>().add(
+                              const CemeteriesEvent.changeLocationMode(
+                                LocationFilterMode.none,
+                              ),
+                            );
+                      } else {
+                        onChooseOnMap();
+                      }
+                    },
                   ),
                 ],
               ),

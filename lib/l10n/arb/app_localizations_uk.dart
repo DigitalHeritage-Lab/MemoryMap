@@ -165,7 +165,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get locationFilterAll => 'Усі';
 
   @override
-  String get locationFilterGps => 'Моя геопозиція';
+  String get locationFilterGps => 'Поблизу мене';
 
   @override
   String get locationFilterCustom => 'Вибрати на карті';

@@ -49,7 +49,7 @@
   "dateFormatHint": "РРРР-ММ-ДД",
   "defaultError": "Щось пішло не так. Будь ласка, спробуйте ще раз.",
   "locationFilterAll": "Усі",
-  "locationFilterGps": "Моя геопозиція",
+  "locationFilterGps": "Поблизу мене",
   "locationFilterCustom": "Вибрати на карті",
   "distanceAwayKm": "{distance} км",
   "@distanceAwayKm": {

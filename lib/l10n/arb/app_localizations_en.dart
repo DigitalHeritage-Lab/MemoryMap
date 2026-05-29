@@ -162,7 +162,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locationFilterAll => 'All';
 
   @override
-  String get locationFilterGps => 'My Geolocation';
+  String get locationFilterGps => 'Near me';
 
   @override
   String get locationFilterCustom => 'Select on Map';

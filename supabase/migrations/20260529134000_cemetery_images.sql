@@ -76,6 +76,14 @@ BEGIN
        OR p_query = '' 
        OR c.name ILIKE '%' || p_query || '%' 
        OR c.location ILIKE '%' || p_query || '%')
+      AND (
+        p_latitude IS NULL OR p_longitude IS NULL OR 
+        (6371.0 * 2.0 * asin(sqrt(
+            power(sin(radians(c.latitude - p_latitude) / 2.0), 2.0) + 
+            cos(radians(p_latitude)) * cos(radians(c.latitude)) * 
+            power(sin(radians(c.longitude - p_longitude) / 2.0), 2.0)
+        ))) <= 50.0
+      )
     ORDER BY 
         CASE 
             WHEN p_latitude IS NOT NULL AND p_longitude IS NOT NULL THEN
