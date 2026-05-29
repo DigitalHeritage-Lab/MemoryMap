@@ -2,9 +2,27 @@
 -- Run this in Supabase Dashboard → SQL Editor
 
 -- =============================================
+-- 0. Cemetery Images
+-- =============================================
+INSERT INTO public.cemetery_images (id, url)
+VALUES
+  (
+    'a1b2c3d4-ffff-0000-0000-000000000001',
+    'https://images.unsplash.com/photo-1595121406830-df4be027e02b?w=600&auto=format&fit=crop&q=80'
+  ),
+  (
+    'a1b2c3d4-ffff-0000-0000-000000000002',
+    'https://images.unsplash.com/photo-1601056639396-829b5522ad7d?w=600&auto=format&fit=crop&q=80'
+  ),
+  (
+    'a1b2c3d4-ffff-0000-0000-000000000003',
+    'https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?w=600&auto=format&fit=crop&q=80'
+  );
+
+-- =============================================
 -- 1. Cemeteries
 -- =============================================
-INSERT INTO public.cemeteries (id, name, location, description, latitude, longitude, photo_url)
+INSERT INTO public.cemeteries (id, name, location, description, latitude, longitude, photo_id)
 VALUES
   (
     'a1b2c3d4-0001-0000-0000-000000000001',
@@ -13,7 +31,7 @@ VALUES
     'Один із найстаріших та найпрестижніших некрополів Києва. Засноване у 1833 році. Тут поховано багато видатних діячів української культури, науки та політики.',
     50.4162,
     30.5097,
-    'https://images.unsplash.com/photo-1595121406830-df4be027e02b?w=600&auto=format&fit=crop&q=80'
+    'a1b2c3d4-ffff-0000-0000-000000000001'
   ),
   (
     'a1b2c3d4-0002-0000-0000-000000000002',
@@ -22,7 +40,7 @@ VALUES
     'Державний історико-культурний музей-заповідник. Заснований у 1786 році. Відомий своїми архітектурно вишуканими надгробками та склепами.',
     49.8328,
     24.0552,
-    'https://images.unsplash.com/photo-1601056639396-829b5522ad7d?w=600&auto=format&fit=crop&q=80'
+    'a1b2c3d4-ffff-0000-0000-000000000002'
   ),
   (
     'a1b2c3d4-0003-0000-0000-000000000003',
@@ -31,7 +49,7 @@ VALUES
     'Військовий некрополь у Києві, де поховані військові діячі різних часів, учасники визвольних змагань та воїни різних війн.',
     50.4715,
     30.4578,
-    'https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?w=600&auto=format&fit=crop&q=80'
+    'a1b2c3d4-ffff-0000-0000-000000000003'
   );
 
 -- =============================================
