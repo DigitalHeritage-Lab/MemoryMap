@@ -41,7 +41,8 @@ sealed class DigitizeState with _$DigitizeState {
   String? get nameError {
     final trimmed = fullName.trim();
     if (trimmed.isEmpty) return 'requiredField';
-    final words = trimmed.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
+    final words =
+        trimmed.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
     if (words.length < 2) return 'fullNameTooShort';
     return null;
   }
@@ -55,7 +56,7 @@ sealed class DigitizeState with _$DigitizeState {
     if (trimmed.isEmpty) return 'requiredField';
     final parsed = DateTime.tryParse(trimmed);
     if (parsed == null) return 'invalidDate';
-    
+
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     if (parsed.isAfter(today)) return 'dateInFuture';
@@ -109,7 +110,7 @@ sealed class DigitizeState with _$DigitizeState {
       LatLng(latitude!, longitude!),
       LatLng(selectedCemetery!.latitude, selectedCemetery!.longitude),
     );
-    
+
     if (distance > 3000) return 'coordinatesTooFar';
     return null;
   }

@@ -49,8 +49,7 @@ class _GravesBodyState extends State<GravesBody>
         Expanded(
           child: BlocBuilder<GravesBloc, GravesState>(
             builder: (context, state) {
-              if (state.status == LoadingStatus.error &&
-                  state.graves.isEmpty) {
+              if (state.status == LoadingStatus.error && state.graves.isEmpty) {
                 return TryAgainWidget(
                   message: state.errorMessage,
                   onRetry: () {

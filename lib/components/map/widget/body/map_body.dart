@@ -47,8 +47,7 @@ class _MapBodyState extends State<MapBody> {
           );
         }
 
-        if (state.status == LoadingStatus.error &&
-            state.cemeteries.isEmpty) {
+        if (state.status == LoadingStatus.error && state.cemeteries.isEmpty) {
           return TryAgainWidget(
             message: state.errorMessage,
             onRetry: () {
@@ -77,9 +76,7 @@ class _MapBodyState extends State<MapBody> {
               isSelected: isSelected,
               isZoomedIn: isZoomedIn,
               onTap: () {
-                context
-                    .read<MapBloc>()
-                    .add(MapEvent.selectCemetery(cemetery));
+                context.read<MapBloc>().add(MapEvent.selectCemetery(cemetery));
                 _moveToCemetery(cemetery.latitude, cemetery.longitude);
               },
             ),
@@ -114,8 +111,7 @@ class _MapBodyState extends State<MapBody> {
                     urlTemplate:
                         'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
                     subdomains: const ['a', 'b', 'c', 'd'],
-                    userAgentPackageName:
-                        'com.digitalheritagelab.memorymap',
+                    userAgentPackageName: 'com.digitalheritagelab.memorymap',
                     retinaMode: RetinaMode.isHighDensity(context),
                   ),
                   MarkerLayer(markers: markers),
@@ -195,8 +191,7 @@ class _CemeteryMarker extends StatelessWidget {
               width: 30,
               height: 30,
               decoration: BoxDecoration(
-                color:
-                    isSelected ? AppColors.emerald : AppColors.slate800,
+                color: isSelected ? AppColors.emerald : AppColors.slate800,
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -221,9 +216,8 @@ class _CemeteryMarker extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected ? AppColors.emerald : AppColors.slate400,
             shape: BoxShape.circle,
-            border: isSelected
-                ? Border.all(color: Colors.white, width: 1.5)
-                : null,
+            border:
+                isSelected ? Border.all(color: Colors.white, width: 1.5) : null,
             boxShadow: isSelected
                 ? [
                     BoxShadow(
