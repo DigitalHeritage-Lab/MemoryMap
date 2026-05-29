@@ -160,8 +160,7 @@ class _MapLocationPickerDialogState extends State<MapLocationPickerDialog> {
                       urlTemplate:
                           'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
                       subdomains: const ['a', 'b', 'c', 'd'],
-                      userAgentPackageName:
-                          'com.digitalheritagelab.memorymap',
+                      userAgentPackageName: 'com.digitalheritagelab.memorymap',
                       retinaMode: RetinaMode.isHighDensity(context),
                     ),
                     MarkerLayer(

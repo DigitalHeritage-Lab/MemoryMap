@@ -4,7 +4,6 @@ import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class AddCemeteryDialog extends StatefulWidget {
   const AddCemeteryDialog({required this.bloc, super.key});
 
@@ -175,10 +174,10 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
                     controller: _nameController,
                     labelText: context.l10n.cemeteryName,
                     hintText: context.l10n.cemeteryNameHint,
-                    readOnly: state.cemeteryCreationStatus ==
-                        LoadingStatus.loading,
-                    showErrorText: _showErrors &&
-                        _nameController.text.trim().isEmpty,
+                    readOnly:
+                        state.cemeteryCreationStatus == LoadingStatus.loading,
+                    showErrorText:
+                        _showErrors && _nameController.text.trim().isEmpty,
                     errorText: context.l10n.requiredField,
                   ),
                   const SizedBox(height: 16),
@@ -188,10 +187,10 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
                     controller: _locationController,
                     labelText: context.l10n.cemeteryLabel,
                     hintText: context.l10n.cemeteryAddressHint,
-                    readOnly: state.cemeteryCreationStatus ==
-                        LoadingStatus.loading,
-                    showErrorText: _showErrors &&
-                        _locationController.text.trim().isEmpty,
+                    readOnly:
+                        state.cemeteryCreationStatus == LoadingStatus.loading,
+                    showErrorText:
+                        _showErrors && _locationController.text.trim().isEmpty,
                     errorText: context.l10n.requiredField,
                   ),
                   const SizedBox(height: 16),
@@ -201,8 +200,8 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
                     controller: _descriptionController,
                     labelText: context.l10n.cemeteryDescription,
                     hintText: context.l10n.cemeteryDescriptionHint,
-                    readOnly: state.cemeteryCreationStatus ==
-                        LoadingStatus.loading,
+                    readOnly:
+                        state.cemeteryCreationStatus == LoadingStatus.loading,
                     maxLines: 3,
                   ),
                   const SizedBox(height: 16),
@@ -222,8 +221,7 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
                             decimal: true,
                           ),
                           showErrorText: _showErrors &&
-                              double.tryParse(_latController.text) ==
-                                  null,
+                              double.tryParse(_latController.text) == null,
                           errorText: context.l10n.requiredField,
                         ),
                       ),
@@ -239,8 +237,7 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
                             decimal: true,
                           ),
                           showErrorText: _showErrors &&
-                              double.tryParse(_lngController.text) ==
-                                  null,
+                              double.tryParse(_lngController.text) == null,
                           errorText: context.l10n.requiredField,
                         ),
                       ),

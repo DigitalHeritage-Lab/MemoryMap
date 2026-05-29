@@ -99,8 +99,7 @@ class _DigitizeBodyState extends State<DigitizeBody> {
         }
         // Sync GPS display field
         if (state.latitude != null && state.longitude != null) {
-          _gpsController.text =
-              '${state.latitude!.toStringAsFixed(6)}, '
+          _gpsController.text = '${state.latitude!.toStringAsFixed(6)}, '
               '${state.longitude!.toStringAsFixed(6)}';
         }
         // Sync date fields from state (needed after resetForm)
@@ -186,8 +185,7 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   value: state.selectedCemetery,
                   items: state.cemeteries,
                   isEnabled: !isReadOnly && state.selectedSettlement != null,
-                  hasError:
-                      state.showErrors && state.cemeteryError != null,
+                  hasError: state.showErrors && state.cemeteryError != null,
                   itemLabel: (c) => c.name,
                   onChanged: (c) => context
                       .read<DigitizeBloc>()
@@ -198,7 +196,9 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   Text(
                     state.cemeteryError.toLocalizedError(context) ?? '',
                     style: const TextStyle(
-                        color: AppColors.red, fontSize: 12,),
+                      color: AppColors.red,
+                      fontSize: 12,
+                    ),
                   ),
                 ],
                 if (state.selectedSettlement != null) ...[

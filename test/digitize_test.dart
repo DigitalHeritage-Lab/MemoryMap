@@ -184,8 +184,7 @@ void main() {
       expect(state.deathDateError, isNull);
     });
 
-    test(
-        'birthDateError & deathDateError chronological/future/lifespan checks',
+    test('birthDateError & deathDateError chronological/future/lifespan checks',
         () {
       final tomorrow = DateTime.now().add(const Duration(days: 1));
       final tomorrowStr = '${tomorrow.year}-'

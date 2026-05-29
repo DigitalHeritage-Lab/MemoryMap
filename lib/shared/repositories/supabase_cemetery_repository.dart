@@ -27,8 +27,7 @@ class SupabaseCemeteryRepository implements CemeteryRepository {
           if (query != null && query.isNotEmpty) 'p_query': query,
           if (latitude != null) 'p_latitude': latitude,
           if (longitude != null) 'p_longitude': longitude,
-          if (regionId != null && regionId.isNotEmpty)
-            'p_region_id': regionId,
+          if (regionId != null && regionId.isNotEmpty) 'p_region_id': regionId,
           if (districtId != null && districtId.isNotEmpty)
             'p_district_id': districtId,
           if (settlementId != null && settlementId.isNotEmpty)

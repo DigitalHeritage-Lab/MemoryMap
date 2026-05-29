@@ -88,7 +88,6 @@ void _showGraveDetailsSheet(BuildContext context, Grave grave) {
   );
 }
 
-
 // ---------------------------------------------------------------------------
 // Private stateless widget — the bottom sheet content
 // ---------------------------------------------------------------------------

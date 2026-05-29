@@ -11,8 +11,8 @@ class DigitizeBlocProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<DigitizeBloc>()
-        ..add(const DigitizeEvent.loadRegions()),
+      create: (context) =>
+          getIt<DigitizeBloc>()..add(const DigitizeEvent.loadRegions()),
       child: child,
     );
   }
