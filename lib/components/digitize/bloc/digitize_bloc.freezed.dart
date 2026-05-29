@@ -50,7 +50,11 @@ extension DigitizeEventPatterns on DigitizeEvent {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadDigitizeCemeteries value)? loadDigitizeCemeteries,
+    TResult Function(_LoadRegions value)? loadRegions,
+    TResult Function(_RegionChanged value)? regionChanged,
+    TResult Function(_DistrictChanged value)? districtChanged,
+    TResult Function(_SettlementChanged value)? settlementChanged,
+    TResult Function(_CreateCemetery value)? createCemetery,
     TResult Function(_FullNameChanged value)? fullNameChanged,
     TResult Function(_BirthDateChanged value)? birthDateChanged,
     TResult Function(_DeathDateChanged value)? deathDateChanged,
@@ -63,8 +67,16 @@ extension DigitizeEventPatterns on DigitizeEvent {
   }) {
     final _that = this;
     switch (_that) {
-      case _LoadDigitizeCemeteries() when loadDigitizeCemeteries != null:
-        return loadDigitizeCemeteries(_that);
+      case _LoadRegions() when loadRegions != null:
+        return loadRegions(_that);
+      case _RegionChanged() when regionChanged != null:
+        return regionChanged(_that);
+      case _DistrictChanged() when districtChanged != null:
+        return districtChanged(_that);
+      case _SettlementChanged() when settlementChanged != null:
+        return settlementChanged(_that);
+      case _CreateCemetery() when createCemetery != null:
+        return createCemetery(_that);
       case _FullNameChanged() when fullNameChanged != null:
         return fullNameChanged(_that);
       case _BirthDateChanged() when birthDateChanged != null:
@@ -101,8 +113,11 @@ extension DigitizeEventPatterns on DigitizeEvent {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadDigitizeCemeteries value)
-        loadDigitizeCemeteries,
+    required TResult Function(_LoadRegions value) loadRegions,
+    required TResult Function(_RegionChanged value) regionChanged,
+    required TResult Function(_DistrictChanged value) districtChanged,
+    required TResult Function(_SettlementChanged value) settlementChanged,
+    required TResult Function(_CreateCemetery value) createCemetery,
     required TResult Function(_FullNameChanged value) fullNameChanged,
     required TResult Function(_BirthDateChanged value) birthDateChanged,
     required TResult Function(_DeathDateChanged value) deathDateChanged,
@@ -114,8 +129,16 @@ extension DigitizeEventPatterns on DigitizeEvent {
   }) {
     final _that = this;
     switch (_that) {
-      case _LoadDigitizeCemeteries():
-        return loadDigitizeCemeteries(_that);
+      case _LoadRegions():
+        return loadRegions(_that);
+      case _RegionChanged():
+        return regionChanged(_that);
+      case _DistrictChanged():
+        return districtChanged(_that);
+      case _SettlementChanged():
+        return settlementChanged(_that);
+      case _CreateCemetery():
+        return createCemetery(_that);
       case _FullNameChanged():
         return fullNameChanged(_that);
       case _BirthDateChanged():
@@ -149,7 +172,11 @@ extension DigitizeEventPatterns on DigitizeEvent {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadDigitizeCemeteries value)? loadDigitizeCemeteries,
+    TResult? Function(_LoadRegions value)? loadRegions,
+    TResult? Function(_RegionChanged value)? regionChanged,
+    TResult? Function(_DistrictChanged value)? districtChanged,
+    TResult? Function(_SettlementChanged value)? settlementChanged,
+    TResult? Function(_CreateCemetery value)? createCemetery,
     TResult? Function(_FullNameChanged value)? fullNameChanged,
     TResult? Function(_BirthDateChanged value)? birthDateChanged,
     TResult? Function(_DeathDateChanged value)? deathDateChanged,
@@ -161,8 +188,16 @@ extension DigitizeEventPatterns on DigitizeEvent {
   }) {
     final _that = this;
     switch (_that) {
-      case _LoadDigitizeCemeteries() when loadDigitizeCemeteries != null:
-        return loadDigitizeCemeteries(_that);
+      case _LoadRegions() when loadRegions != null:
+        return loadRegions(_that);
+      case _RegionChanged() when regionChanged != null:
+        return regionChanged(_that);
+      case _DistrictChanged() when districtChanged != null:
+        return districtChanged(_that);
+      case _SettlementChanged() when settlementChanged != null:
+        return settlementChanged(_that);
+      case _CreateCemetery() when createCemetery != null:
+        return createCemetery(_that);
       case _FullNameChanged() when fullNameChanged != null:
         return fullNameChanged(_that);
       case _BirthDateChanged() when birthDateChanged != null:
@@ -198,12 +233,18 @@ extension DigitizeEventPatterns on DigitizeEvent {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadDigitizeCemeteries,
+    TResult Function()? loadRegions,
+    TResult Function(Region? region)? regionChanged,
+    TResult Function(District? district)? districtChanged,
+    TResult Function(Settlement? settlement)? settlementChanged,
+    TResult Function(String name, String location, String description,
+            double latitude, double longitude, String? photoUrl)?
+        createCemetery,
     TResult Function(String value)? fullNameChanged,
     TResult Function(String value)? birthDateChanged,
     TResult Function(String value)? deathDateChanged,
     TResult Function(String value)? bioChanged,
-    TResult Function(Cemetery value)? cemeterySelected,
+    TResult Function(Cemetery? value)? cemeterySelected,
     TResult Function()? getCurrentGps,
     TResult Function()? submitGrave,
     TResult Function()? resetForm,
@@ -211,8 +252,17 @@ extension DigitizeEventPatterns on DigitizeEvent {
   }) {
     final _that = this;
     switch (_that) {
-      case _LoadDigitizeCemeteries() when loadDigitizeCemeteries != null:
-        return loadDigitizeCemeteries();
+      case _LoadRegions() when loadRegions != null:
+        return loadRegions();
+      case _RegionChanged() when regionChanged != null:
+        return regionChanged(_that.region);
+      case _DistrictChanged() when districtChanged != null:
+        return districtChanged(_that.district);
+      case _SettlementChanged() when settlementChanged != null:
+        return settlementChanged(_that.settlement);
+      case _CreateCemetery() when createCemetery != null:
+        return createCemetery(_that.name, _that.location, _that.description,
+            _that.latitude, _that.longitude, _that.photoUrl);
       case _FullNameChanged() when fullNameChanged != null:
         return fullNameChanged(_that.value);
       case _BirthDateChanged() when birthDateChanged != null:
@@ -249,20 +299,35 @@ extension DigitizeEventPatterns on DigitizeEvent {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadDigitizeCemeteries,
+    required TResult Function() loadRegions,
+    required TResult Function(Region? region) regionChanged,
+    required TResult Function(District? district) districtChanged,
+    required TResult Function(Settlement? settlement) settlementChanged,
+    required TResult Function(String name, String location, String description,
+            double latitude, double longitude, String? photoUrl)
+        createCemetery,
     required TResult Function(String value) fullNameChanged,
     required TResult Function(String value) birthDateChanged,
     required TResult Function(String value) deathDateChanged,
     required TResult Function(String value) bioChanged,
-    required TResult Function(Cemetery value) cemeterySelected,
+    required TResult Function(Cemetery? value) cemeterySelected,
     required TResult Function() getCurrentGps,
     required TResult Function() submitGrave,
     required TResult Function() resetForm,
   }) {
     final _that = this;
     switch (_that) {
-      case _LoadDigitizeCemeteries():
-        return loadDigitizeCemeteries();
+      case _LoadRegions():
+        return loadRegions();
+      case _RegionChanged():
+        return regionChanged(_that.region);
+      case _DistrictChanged():
+        return districtChanged(_that.district);
+      case _SettlementChanged():
+        return settlementChanged(_that.settlement);
+      case _CreateCemetery():
+        return createCemetery(_that.name, _that.location, _that.description,
+            _that.latitude, _that.longitude, _that.photoUrl);
       case _FullNameChanged():
         return fullNameChanged(_that.value);
       case _BirthDateChanged():
@@ -296,20 +361,35 @@ extension DigitizeEventPatterns on DigitizeEvent {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadDigitizeCemeteries,
+    TResult? Function()? loadRegions,
+    TResult? Function(Region? region)? regionChanged,
+    TResult? Function(District? district)? districtChanged,
+    TResult? Function(Settlement? settlement)? settlementChanged,
+    TResult? Function(String name, String location, String description,
+            double latitude, double longitude, String? photoUrl)?
+        createCemetery,
     TResult? Function(String value)? fullNameChanged,
     TResult? Function(String value)? birthDateChanged,
     TResult? Function(String value)? deathDateChanged,
     TResult? Function(String value)? bioChanged,
-    TResult? Function(Cemetery value)? cemeterySelected,
+    TResult? Function(Cemetery? value)? cemeterySelected,
     TResult? Function()? getCurrentGps,
     TResult? Function()? submitGrave,
     TResult? Function()? resetForm,
   }) {
     final _that = this;
     switch (_that) {
-      case _LoadDigitizeCemeteries() when loadDigitizeCemeteries != null:
-        return loadDigitizeCemeteries();
+      case _LoadRegions() when loadRegions != null:
+        return loadRegions();
+      case _RegionChanged() when regionChanged != null:
+        return regionChanged(_that.region);
+      case _DistrictChanged() when districtChanged != null:
+        return districtChanged(_that.district);
+      case _SettlementChanged() when settlementChanged != null:
+        return settlementChanged(_that.settlement);
+      case _CreateCemetery() when createCemetery != null:
+        return createCemetery(_that.name, _that.location, _that.description,
+            _that.latitude, _that.longitude, _that.photoUrl);
       case _FullNameChanged() when fullNameChanged != null:
         return fullNameChanged(_that.value);
       case _BirthDateChanged() when birthDateChanged != null:
@@ -334,13 +414,13 @@ extension DigitizeEventPatterns on DigitizeEvent {
 
 /// @nodoc
 
-class _LoadDigitizeCemeteries implements DigitizeEvent {
-  const _LoadDigitizeCemeteries();
+class _LoadRegions implements DigitizeEvent {
+  const _LoadRegions();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _LoadDigitizeCemeteries);
+        (other.runtimeType == runtimeType && other is _LoadRegions);
   }
 
   @override
@@ -348,7 +428,318 @@ class _LoadDigitizeCemeteries implements DigitizeEvent {
 
   @override
   String toString() {
-    return 'DigitizeEvent.loadDigitizeCemeteries()';
+    return 'DigitizeEvent.loadRegions()';
+  }
+}
+
+/// @nodoc
+
+class _RegionChanged implements DigitizeEvent {
+  const _RegionChanged(this.region);
+
+  final Region? region;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RegionChangedCopyWith<_RegionChanged> get copyWith =>
+      __$RegionChangedCopyWithImpl<_RegionChanged>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _RegionChanged &&
+            (identical(other.region, region) || other.region == region));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, region);
+
+  @override
+  String toString() {
+    return 'DigitizeEvent.regionChanged(region: $region)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$RegionChangedCopyWith<$Res>
+    implements $DigitizeEventCopyWith<$Res> {
+  factory _$RegionChangedCopyWith(
+          _RegionChanged value, $Res Function(_RegionChanged) _then) =
+      __$RegionChangedCopyWithImpl;
+  @useResult
+  $Res call({Region? region});
+}
+
+/// @nodoc
+class __$RegionChangedCopyWithImpl<$Res>
+    implements _$RegionChangedCopyWith<$Res> {
+  __$RegionChangedCopyWithImpl(this._self, this._then);
+
+  final _RegionChanged _self;
+  final $Res Function(_RegionChanged) _then;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? region = freezed,
+  }) {
+    return _then(_RegionChanged(
+      freezed == region
+          ? _self.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as Region?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _DistrictChanged implements DigitizeEvent {
+  const _DistrictChanged(this.district);
+
+  final District? district;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DistrictChangedCopyWith<_DistrictChanged> get copyWith =>
+      __$DistrictChangedCopyWithImpl<_DistrictChanged>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DistrictChanged &&
+            (identical(other.district, district) ||
+                other.district == district));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, district);
+
+  @override
+  String toString() {
+    return 'DigitizeEvent.districtChanged(district: $district)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DistrictChangedCopyWith<$Res>
+    implements $DigitizeEventCopyWith<$Res> {
+  factory _$DistrictChangedCopyWith(
+          _DistrictChanged value, $Res Function(_DistrictChanged) _then) =
+      __$DistrictChangedCopyWithImpl;
+  @useResult
+  $Res call({District? district});
+}
+
+/// @nodoc
+class __$DistrictChangedCopyWithImpl<$Res>
+    implements _$DistrictChangedCopyWith<$Res> {
+  __$DistrictChangedCopyWithImpl(this._self, this._then);
+
+  final _DistrictChanged _self;
+  final $Res Function(_DistrictChanged) _then;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? district = freezed,
+  }) {
+    return _then(_DistrictChanged(
+      freezed == district
+          ? _self.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as District?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _SettlementChanged implements DigitizeEvent {
+  const _SettlementChanged(this.settlement);
+
+  final Settlement? settlement;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SettlementChangedCopyWith<_SettlementChanged> get copyWith =>
+      __$SettlementChangedCopyWithImpl<_SettlementChanged>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SettlementChanged &&
+            (identical(other.settlement, settlement) ||
+                other.settlement == settlement));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, settlement);
+
+  @override
+  String toString() {
+    return 'DigitizeEvent.settlementChanged(settlement: $settlement)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SettlementChangedCopyWith<$Res>
+    implements $DigitizeEventCopyWith<$Res> {
+  factory _$SettlementChangedCopyWith(
+          _SettlementChanged value, $Res Function(_SettlementChanged) _then) =
+      __$SettlementChangedCopyWithImpl;
+  @useResult
+  $Res call({Settlement? settlement});
+}
+
+/// @nodoc
+class __$SettlementChangedCopyWithImpl<$Res>
+    implements _$SettlementChangedCopyWith<$Res> {
+  __$SettlementChangedCopyWithImpl(this._self, this._then);
+
+  final _SettlementChanged _self;
+  final $Res Function(_SettlementChanged) _then;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? settlement = freezed,
+  }) {
+    return _then(_SettlementChanged(
+      freezed == settlement
+          ? _self.settlement
+          : settlement // ignore: cast_nullable_to_non_nullable
+              as Settlement?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _CreateCemetery implements DigitizeEvent {
+  const _CreateCemetery(
+      {required this.name,
+      required this.location,
+      required this.description,
+      required this.latitude,
+      required this.longitude,
+      this.photoUrl});
+
+  final String name;
+  final String location;
+  final String description;
+  final double latitude;
+  final double longitude;
+  final String? photoUrl;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CreateCemeteryCopyWith<_CreateCemetery> get copyWith =>
+      __$CreateCemeteryCopyWithImpl<_CreateCemetery>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CreateCemetery &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, name, location, description, latitude, longitude, photoUrl);
+
+  @override
+  String toString() {
+    return 'DigitizeEvent.createCemetery(name: $name, location: $location, description: $description, latitude: $latitude, longitude: $longitude, photoUrl: $photoUrl)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CreateCemeteryCopyWith<$Res>
+    implements $DigitizeEventCopyWith<$Res> {
+  factory _$CreateCemeteryCopyWith(
+          _CreateCemetery value, $Res Function(_CreateCemetery) _then) =
+      __$CreateCemeteryCopyWithImpl;
+  @useResult
+  $Res call(
+      {String name,
+      String location,
+      String description,
+      double latitude,
+      double longitude,
+      String? photoUrl});
+}
+
+/// @nodoc
+class __$CreateCemeteryCopyWithImpl<$Res>
+    implements _$CreateCemeteryCopyWith<$Res> {
+  __$CreateCemeteryCopyWithImpl(this._self, this._then);
+
+  final _CreateCemetery _self;
+  final $Res Function(_CreateCemetery) _then;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? name = null,
+    Object? location = null,
+    Object? description = null,
+    Object? latitude = null,
+    Object? longitude = null,
+    Object? photoUrl = freezed,
+  }) {
+    return _then(_CreateCemetery(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: null == location
+          ? _self.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _self.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _self.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      photoUrl: freezed == photoUrl
+          ? _self.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
@@ -612,7 +1003,7 @@ class __$BioChangedCopyWithImpl<$Res> implements _$BioChangedCopyWith<$Res> {
 class _CemeterySelected implements DigitizeEvent {
   const _CemeterySelected(this.value);
 
-  final Cemetery value;
+  final Cemetery? value;
 
   /// Create a copy of DigitizeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -645,7 +1036,7 @@ abstract mixin class _$CemeterySelectedCopyWith<$Res>
           _CemeterySelected value, $Res Function(_CemeterySelected) _then) =
       __$CemeterySelectedCopyWithImpl;
   @useResult
-  $Res call({Cemetery value});
+  $Res call({Cemetery? value});
 }
 
 /// @nodoc
@@ -660,13 +1051,13 @@ class __$CemeterySelectedCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? value = null,
+    Object? value = freezed,
   }) {
     return _then(_CemeterySelected(
-      null == value
+      freezed == value
           ? _self.value
           : value // ignore: cast_nullable_to_non_nullable
-              as Cemetery,
+              as Cemetery?,
     ));
   }
 }
@@ -734,8 +1125,16 @@ class _ResetForm implements DigitizeEvent {
 /// @nodoc
 mixin _$DigitizeState {
   LoadingStatus get status;
-  GpsStatus get gpsStatus;
+  LoadingStatus get adminDataStatus;
+  LoadingStatus get cemeteryCreationStatus;
+  List<Region> get regions;
+  List<District> get districts;
+  List<Settlement> get settlements;
   List<Cemetery> get cemeteries;
+  Region? get selectedRegion;
+  District? get selectedDistrict;
+  Settlement? get selectedSettlement;
+  GpsStatus get gpsStatus;
   String get fullName;
   String get birthDate;
   String get deathDate;
@@ -745,6 +1144,7 @@ mixin _$DigitizeState {
   double? get longitude;
   bool get showErrors;
   String? get errorMessage;
+  String? get cemeteryErrorMessage;
 
   /// Create a copy of DigitizeState
   /// with the given fields replaced by the non-null parameter values.
@@ -760,10 +1160,24 @@ mixin _$DigitizeState {
         (other.runtimeType == runtimeType &&
             other is DigitizeState &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.gpsStatus, gpsStatus) ||
-                other.gpsStatus == gpsStatus) &&
+            (identical(other.adminDataStatus, adminDataStatus) ||
+                other.adminDataStatus == adminDataStatus) &&
+            (identical(other.cemeteryCreationStatus, cemeteryCreationStatus) ||
+                other.cemeteryCreationStatus == cemeteryCreationStatus) &&
+            const DeepCollectionEquality().equals(other.regions, regions) &&
+            const DeepCollectionEquality().equals(other.districts, districts) &&
+            const DeepCollectionEquality()
+                .equals(other.settlements, settlements) &&
             const DeepCollectionEquality()
                 .equals(other.cemeteries, cemeteries) &&
+            (identical(other.selectedRegion, selectedRegion) ||
+                other.selectedRegion == selectedRegion) &&
+            (identical(other.selectedDistrict, selectedDistrict) ||
+                other.selectedDistrict == selectedDistrict) &&
+            (identical(other.selectedSettlement, selectedSettlement) ||
+                other.selectedSettlement == selectedSettlement) &&
+            (identical(other.gpsStatus, gpsStatus) ||
+                other.gpsStatus == gpsStatus) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.birthDate, birthDate) ||
@@ -780,28 +1194,40 @@ mixin _$DigitizeState {
             (identical(other.showErrors, showErrors) ||
                 other.showErrors == showErrors) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.cemeteryErrorMessage, cemeteryErrorMessage) ||
+                other.cemeteryErrorMessage == cemeteryErrorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      status,
-      gpsStatus,
-      const DeepCollectionEquality().hash(cemeteries),
-      fullName,
-      birthDate,
-      deathDate,
-      bio,
-      selectedCemetery,
-      latitude,
-      longitude,
-      showErrors,
-      errorMessage);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        status,
+        adminDataStatus,
+        cemeteryCreationStatus,
+        const DeepCollectionEquality().hash(regions),
+        const DeepCollectionEquality().hash(districts),
+        const DeepCollectionEquality().hash(settlements),
+        const DeepCollectionEquality().hash(cemeteries),
+        selectedRegion,
+        selectedDistrict,
+        selectedSettlement,
+        gpsStatus,
+        fullName,
+        birthDate,
+        deathDate,
+        bio,
+        selectedCemetery,
+        latitude,
+        longitude,
+        showErrors,
+        errorMessage,
+        cemeteryErrorMessage
+      ]);
 
   @override
   String toString() {
-    return 'DigitizeState(status: $status, gpsStatus: $gpsStatus, cemeteries: $cemeteries, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage)';
+    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
   }
 }
 
@@ -813,8 +1239,16 @@ abstract mixin class $DigitizeStateCopyWith<$Res> {
   @useResult
   $Res call(
       {LoadingStatus status,
-      GpsStatus gpsStatus,
+      LoadingStatus adminDataStatus,
+      LoadingStatus cemeteryCreationStatus,
+      List<Region> regions,
+      List<District> districts,
+      List<Settlement> settlements,
       List<Cemetery> cemeteries,
+      Region? selectedRegion,
+      District? selectedDistrict,
+      Settlement? selectedSettlement,
+      GpsStatus gpsStatus,
       String fullName,
       String birthDate,
       String deathDate,
@@ -823,7 +1257,8 @@ abstract mixin class $DigitizeStateCopyWith<$Res> {
       double? latitude,
       double? longitude,
       bool showErrors,
-      String? errorMessage});
+      String? errorMessage,
+      String? cemeteryErrorMessage});
 }
 
 /// @nodoc
@@ -840,8 +1275,16 @@ class _$DigitizeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? gpsStatus = null,
+    Object? adminDataStatus = null,
+    Object? cemeteryCreationStatus = null,
+    Object? regions = null,
+    Object? districts = null,
+    Object? settlements = null,
     Object? cemeteries = null,
+    Object? selectedRegion = freezed,
+    Object? selectedDistrict = freezed,
+    Object? selectedSettlement = freezed,
+    Object? gpsStatus = null,
     Object? fullName = null,
     Object? birthDate = null,
     Object? deathDate = null,
@@ -851,20 +1294,53 @@ class _$DigitizeStateCopyWithImpl<$Res>
     Object? longitude = freezed,
     Object? showErrors = null,
     Object? errorMessage = freezed,
+    Object? cemeteryErrorMessage = freezed,
   }) {
     return _then(_self.copyWith(
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
-      gpsStatus: null == gpsStatus
-          ? _self.gpsStatus
-          : gpsStatus // ignore: cast_nullable_to_non_nullable
-              as GpsStatus,
+      adminDataStatus: null == adminDataStatus
+          ? _self.adminDataStatus
+          : adminDataStatus // ignore: cast_nullable_to_non_nullable
+              as LoadingStatus,
+      cemeteryCreationStatus: null == cemeteryCreationStatus
+          ? _self.cemeteryCreationStatus
+          : cemeteryCreationStatus // ignore: cast_nullable_to_non_nullable
+              as LoadingStatus,
+      regions: null == regions
+          ? _self.regions
+          : regions // ignore: cast_nullable_to_non_nullable
+              as List<Region>,
+      districts: null == districts
+          ? _self.districts
+          : districts // ignore: cast_nullable_to_non_nullable
+              as List<District>,
+      settlements: null == settlements
+          ? _self.settlements
+          : settlements // ignore: cast_nullable_to_non_nullable
+              as List<Settlement>,
       cemeteries: null == cemeteries
           ? _self.cemeteries
           : cemeteries // ignore: cast_nullable_to_non_nullable
               as List<Cemetery>,
+      selectedRegion: freezed == selectedRegion
+          ? _self.selectedRegion
+          : selectedRegion // ignore: cast_nullable_to_non_nullable
+              as Region?,
+      selectedDistrict: freezed == selectedDistrict
+          ? _self.selectedDistrict
+          : selectedDistrict // ignore: cast_nullable_to_non_nullable
+              as District?,
+      selectedSettlement: freezed == selectedSettlement
+          ? _self.selectedSettlement
+          : selectedSettlement // ignore: cast_nullable_to_non_nullable
+              as Settlement?,
+      gpsStatus: null == gpsStatus
+          ? _self.gpsStatus
+          : gpsStatus // ignore: cast_nullable_to_non_nullable
+              as GpsStatus,
       fullName: null == fullName
           ? _self.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -900,6 +1376,10 @@ class _$DigitizeStateCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cemeteryErrorMessage: freezed == cemeteryErrorMessage
+          ? _self.cemeteryErrorMessage
+          : cemeteryErrorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -998,8 +1478,16 @@ extension DigitizeStatePatterns on DigitizeState {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             LoadingStatus status,
-            GpsStatus gpsStatus,
+            LoadingStatus adminDataStatus,
+            LoadingStatus cemeteryCreationStatus,
+            List<Region> regions,
+            List<District> districts,
+            List<Settlement> settlements,
             List<Cemetery> cemeteries,
+            Region? selectedRegion,
+            District? selectedDistrict,
+            Settlement? selectedSettlement,
+            GpsStatus gpsStatus,
             String fullName,
             String birthDate,
             String deathDate,
@@ -1008,7 +1496,8 @@ extension DigitizeStatePatterns on DigitizeState {
             double? latitude,
             double? longitude,
             bool showErrors,
-            String? errorMessage)?
+            String? errorMessage,
+            String? cemeteryErrorMessage)?
         $default, {
     required TResult orElse(),
   }) {
@@ -1017,8 +1506,16 @@ extension DigitizeStatePatterns on DigitizeState {
       case _DigitizeState() when $default != null:
         return $default(
             _that.status,
-            _that.gpsStatus,
+            _that.adminDataStatus,
+            _that.cemeteryCreationStatus,
+            _that.regions,
+            _that.districts,
+            _that.settlements,
             _that.cemeteries,
+            _that.selectedRegion,
+            _that.selectedDistrict,
+            _that.selectedSettlement,
+            _that.gpsStatus,
             _that.fullName,
             _that.birthDate,
             _that.deathDate,
@@ -1027,7 +1524,8 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.latitude,
             _that.longitude,
             _that.showErrors,
-            _that.errorMessage);
+            _that.errorMessage,
+            _that.cemeteryErrorMessage);
       case _:
         return orElse();
     }
@@ -1050,8 +1548,16 @@ extension DigitizeStatePatterns on DigitizeState {
   TResult when<TResult extends Object?>(
     TResult Function(
             LoadingStatus status,
-            GpsStatus gpsStatus,
+            LoadingStatus adminDataStatus,
+            LoadingStatus cemeteryCreationStatus,
+            List<Region> regions,
+            List<District> districts,
+            List<Settlement> settlements,
             List<Cemetery> cemeteries,
+            Region? selectedRegion,
+            District? selectedDistrict,
+            Settlement? selectedSettlement,
+            GpsStatus gpsStatus,
             String fullName,
             String birthDate,
             String deathDate,
@@ -1060,7 +1566,8 @@ extension DigitizeStatePatterns on DigitizeState {
             double? latitude,
             double? longitude,
             bool showErrors,
-            String? errorMessage)
+            String? errorMessage,
+            String? cemeteryErrorMessage)
         $default,
   ) {
     final _that = this;
@@ -1068,8 +1575,16 @@ extension DigitizeStatePatterns on DigitizeState {
       case _DigitizeState():
         return $default(
             _that.status,
-            _that.gpsStatus,
+            _that.adminDataStatus,
+            _that.cemeteryCreationStatus,
+            _that.regions,
+            _that.districts,
+            _that.settlements,
             _that.cemeteries,
+            _that.selectedRegion,
+            _that.selectedDistrict,
+            _that.selectedSettlement,
+            _that.gpsStatus,
             _that.fullName,
             _that.birthDate,
             _that.deathDate,
@@ -1078,7 +1593,8 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.latitude,
             _that.longitude,
             _that.showErrors,
-            _that.errorMessage);
+            _that.errorMessage,
+            _that.cemeteryErrorMessage);
     }
   }
 
@@ -1098,8 +1614,16 @@ extension DigitizeStatePatterns on DigitizeState {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             LoadingStatus status,
-            GpsStatus gpsStatus,
+            LoadingStatus adminDataStatus,
+            LoadingStatus cemeteryCreationStatus,
+            List<Region> regions,
+            List<District> districts,
+            List<Settlement> settlements,
             List<Cemetery> cemeteries,
+            Region? selectedRegion,
+            District? selectedDistrict,
+            Settlement? selectedSettlement,
+            GpsStatus gpsStatus,
             String fullName,
             String birthDate,
             String deathDate,
@@ -1108,7 +1632,8 @@ extension DigitizeStatePatterns on DigitizeState {
             double? latitude,
             double? longitude,
             bool showErrors,
-            String? errorMessage)?
+            String? errorMessage,
+            String? cemeteryErrorMessage)?
         $default,
   ) {
     final _that = this;
@@ -1116,8 +1641,16 @@ extension DigitizeStatePatterns on DigitizeState {
       case _DigitizeState() when $default != null:
         return $default(
             _that.status,
-            _that.gpsStatus,
+            _that.adminDataStatus,
+            _that.cemeteryCreationStatus,
+            _that.regions,
+            _that.districts,
+            _that.settlements,
             _that.cemeteries,
+            _that.selectedRegion,
+            _that.selectedDistrict,
+            _that.selectedSettlement,
+            _that.gpsStatus,
             _that.fullName,
             _that.birthDate,
             _that.deathDate,
@@ -1126,7 +1659,8 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.latitude,
             _that.longitude,
             _that.showErrors,
-            _that.errorMessage);
+            _that.errorMessage,
+            _that.cemeteryErrorMessage);
       case _:
         return null;
     }
@@ -1138,8 +1672,16 @@ extension DigitizeStatePatterns on DigitizeState {
 class _DigitizeState extends DigitizeState {
   const _DigitizeState(
       {this.status = LoadingStatus.initial,
-      this.gpsStatus = GpsStatus.idle,
+      this.adminDataStatus = LoadingStatus.initial,
+      this.cemeteryCreationStatus = LoadingStatus.initial,
+      final List<Region> regions = const [],
+      final List<District> districts = const [],
+      final List<Settlement> settlements = const [],
       final List<Cemetery> cemeteries = const [],
+      this.selectedRegion,
+      this.selectedDistrict,
+      this.selectedSettlement,
+      this.gpsStatus = GpsStatus.idle,
       this.fullName = '',
       this.birthDate = '',
       this.deathDate = '',
@@ -1148,8 +1690,12 @@ class _DigitizeState extends DigitizeState {
       this.latitude,
       this.longitude,
       this.showErrors = false,
-      this.errorMessage})
-      : _cemeteries = cemeteries,
+      this.errorMessage,
+      this.cemeteryErrorMessage})
+      : _regions = regions,
+        _districts = districts,
+        _settlements = settlements,
+        _cemeteries = cemeteries,
         super._();
 
   @override
@@ -1157,7 +1703,37 @@ class _DigitizeState extends DigitizeState {
   final LoadingStatus status;
   @override
   @JsonKey()
-  final GpsStatus gpsStatus;
+  final LoadingStatus adminDataStatus;
+  @override
+  @JsonKey()
+  final LoadingStatus cemeteryCreationStatus;
+  final List<Region> _regions;
+  @override
+  @JsonKey()
+  List<Region> get regions {
+    if (_regions is EqualUnmodifiableListView) return _regions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_regions);
+  }
+
+  final List<District> _districts;
+  @override
+  @JsonKey()
+  List<District> get districts {
+    if (_districts is EqualUnmodifiableListView) return _districts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_districts);
+  }
+
+  final List<Settlement> _settlements;
+  @override
+  @JsonKey()
+  List<Settlement> get settlements {
+    if (_settlements is EqualUnmodifiableListView) return _settlements;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_settlements);
+  }
+
   final List<Cemetery> _cemeteries;
   @override
   @JsonKey()
@@ -1167,6 +1743,15 @@ class _DigitizeState extends DigitizeState {
     return EqualUnmodifiableListView(_cemeteries);
   }
 
+  @override
+  final Region? selectedRegion;
+  @override
+  final District? selectedDistrict;
+  @override
+  final Settlement? selectedSettlement;
+  @override
+  @JsonKey()
+  final GpsStatus gpsStatus;
   @override
   @JsonKey()
   final String fullName;
@@ -1190,6 +1775,8 @@ class _DigitizeState extends DigitizeState {
   final bool showErrors;
   @override
   final String? errorMessage;
+  @override
+  final String? cemeteryErrorMessage;
 
   /// Create a copy of DigitizeState
   /// with the given fields replaced by the non-null parameter values.
@@ -1205,10 +1792,25 @@ class _DigitizeState extends DigitizeState {
         (other.runtimeType == runtimeType &&
             other is _DigitizeState &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.gpsStatus, gpsStatus) ||
-                other.gpsStatus == gpsStatus) &&
+            (identical(other.adminDataStatus, adminDataStatus) ||
+                other.adminDataStatus == adminDataStatus) &&
+            (identical(other.cemeteryCreationStatus, cemeteryCreationStatus) ||
+                other.cemeteryCreationStatus == cemeteryCreationStatus) &&
+            const DeepCollectionEquality().equals(other._regions, _regions) &&
+            const DeepCollectionEquality()
+                .equals(other._districts, _districts) &&
+            const DeepCollectionEquality()
+                .equals(other._settlements, _settlements) &&
             const DeepCollectionEquality()
                 .equals(other._cemeteries, _cemeteries) &&
+            (identical(other.selectedRegion, selectedRegion) ||
+                other.selectedRegion == selectedRegion) &&
+            (identical(other.selectedDistrict, selectedDistrict) ||
+                other.selectedDistrict == selectedDistrict) &&
+            (identical(other.selectedSettlement, selectedSettlement) ||
+                other.selectedSettlement == selectedSettlement) &&
+            (identical(other.gpsStatus, gpsStatus) ||
+                other.gpsStatus == gpsStatus) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.birthDate, birthDate) ||
@@ -1225,28 +1827,40 @@ class _DigitizeState extends DigitizeState {
             (identical(other.showErrors, showErrors) ||
                 other.showErrors == showErrors) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.cemeteryErrorMessage, cemeteryErrorMessage) ||
+                other.cemeteryErrorMessage == cemeteryErrorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      status,
-      gpsStatus,
-      const DeepCollectionEquality().hash(_cemeteries),
-      fullName,
-      birthDate,
-      deathDate,
-      bio,
-      selectedCemetery,
-      latitude,
-      longitude,
-      showErrors,
-      errorMessage);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        status,
+        adminDataStatus,
+        cemeteryCreationStatus,
+        const DeepCollectionEquality().hash(_regions),
+        const DeepCollectionEquality().hash(_districts),
+        const DeepCollectionEquality().hash(_settlements),
+        const DeepCollectionEquality().hash(_cemeteries),
+        selectedRegion,
+        selectedDistrict,
+        selectedSettlement,
+        gpsStatus,
+        fullName,
+        birthDate,
+        deathDate,
+        bio,
+        selectedCemetery,
+        latitude,
+        longitude,
+        showErrors,
+        errorMessage,
+        cemeteryErrorMessage
+      ]);
 
   @override
   String toString() {
-    return 'DigitizeState(status: $status, gpsStatus: $gpsStatus, cemeteries: $cemeteries, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage)';
+    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
   }
 }
 
@@ -1260,8 +1874,16 @@ abstract mixin class _$DigitizeStateCopyWith<$Res>
   @useResult
   $Res call(
       {LoadingStatus status,
-      GpsStatus gpsStatus,
+      LoadingStatus adminDataStatus,
+      LoadingStatus cemeteryCreationStatus,
+      List<Region> regions,
+      List<District> districts,
+      List<Settlement> settlements,
       List<Cemetery> cemeteries,
+      Region? selectedRegion,
+      District? selectedDistrict,
+      Settlement? selectedSettlement,
+      GpsStatus gpsStatus,
       String fullName,
       String birthDate,
       String deathDate,
@@ -1270,7 +1892,8 @@ abstract mixin class _$DigitizeStateCopyWith<$Res>
       double? latitude,
       double? longitude,
       bool showErrors,
-      String? errorMessage});
+      String? errorMessage,
+      String? cemeteryErrorMessage});
 }
 
 /// @nodoc
@@ -1287,8 +1910,16 @@ class __$DigitizeStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? status = null,
-    Object? gpsStatus = null,
+    Object? adminDataStatus = null,
+    Object? cemeteryCreationStatus = null,
+    Object? regions = null,
+    Object? districts = null,
+    Object? settlements = null,
     Object? cemeteries = null,
+    Object? selectedRegion = freezed,
+    Object? selectedDistrict = freezed,
+    Object? selectedSettlement = freezed,
+    Object? gpsStatus = null,
     Object? fullName = null,
     Object? birthDate = null,
     Object? deathDate = null,
@@ -1298,20 +1929,53 @@ class __$DigitizeStateCopyWithImpl<$Res>
     Object? longitude = freezed,
     Object? showErrors = null,
     Object? errorMessage = freezed,
+    Object? cemeteryErrorMessage = freezed,
   }) {
     return _then(_DigitizeState(
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
-      gpsStatus: null == gpsStatus
-          ? _self.gpsStatus
-          : gpsStatus // ignore: cast_nullable_to_non_nullable
-              as GpsStatus,
+      adminDataStatus: null == adminDataStatus
+          ? _self.adminDataStatus
+          : adminDataStatus // ignore: cast_nullable_to_non_nullable
+              as LoadingStatus,
+      cemeteryCreationStatus: null == cemeteryCreationStatus
+          ? _self.cemeteryCreationStatus
+          : cemeteryCreationStatus // ignore: cast_nullable_to_non_nullable
+              as LoadingStatus,
+      regions: null == regions
+          ? _self._regions
+          : regions // ignore: cast_nullable_to_non_nullable
+              as List<Region>,
+      districts: null == districts
+          ? _self._districts
+          : districts // ignore: cast_nullable_to_non_nullable
+              as List<District>,
+      settlements: null == settlements
+          ? _self._settlements
+          : settlements // ignore: cast_nullable_to_non_nullable
+              as List<Settlement>,
       cemeteries: null == cemeteries
           ? _self._cemeteries
           : cemeteries // ignore: cast_nullable_to_non_nullable
               as List<Cemetery>,
+      selectedRegion: freezed == selectedRegion
+          ? _self.selectedRegion
+          : selectedRegion // ignore: cast_nullable_to_non_nullable
+              as Region?,
+      selectedDistrict: freezed == selectedDistrict
+          ? _self.selectedDistrict
+          : selectedDistrict // ignore: cast_nullable_to_non_nullable
+              as District?,
+      selectedSettlement: freezed == selectedSettlement
+          ? _self.selectedSettlement
+          : selectedSettlement // ignore: cast_nullable_to_non_nullable
+              as Settlement?,
+      gpsStatus: null == gpsStatus
+          ? _self.gpsStatus
+          : gpsStatus // ignore: cast_nullable_to_non_nullable
+              as GpsStatus,
       fullName: null == fullName
           ? _self.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -1347,6 +2011,10 @@ class __$DigitizeStateCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cemeteryErrorMessage: freezed == cemeteryErrorMessage
+          ? _self.cemeteryErrorMessage
+          : cemeteryErrorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }

@@ -1,6 +1,6 @@
 -- Test database schema and optimized functions/indexes
 BEGIN;
-SELECT plan(16);
+SELECT plan(17);
 
 -- 1. Check tables exist
 SELECT has_table('public', 'cemeteries', 'Table public.cemeteries should exist');
@@ -20,7 +20,8 @@ SELECT has_index('public', 'graves', 'idx_graves_cemetery_id', 'Index idx_graves
 SELECT has_index('public', 'graves', 'idx_graves_created_at', 'Index idx_graves_created_at should exist');
 
 -- 4. Check functions exist with correct signatures
-SELECT has_function('public', 'rpc_get_cemeteries', ARRAY['text', 'uuid', 'double precision', 'double precision'], 'Function rpc_get_cemeteries(text, uuid, double precision, double precision) should exist');
+SELECT has_function('public', 'rpc_get_cemeteries', ARRAY['text', 'uuid', 'double precision', 'double precision', 'uuid', 'uuid', 'uuid'], 'Function rpc_get_cemeteries(text, uuid, double precision, double precision, uuid, uuid, uuid) should exist');
+SELECT has_function('public', 'rpc_add_cemetery', ARRAY['character varying', 'text', 'text', 'double precision', 'double precision', 'uuid', 'uuid', 'uuid', 'text'], 'Function rpc_add_cemetery(...) should exist');
 SELECT has_function('public', 'rpc_get_graves', ARRAY['integer', 'integer', 'text', 'uuid'], 'Function rpc_get_graves(integer, integer, text, uuid) should exist');
 SELECT has_function('public', 'rpc_get_regions', '{}'::name[], 'Function rpc_get_regions() should exist');
 SELECT has_function('public', 'rpc_get_districts', ARRAY['uuid'], 'Function rpc_get_districts(uuid) should exist');

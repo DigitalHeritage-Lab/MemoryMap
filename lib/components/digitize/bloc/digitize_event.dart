@@ -2,8 +2,24 @@ part of 'digitize_bloc.dart';
 
 @freezed
 sealed class DigitizeEvent with _$DigitizeEvent {
-  const factory DigitizeEvent.loadDigitizeCemeteries() =
-      _LoadDigitizeCemeteries;
+  const factory DigitizeEvent.loadRegions() = _LoadRegions;
+  const factory DigitizeEvent.regionChanged(
+    Region? region,
+  ) = _RegionChanged;
+  const factory DigitizeEvent.districtChanged(
+    District? district,
+  ) = _DistrictChanged;
+  const factory DigitizeEvent.settlementChanged(
+    Settlement? settlement,
+  ) = _SettlementChanged;
+  const factory DigitizeEvent.createCemetery({
+    required String name,
+    required String location,
+    required String description,
+    required double latitude,
+    required double longitude,
+    String? photoUrl,
+  }) = _CreateCemetery;
   const factory DigitizeEvent.fullNameChanged(
     String value,
   ) = _FullNameChanged;
@@ -17,7 +33,7 @@ sealed class DigitizeEvent with _$DigitizeEvent {
     String value,
   ) = _BioChanged;
   const factory DigitizeEvent.cemeterySelected(
-    Cemetery value,
+    Cemetery? value,
   ) = _CemeterySelected;
   const factory DigitizeEvent.getCurrentGps() = _GetCurrentGps;
   const factory DigitizeEvent.submitGrave() = _SubmitGrave;

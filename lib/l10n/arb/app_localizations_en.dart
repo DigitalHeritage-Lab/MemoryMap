@@ -187,4 +187,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String mapLocationLabel(String lat, String lng) {
     return 'Map ($lat, $lng)';
   }
+
+  @override
+  String get region => 'Region';
+
+  @override
+  String get selectRegion => 'Select region';
+
+  @override
+  String get district => 'District';
+
+  @override
+  String get selectDistrict => 'Select district';
+
+  @override
+  String get settlement => 'Settlement';
+
+  @override
+  String get selectSettlement => 'Select settlement';
+
+  @override
+  String get addCemetery => 'Add cemetery';
+
+  @override
+  String get cemeteryName => 'Cemetery Name';
+
+  @override
+  String get cemeteryNameHint => 'Baykove cemetery';
+
+  @override
+  String get cemeteryDescription => 'Cemetery Description';
+
+  @override
+  String get cemeteryDescriptionHint =>
+      'Description or history of the cemetery...';
+
+  @override
+  String get cemeteryCreatedSuccess => 'Cemetery created successfully!';
+
+  @override
+  String get noCemeteriesInSettlement =>
+      'No digitized cemeteries in this settlement';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get latitude => 'Latitude (Lat)';
+
+  @override
+  String get longitude => 'Longitude (Lng)';
+
+  @override
+  String get cemeteryAddressHint => '6 Baykova St';
 }

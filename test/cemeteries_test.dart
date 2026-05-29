@@ -56,16 +56,25 @@ class MockCemeteryRepository implements CemeteryRepository {
   String? lastQuery;
   double? lastLatitude;
   double? lastLongitude;
+  String? lastRegionId;
+  String? lastDistrictId;
+  String? lastSettlementId;
 
   @override
   Future<Either<Failure, List<Cemetery>>> getCemeteries({
     String? query,
     double? latitude,
     double? longitude,
+    String? regionId,
+    String? districtId,
+    String? settlementId,
   }) async {
     lastQuery = query;
     lastLatitude = latitude;
     lastLongitude = longitude;
+    lastRegionId = regionId;
+    lastDistrictId = districtId;
+    lastSettlementId = settlementId;
 
     if (failureResult != null) {
       return Left(failureResult!);
@@ -79,6 +88,40 @@ class MockCemeteryRepository implements CemeteryRepository {
       return Left(failureResult!);
     }
     return Right(cemeteriesResult.firstWhere((c) => c.id == id));
+  }
+
+  @override
+  Future<Either<Failure, List<Region>>> getRegions() async {
+    if (failureResult != null) {
+      return Left(failureResult!);
+    }
+    return const Right([]);
+  }
+
+  @override
+  Future<Either<Failure, List<District>>> getDistricts(String regionId) async {
+    if (failureResult != null) {
+      return Left(failureResult!);
+    }
+    return const Right([]);
+  }
+
+  @override
+  Future<Either<Failure, List<Settlement>>> getSettlements(
+    String districtId,
+  ) async {
+    if (failureResult != null) {
+      return Left(failureResult!);
+    }
+    return const Right([]);
+  }
+
+  @override
+  Future<Either<Failure, Cemetery>> addCemetery(Cemetery cemetery) async {
+    if (failureResult != null) {
+      return Left(failureResult!);
+    }
+    return Right(cemetery);
   }
 }
 

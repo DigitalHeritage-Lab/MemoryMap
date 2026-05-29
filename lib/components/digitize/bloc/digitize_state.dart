@@ -6,8 +6,16 @@ enum GpsStatus { idle, loading, success, error }
 sealed class DigitizeState with _$DigitizeState {
   const factory DigitizeState({
     @Default(LoadingStatus.initial) LoadingStatus status,
-    @Default(GpsStatus.idle) GpsStatus gpsStatus,
+    @Default(LoadingStatus.initial) LoadingStatus adminDataStatus,
+    @Default(LoadingStatus.initial) LoadingStatus cemeteryCreationStatus,
+    @Default([]) List<Region> regions,
+    @Default([]) List<District> districts,
+    @Default([]) List<Settlement> settlements,
     @Default([]) List<Cemetery> cemeteries,
+    Region? selectedRegion,
+    District? selectedDistrict,
+    Settlement? selectedSettlement,
+    @Default(GpsStatus.idle) GpsStatus gpsStatus,
     @Default('') String fullName,
     @Default('') String birthDate,
     @Default('') String deathDate,
@@ -17,6 +25,7 @@ sealed class DigitizeState with _$DigitizeState {
     double? longitude,
     @Default(false) bool showErrors,
     String? errorMessage,
+    String? cemeteryErrorMessage,
   }) = _DigitizeState;
 
   const DigitizeState._();

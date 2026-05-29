@@ -15,7 +15,11 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
     this._cemeteryRepository,
     this._graveRepository,
   ) : super(const DigitizeState()) {
-    on<_LoadDigitizeCemeteries>(_onLoadDigitizeCemeteries);
+    on<_LoadRegions>(_onLoadRegions);
+    on<_RegionChanged>(_onRegionChanged);
+    on<_DistrictChanged>(_onDistrictChanged);
+    on<_SettlementChanged>(_onSettlementChanged);
+    on<_CreateCemetery>(_onCreateCemetery);
     on<_FullNameChanged>(_onFullNameChanged);
     on<_BirthDateChanged>(_onBirthDateChanged);
     on<_DeathDateChanged>(_onDeathDateChanged);
@@ -29,16 +33,188 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
   final CemeteryRepository _cemeteryRepository;
   final GraveRepository _graveRepository;
 
-  Future<void> _onLoadDigitizeCemeteries(
-    _LoadDigitizeCemeteries event,
+  Future<void> _onLoadRegions(
+    _LoadRegions event,
     Emitter<DigitizeState> emit,
   ) async {
-    final result = await _cemeteryRepository.getCemeteries();
+    emit(state.copyWith(adminDataStatus: LoadingStatus.loading));
+    final result = await _cemeteryRepository.getRegions();
     result.fold(
-      (failure) => null,
-      (list) => emit(
-        state.copyWith(cemeteries: list),
+      (failure) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.error,
+          errorMessage: failure.message,
+        ),
       ),
+      (regions) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.loaded,
+          regions: regions,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onRegionChanged(
+    _RegionChanged event,
+    Emitter<DigitizeState> emit,
+  ) async {
+    final region = event.region;
+    emit(
+      state.copyWith(
+        selectedRegion: region,
+        selectedDistrict: null,
+        selectedSettlement: null,
+        selectedCemetery: null,
+        districts: [],
+        settlements: [],
+        cemeteries: [],
+      ),
+    );
+    if (region == null) return;
+
+    emit(state.copyWith(adminDataStatus: LoadingStatus.loading));
+    final result = await _cemeteryRepository.getDistricts(region.id);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.error,
+          errorMessage: failure.message,
+        ),
+      ),
+      (districts) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.loaded,
+          districts: districts,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onDistrictChanged(
+    _DistrictChanged event,
+    Emitter<DigitizeState> emit,
+  ) async {
+    final district = event.district;
+    emit(
+      state.copyWith(
+        selectedDistrict: district,
+        selectedSettlement: null,
+        selectedCemetery: null,
+        settlements: [],
+        cemeteries: [],
+      ),
+    );
+    if (district == null) return;
+
+    emit(state.copyWith(adminDataStatus: LoadingStatus.loading));
+    final result = await _cemeteryRepository.getSettlements(district.id);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.error,
+          errorMessage: failure.message,
+        ),
+      ),
+      (settlements) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.loaded,
+          settlements: settlements,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onSettlementChanged(
+    _SettlementChanged event,
+    Emitter<DigitizeState> emit,
+  ) async {
+    final settlement = event.settlement;
+    emit(
+      state.copyWith(
+        selectedSettlement: settlement,
+        selectedCemetery: null,
+        cemeteries: [],
+      ),
+    );
+    if (settlement == null) return;
+
+    emit(state.copyWith(adminDataStatus: LoadingStatus.loading));
+    final result = await _cemeteryRepository.getCemeteries(
+      settlementId: settlement.id,
+    );
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.error,
+          errorMessage: failure.message,
+        ),
+      ),
+      (cemeteries) => emit(
+        state.copyWith(
+          adminDataStatus: LoadingStatus.loaded,
+          cemeteries: cemeteries,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onCreateCemetery(
+    _CreateCemetery event,
+    Emitter<DigitizeState> emit,
+  ) async {
+    if (state.selectedRegion == null ||
+        state.selectedDistrict == null ||
+        state.selectedSettlement == null) {
+      emit(
+        state.copyWith(
+          cemeteryCreationStatus: LoadingStatus.error,
+          cemeteryErrorMessage: 'fillAllRequiredFields',
+        ),
+      );
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        cemeteryCreationStatus: LoadingStatus.loading,
+        cemeteryErrorMessage: null,
+      ),
+    );
+
+    final cemetery = Cemetery(
+      id: '',
+      name: event.name,
+      location: event.location,
+      description: event.description,
+      latitude: event.latitude,
+      longitude: event.longitude,
+      photoUrl: event.photoUrl ?? '',
+      regionId: state.selectedRegion!.id,
+      districtId: state.selectedDistrict!.id,
+      settlementId: state.selectedSettlement!.id,
+    );
+
+    final result = await _cemeteryRepository.addCemetery(cemetery);
+
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          cemeteryCreationStatus: LoadingStatus.error,
+          cemeteryErrorMessage: failure.message,
+        ),
+      ),
+      (newCemetery) {
+        final updatedCemeteries = List<Cemetery>.from(state.cemeteries)
+          ..add(newCemetery);
+        emit(
+          state.copyWith(
+            cemeteryCreationStatus: LoadingStatus.loaded,
+            cemeteries: updatedCemeteries,
+            selectedCemetery: newCemetery,
+          ),
+        );
+      },
     );
   }
 
@@ -189,7 +365,16 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
     Emitter<DigitizeState> emit,
   ) {
     emit(
-      DigitizeState(cemeteries: state.cemeteries),
+      DigitizeState(
+        regions: state.regions,
+        selectedRegion: state.selectedRegion,
+        districts: state.districts,
+        selectedDistrict: state.selectedDistrict,
+        settlements: state.settlements,
+        selectedSettlement: state.selectedSettlement,
+        cemeteries: state.cemeteries,
+        selectedCemetery: state.selectedCemetery,
+      ),
     );
   }
 }
