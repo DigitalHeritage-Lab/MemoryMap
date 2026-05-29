@@ -9,8 +9,11 @@
 **MemoryMap** — це сучасний, високопродуктивний кросплатформний мобільний додаток на Flutter для оцифрування, каталогізації та інтерактивного картування історичних некрополів та індивідуальних поховань України. Проєкт покликаний зберегти культурну спадщину через зручні інструменти збору GPS-даних, біографічних описів та фотофіксації безпосередньо «у полі».
 
 <p align="center">
-  <img src="assets/images/mockup.png" width="400" alt="MemoryMap Mobile Mockup">
+  <img src="assets/images/mockup_cemetery.png" width="380" alt="Cemeteries Search Screen">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/images/mockup_digitize.png" width="380" alt="Digitize Grave Screen">
 </p>
+
 
 ---
 
