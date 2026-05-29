@@ -3,6 +3,7 @@ export 'constants/enum.dart';
 export 'constants/theme/app_colors.dart';
 export 'di/injection.dart';
 export 'helper/error_helper.dart';
+export 'models/admin_division.dart';
 export 'models/cemetery.dart';
 export 'models/grave.dart';
 export 'navigation/app_router.dart';

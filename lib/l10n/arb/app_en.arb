@@ -96,5 +96,22 @@
         "type": "String"
       }
     }
-  }
+  },
+  "region": "Region",
+  "selectRegion": "Select region",
+  "district": "District",
+  "selectDistrict": "Select district",
+  "settlement": "Settlement",
+  "selectSettlement": "Select settlement",
+  "addCemetery": "Add cemetery",
+  "cemeteryName": "Cemetery Name",
+  "cemeteryNameHint": "Baykove cemetery",
+  "cemeteryDescription": "Cemetery Description",
+  "cemeteryDescriptionHint": "Description or history of the cemetery...",
+  "cemeteryCreatedSuccess": "Cemetery created successfully!",
+  "noCemeteriesInSettlement": "No digitized cemeteries in this settlement",
+  "cancel": "Cancel",
+  "latitude": "Latitude (Lat)",
+  "longitude": "Longitude (Lng)",
+  "cemeteryAddressHint": "6 Baykova St"
 }

@@ -433,6 +433,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Map ({lat}, {lng})'**
   String mapLocationLabel(String lat, String lng);
+
+  /// No description provided for @region.
+  ///
+  /// In en, this message translates to:
+  /// **'Region'**
+  String get region;
+
+  /// No description provided for @selectRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'Select region'**
+  String get selectRegion;
+
+  /// No description provided for @district.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get district;
+
+  /// No description provided for @selectDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'Select district'**
+  String get selectDistrict;
+
+  /// No description provided for @settlement.
+  ///
+  /// In en, this message translates to:
+  /// **'Settlement'**
+  String get settlement;
+
+  /// No description provided for @selectSettlement.
+  ///
+  /// In en, this message translates to:
+  /// **'Select settlement'**
+  String get selectSettlement;
+
+  /// No description provided for @addCemetery.
+  ///
+  /// In en, this message translates to:
+  /// **'Add cemetery'**
+  String get addCemetery;
+
+  /// No description provided for @cemeteryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Cemetery Name'**
+  String get cemeteryName;
+
+  /// No description provided for @cemeteryNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Baykove cemetery'**
+  String get cemeteryNameHint;
+
+  /// No description provided for @cemeteryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Cemetery Description'**
+  String get cemeteryDescription;
+
+  /// No description provided for @cemeteryDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Description or history of the cemetery...'**
+  String get cemeteryDescriptionHint;
+
+  /// No description provided for @cemeteryCreatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Cemetery created successfully!'**
+  String get cemeteryCreatedSuccess;
+
+  /// No description provided for @noCemeteriesInSettlement.
+  ///
+  /// In en, this message translates to:
+  /// **'No digitized cemeteries in this settlement'**
+  String get noCemeteriesInSettlement;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @latitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Latitude (Lat)'**
+  String get latitude;
+
+  /// No description provided for @longitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Longitude (Lng)'**
+  String get longitude;
+
+  /// No description provided for @cemeteryAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'6 Baykova St'**
+  String get cemeteryAddressHint;
 }
 
 class _AppLocalizationsDelegate

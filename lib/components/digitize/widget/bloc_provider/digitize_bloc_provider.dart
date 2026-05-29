@@ -12,7 +12,7 @@ class DigitizeBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<DigitizeBloc>()
-        ..add(const DigitizeEvent.loadDigitizeCemeteries()),
+        ..add(const DigitizeEvent.loadRegions()),
       child: child,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:empty_template/components/digitize/bloc/digitize_bloc.dart';
+import 'package:empty_template/components/digitize/widget/add_cemetery_dialog.dart';
 import 'package:empty_template/l10n/l10n.dart';
 import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -104,9 +105,9 @@ class _DigitizeBodyState extends State<DigitizeBody> {
               ),
               const SizedBox(height: 18),
 
-              // Cemetery selection
+              // 1. Region selection
               Text(
-                context.l10n.cemeteryLabel,
+                context.l10n.region,
                 style: const TextStyle(
                   color: AppColors.slate400,
                   fontSize: 14,
@@ -119,17 +120,13 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                 decoration: BoxDecoration(
                   color: isReadOnly ? AppColors.slate900 : AppColors.slate800,
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: (state.showErrors && state.cemeteryError != null)
-                        ? AppColors.red
-                        : AppColors.slate700,
-                  ),
+                  border: Border.all(color: AppColors.slate700),
                 ),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton<Cemetery>(
-                    value: state.selectedCemetery,
+                  child: DropdownButton<Region>(
+                    value: state.selectedRegion,
                     hint: Text(
-                      context.l10n.selectCemetery,
+                      context.l10n.selectRegion,
                       style: const TextStyle(
                         color: AppColors.slate600,
                         fontSize: 16,
@@ -147,12 +144,198 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                     ),
                     onChanged: isReadOnly
                         ? null
+                        : (Region? region) {
+                            context.read<DigitizeBloc>().add(
+                                  DigitizeEvent.regionChanged(region),
+                                );
+                          },
+                    items: state.regions.map((Region r) {
+                      return DropdownMenuItem<Region>(
+                        value: r,
+                        child: Text(r.name),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+
+              // 2. District selection
+              Text(
+                context.l10n.district,
+                style: const TextStyle(
+                  color: AppColors.slate400,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: (isReadOnly || state.selectedRegion == null)
+                      ? AppColors.slate900
+                      : AppColors.slate800,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: (isReadOnly || state.selectedRegion == null)
+                        ? AppColors.slate800
+                        : AppColors.slate700,
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<District>(
+                    value: state.selectedDistrict,
+                    hint: Text(
+                      context.l10n.selectDistrict,
+                      style: const TextStyle(
+                        color: AppColors.slate600,
+                        fontSize: 16,
+                      ),
+                    ),
+                    dropdownColor: AppColors.slate800,
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: AppColors.slate500,
+                    ),
+                    isExpanded: true,
+                    style: const TextStyle(
+                      color: AppColors.slate50,
+                      fontSize: 16,
+                    ),
+                    onChanged: (isReadOnly || state.selectedRegion == null)
+                        ? null
+                        : (District? district) {
+                            context.read<DigitizeBloc>().add(
+                                  DigitizeEvent.districtChanged(district),
+                                );
+                          },
+                    items: state.districts.map((District d) {
+                      return DropdownMenuItem<District>(
+                        value: d,
+                        child: Text(d.name),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+
+              // 3. Settlement selection
+              Text(
+                context.l10n.settlement,
+                style: const TextStyle(
+                  color: AppColors.slate400,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: (isReadOnly || state.selectedDistrict == null)
+                      ? AppColors.slate900
+                      : AppColors.slate800,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: (isReadOnly || state.selectedDistrict == null)
+                        ? AppColors.slate800
+                        : AppColors.slate700,
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Settlement>(
+                    value: state.selectedSettlement,
+                    hint: Text(
+                      context.l10n.selectSettlement,
+                      style: const TextStyle(
+                        color: AppColors.slate600,
+                        fontSize: 16,
+                      ),
+                    ),
+                    dropdownColor: AppColors.slate800,
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: AppColors.slate500,
+                    ),
+                    isExpanded: true,
+                    style: const TextStyle(
+                      color: AppColors.slate50,
+                      fontSize: 16,
+                    ),
+                    onChanged: (isReadOnly || state.selectedDistrict == null)
+                        ? null
+                        : (Settlement? settlement) {
+                            context.read<DigitizeBloc>().add(
+                                  DigitizeEvent.settlementChanged(settlement),
+                                );
+                          },
+                    items: state.settlements.map((Settlement s) {
+                      return DropdownMenuItem<Settlement>(
+                        value: s,
+                        child: Text('${s.type} ${s.name}'),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+
+              // 4. Cemetery selection
+              Text(
+                context.l10n.cemeteryLabel,
+                style: const TextStyle(
+                  color: AppColors.slate400,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: (isReadOnly || state.selectedSettlement == null)
+                      ? AppColors.slate900
+                      : AppColors.slate800,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: (state.showErrors && state.cemeteryError != null)
+                        ? AppColors.red
+                        : ((isReadOnly || state.selectedSettlement == null)
+                            ? AppColors.slate800
+                            : AppColors.slate700),
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Cemetery>(
+                    value: state.selectedCemetery,
+                    hint: Text(
+                      state.cemeteries.isEmpty &&
+                              state.selectedSettlement != null
+                          ? context.l10n.noCemeteriesInSettlement
+                          : context.l10n.selectCemetery,
+                      style: const TextStyle(
+                        color: AppColors.slate600,
+                        fontSize: 16,
+                      ),
+                    ),
+                    dropdownColor: AppColors.slate800,
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: AppColors.slate500,
+                    ),
+                    isExpanded: true,
+                    style: const TextStyle(
+                      color: AppColors.slate50,
+                      fontSize: 16,
+                    ),
+                    onChanged: (isReadOnly || state.selectedSettlement == null)
+                        ? null
                         : (Cemetery? cemetery) {
-                            if (cemetery != null) {
-                              context.read<DigitizeBloc>().add(
-                                    DigitizeEvent.cemeterySelected(cemetery),
-                                  );
-                            }
+                            context.read<DigitizeBloc>().add(
+                                  DigitizeEvent.cemeterySelected(cemetery),
+                                );
                           },
                     items: state.cemeteries.map((Cemetery c) {
                       return DropdownMenuItem<Cemetery>(
@@ -168,6 +351,23 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                 Text(
                   _getLocalizedError(context, state.cemeteryError) ?? '',
                   style: const TextStyle(color: AppColors.red, fontSize: 12),
+                ),
+              ],
+              if (state.selectedSettlement != null) ...[
+                const SizedBox(height: 10),
+                AppButton(
+                  onPressed: isReadOnly
+                      ? null
+                      : () async {
+                          await AddCemeteryDialog.show(
+                            context,
+                            context.read<DigitizeBloc>(),
+                          );
+                        },
+                  text: context.l10n.addCemetery,
+                  icon: Icons.add,
+                  backgroundColor: AppColors.slate700,
+                  textColor: AppColors.slate50,
                 ),
               ],
               const SizedBox(height: 18),

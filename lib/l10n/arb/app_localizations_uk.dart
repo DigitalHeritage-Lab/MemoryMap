@@ -190,4 +190,56 @@ class AppLocalizationsUk extends AppLocalizations {
   String mapLocationLabel(String lat, String lng) {
     return 'Мапа ($lat, $lng)';
   }
+
+  @override
+  String get region => 'Область';
+
+  @override
+  String get selectRegion => 'Виберіть область';
+
+  @override
+  String get district => 'Район';
+
+  @override
+  String get selectDistrict => 'Виберіть район';
+
+  @override
+  String get settlement => 'Населений пункт';
+
+  @override
+  String get selectSettlement => 'Виберіть населений пункт';
+
+  @override
+  String get addCemetery => 'Додати цвинтар';
+
+  @override
+  String get cemeteryName => 'Назва цвинтаря';
+
+  @override
+  String get cemeteryNameHint => 'Байкове кладовище';
+
+  @override
+  String get cemeteryDescription => 'Опис цвинтаря';
+
+  @override
+  String get cemeteryDescriptionHint => 'Опис або історія цвинтаря...';
+
+  @override
+  String get cemeteryCreatedSuccess => 'Цвинтар успішно створено!';
+
+  @override
+  String get noCemeteriesInSettlement =>
+      'У цьому населеному пункті немає оцифрованих цвинтарів';
+
+  @override
+  String get cancel => 'Скасувати';
+
+  @override
+  String get latitude => 'Широта (Lat)';
+
+  @override
+  String get longitude => 'Довгота (Lng)';
+
+  @override
+  String get cemeteryAddressHint => 'вул. Байкова, 6';
 }
