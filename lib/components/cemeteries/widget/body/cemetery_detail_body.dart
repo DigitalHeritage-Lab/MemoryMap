@@ -13,36 +13,13 @@ class CemeteryDetailBody extends StatefulWidget {
   State<CemeteryDetailBody> createState() => _CemeteryDetailBodyState();
 }
 
-class _CemeteryDetailBodyState extends State<CemeteryDetailBody> {
-  final ScrollController _scrollController = ScrollController();
-
+class _CemeteryDetailBodyState extends State<CemeteryDetailBody>
+    with ScrollPaginationMixin<CemeteryDetailBody> {
   @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (_isBottom) {
-      context.read<CemeteryDetailBloc>().add(
-            const CemeteryDetailEvent.loadMoreGraves(),
-          );
-    }
-  }
-
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
+  void onReachedBottom() {
+    context
+        .read<CemeteryDetailBloc>()
+        .add(const CemeteryDetailEvent.loadMoreGraves());
   }
 
   @override
@@ -78,7 +55,7 @@ class _CemeteryDetailBodyState extends State<CemeteryDetailBody> {
         final graves = state.graves;
 
         return CustomScrollView(
-          controller: _scrollController,
+          controller: scrollController,
           slivers: [
             SliverAppBar(
               expandedHeight: 220,
@@ -107,89 +84,9 @@ class _CemeteryDetailBodyState extends State<CemeteryDetailBody> {
               ),
             ),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      cemetery.name,
-                      style: const TextStyle(
-                        color: AppColors.slate50,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on,
-                          color: AppColors.emerald,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            cemetery.location,
-                            style: const TextStyle(
-                              color: AppColors.slate400,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.gps_fixed,
-                          color: AppColors.gold,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          '${cemetery.latitude.toStringAsFixed(5)}, '
-                          '${cemetery.longitude.toStringAsFixed(5)}',
-                          style: const TextStyle(
-                            color: AppColors.slate500,
-                            fontSize: 12,
-                            fontFamily: 'monospace',
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Divider(color: AppColors.slate700, height: 32),
-                    Text(
-                      context.l10n.aboutCemetery,
-                      style: const TextStyle(
-                        color: AppColors.slate50,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      cemetery.description,
-                      style: const TextStyle(
-                        color: AppColors.slate400,
-                        fontSize: 15,
-                        height: 1.5,
-                      ),
-                    ),
-                    const Divider(color: AppColors.slate700, height: 32),
-                    Text(
-                      context.l10n.digitizedGravesCount(graves.length),
-                      style: const TextStyle(
-                        color: AppColors.slate50,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                ),
+              child: _CemeteryHeader(
+                cemetery: cemetery,
+                gravesCount: graves.length,
               ),
             ),
             if (graves.isEmpty)
@@ -239,6 +136,108 @@ class _CemeteryDetailBodyState extends State<CemeteryDetailBody> {
           ],
         );
       },
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Private stateless header with cemetery info and graves count
+// ---------------------------------------------------------------------------
+
+class _CemeteryHeader extends StatelessWidget {
+  const _CemeteryHeader({
+    required this.cemetery,
+    required this.gravesCount,
+  });
+
+  final Cemetery cemetery;
+  final int gravesCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            cemetery.name,
+            style: const TextStyle(
+              color: AppColors.slate50,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const Icon(
+                Icons.location_on,
+                color: AppColors.emerald,
+                size: 16,
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  cemetery.location,
+                  style: const TextStyle(
+                    color: AppColors.slate400,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              const Icon(
+                Icons.gps_fixed,
+                color: AppColors.gold,
+                size: 14,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                '${cemetery.latitude.toStringAsFixed(5)}, '
+                '${cemetery.longitude.toStringAsFixed(5)}',
+                style: const TextStyle(
+                  color: AppColors.slate500,
+                  fontSize: 12,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ],
+          ),
+          const Divider(color: AppColors.slate700, height: 32),
+          Text(
+            context.l10n.aboutCemetery,
+            style: const TextStyle(
+              color: AppColors.slate50,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            cemetery.description,
+            style: const TextStyle(
+              color: AppColors.slate400,
+              fontSize: 15,
+              height: 1.5,
+            ),
+          ),
+          const Divider(color: AppColors.slate700, height: 32),
+          Text(
+            context.l10n.digitizedGravesCount(gravesCount),
+            style: const TextStyle(
+              color: AppColors.slate50,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 }

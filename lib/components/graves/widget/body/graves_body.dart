@@ -13,36 +13,19 @@ class GravesBody extends StatefulWidget {
   State<GravesBody> createState() => _GravesBodyState();
 }
 
-class _GravesBodyState extends State<GravesBody> {
-  final ScrollController _scrollController = ScrollController();
+class _GravesBodyState extends State<GravesBody>
+    with ScrollPaginationMixin<GravesBody> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
+  void onReachedBottom() {
+    context.read<GravesBloc>().add(const GravesEvent.loadMoreGraves());
   }
 
   @override
   void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
     _searchController.dispose();
     super.dispose();
-  }
-
-  void _onScroll() {
-    if (_isBottom) {
-      context.read<GravesBloc>().add(const GravesEvent.loadMoreGraves());
-    }
-  }
-
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
   }
 
   @override
@@ -66,7 +49,8 @@ class _GravesBodyState extends State<GravesBody> {
         Expanded(
           child: BlocBuilder<GravesBloc, GravesState>(
             builder: (context, state) {
-              if (state.status == LoadingStatus.error && state.graves.isEmpty) {
+              if (state.status == LoadingStatus.error &&
+                  state.graves.isEmpty) {
                 return TryAgainWidget(
                   message: state.errorMessage,
                   onRetry: () {
@@ -94,7 +78,7 @@ class _GravesBodyState extends State<GravesBody> {
               return Skeletonizer(
                 enabled: isLoading,
                 child: ListView.builder(
-                  controller: _scrollController,
+                  controller: scrollController,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemCount:
                       state.hasReachedMax ? list.length : list.length + 1,
@@ -116,9 +100,11 @@ class _GravesBodyState extends State<GravesBody> {
                         ),
                       );
                     }
-
                     final grave = list[index];
-                    return GraveListTile(grave: grave, isLoading: isLoading);
+                    return GraveListTile(
+                      grave: grave,
+                      isLoading: isLoading,
+                    );
                   },
                 ),
               );
