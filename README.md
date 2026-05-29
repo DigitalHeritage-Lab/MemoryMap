@@ -1,16 +1,116 @@
-# empty_template
+# 🏛️ MemoryMap — Digital Heritage Platform
 
-A new Flutter project.
+[![Flutter](https://img.shields.io/badge/Flutter-3.22+-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.4+-0175C2?logo=dart&logoColor=white)](https://dart.dev)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-green?logo=supabase&logoColor=white)](https://supabase.com)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-blue)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Getting Started
+**MemoryMap** — це сучасний, високопродуктивний кросплатформний мобільний додаток на Flutter для оцифрування, каталогізації та інтерактивного картування історичних некрополів та індивідуальних поховань України. Проєкт покликаний зберегти культурну спадщину через зручні інструменти збору GPS-даних, біографічних описів та фотофіксації безпосередньо «у полі».
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🌟 Основні можливості
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 📍 **Інтерактивна карта некрополів**  
+  Візуалізація цвинтарів на карті на основі OpenStreetMap (використовуючи `flutter_map` з темним дизайном CartoDB). Швидкий перегляд деталей та фільтрація за відстанню від користувача.
+- 📱 **Оцифрування «у полі» (Digitization Flow)**  
+  Інтуїтивний покроковий майстер для додавання нових поховань та цвинтарів:
+  * Інтеграція з геоданими (автоматичне визначення координат через GPS або вибір точки на карті).
+  * Динамічний вибір адміністративного поділу: Область ➡️ Район ➡️ Громада/Населений пункт.
+  * Фотофіксація пам'ятників та розпізнавання дат життя.
+- 🔍 **Розумний пошук та фільтрація**  
+  Швидкий повнотекстовий пошук за ім'ям, датами життя, біографією, а також пошук цвинтарів за локацією чи назвою.
+- 📶 **Стійкість та оптимізація**  
+  * Реалізовано плавний безкінечний скролінг (Infinite Pagination) через кастомні міксини.
+  * Мінімізація затримок інтерфейсу шляхом перенесення важких розрахунків на сторону бази даних (Supabase RPC) та використання "дурних" presentational-віджетів для кращого перевикористання елементів Flutter.
+  * Гарні Skeleton-ефекти під час завантаження даних.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🎨 Дизайн-система (Branding)
+
+Інтерфейс виконаний у преміальній, глибокій кольоровій гамі, що відповідає тематиці збереження пам'яті:
+- ⬛ **Slate Dark Mode** (`#0F172A` / `#1E293B`) — глибокі фони, що не втомлюють очі при сонячному світлі під час польових робіт.
+- 🟢 **Emerald Green** (`#10B981` / `#064E3B`) — колір надії, життя та природи для акцентів та успішних дій.
+- 🟡 **Gold / Amber** (`#F59E0B`) — для навігації, GPS-координат та важливих статусів.
+
+---
+
+## 🛠️ Технологічний стек
+
+* **Core:** [Flutter SDK](https://flutter.dev) (Макети адаптовані під стандарт `390x844` за допомогою `flutter_screenutil`).
+* **Державний менеджмент:** [Bloc](https://bloclibrary.dev/) (класи станів спрощені за допомогою `freezed` для запобігання зайвим ребілдам).
+* **Навігація:** [GoRouter](https://pub.dev/packages/go_router) з декларативними шляхами.
+* **База даних & Бекенд:** [Supabase](https://supabase.com) (PostgreSQL з географічними розширеннями PostGIS). Взаємодія здійснюється виключно через безпечні збережені процедури (RPC) для мінімізації накладних витрат мережі та захисту User ID.
+* **Картографія:** `flutter_map` + `latlong2`.
+* **Локалізація:** Повна підтримка української мови (`context.l10n`) через ARB-файли.
+
+---
+
+## 📁 Структура проєкту
+
+```
+lib/
+├── bootstrap.dart          # Ініціалізація сервісів, BlocObserver та обробка глобальних помилок
+├── main.dart               # Точка входу, конфігурація MaterialApp та теми
+├── components/             # Модулі додатку за фічами
+│   ├── cemeteries/         # Екрани, BLoC та плитки списку цвинтарів
+│   ├── digitize/           # Логіка та форми оцифрування нових поховань
+│   ├── graves/             # Індивідуальні картки поховань, біографії та дати
+│   ├── home/               # Головний екран та Bottom Navigation Bar
+│   └── map/                # Інтерактивна мапа та прев'ю маркерів
+├── shared/                 # Спільний UI, утиліти та дизайн-система
+│   ├── mixin/              # ScrollPaginationMixin для нескінченних списків
+│   ├── extension/          # ErrorCodeExtension для перекладу кодів помилок БД
+│   └── theme/              # Токени кольорів (AppColors) та загальні віджети (AppButton, AppScaffold)
+└── l10n/                   # Локалізаційні ресурси (ARB)
+```
+
+---
+
+## 🚀 Швидкий старт для розробників
+
+### 1. Передумови
+* Встановлений [Flutter SDK](https://docs.flutter.dev/get-started/install) (версія `>= 3.22.0`).
+* Встановлений [Docker](https://www.docker.com/) (для локального розгортання Supabase).
+
+### 2. Клонування та налаштування локальної бази
+Запуск локального оточення Supabase з міграціями та початковими даними адміністративного поділу України (області, громади, міста):
+```bash
+cd supabase
+supabase start
+```
+Це автоматично розгорне локальну БД PostgreSQL на порту `54321` та запустить міграції з папки `supabase/migrations`.
+
+### 3. Запуск генерації коду
+Проєкт використовує генератори коду для `freezed`, `injectable` та JSON-серіалізації. Запустіть build_runner:
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+
+### 4. Запуск додатку
+```bash
+flutter run
+```
+
+---
+
+## 🧪 Тестування та Аналіз коду
+
+Проєкт дотримується суворих стандартів якості (`very_good_analysis` з увімкненими додатковими правилами lint). 
+
+Перед створенням Pull Request обов'язково перевірте код локально:
+```bash
+# Статичний аналіз (повинен повернути "No issues found!")
+flutter analyze --fatal-warnings
+
+# Запуск юніт та віджет тестів із покриттям
+flutter test --coverage
+```
+
+---
+
+## 📄 Ліцензія
+
+Цей проєкт поширюється під ліцензією MIT. Деталі див. у файлі [LICENSE](LICENSE).
