@@ -3,7 +3,7 @@ import 'package:empty_template/l10n/l10n.dart';
 import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
+
 
 class AddCemeteryDialog extends StatefulWidget {
   const AddCemeteryDialog({required this.bloc, super.key});
@@ -30,8 +30,19 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
   final _latController = TextEditingController();
   final _lngController = TextEditingController();
 
-  bool _isGpsLoading = false;
   bool _showErrors = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final state = widget.bloc.state;
+    if (state.latitude != null) {
+      _latController.text = state.latitude!.toStringAsFixed(6);
+    }
+    if (state.longitude != null) {
+      _lngController.text = state.longitude!.toStringAsFixed(6);
+    }
+  }
 
   @override
   void dispose() {
@@ -41,56 +52,6 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
     _latController.dispose();
     _lngController.dispose();
     super.dispose();
-  }
-
-  Future<void> _getCurrentGps() async {
-    setState(() => _isGpsLoading = true);
-    try {
-      var permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
-
-      if (permission == LocationPermission.deniedForever) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(context.l10n.gpsError),
-              backgroundColor: AppColors.red,
-            ),
-          );
-        }
-        return;
-      }
-
-      final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.high,
-          timeLimit: Duration(seconds: 5),
-        ),
-      );
-
-      if (mounted) {
-        _latController.text = position.latitude.toStringAsFixed(6);
-        _lngController.text = position.longitude.toStringAsFixed(6);
-      }
-    } on Object catch (_) {
-      // Fallback fallback mock coordinates in case of error
-      if (mounted) {
-        _latController.text = '50.4162';
-        _lngController.text = '30.5097';
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(context.l10n.gpsError),
-            backgroundColor: AppColors.red,
-          ),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() => _isGpsLoading = false);
-      }
-    }
   }
 
   void _submit() {
@@ -125,7 +86,9 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
     return BlocListener<DigitizeBloc, DigitizeState>(
       bloc: widget.bloc,
       listenWhen: (previous, current) =>
-          previous.cemeteryCreationStatus != current.cemeteryCreationStatus,
+          previous.cemeteryCreationStatus != current.cemeteryCreationStatus ||
+          previous.latitude != current.latitude ||
+          previous.longitude != current.longitude,
       listener: (context, state) {
         if (state.cemeteryCreationStatus == LoadingStatus.loaded) {
           ScaffoldMessenger.of(parentContext).showSnackBar(
@@ -135,6 +98,10 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
             ),
           );
           Navigator.of(parentContext).pop();
+        }
+        if (state.latitude != null && state.longitude != null) {
+          _latController.text = state.latitude!.toStringAsFixed(6);
+          _lngController.text = state.longitude!.toStringAsFixed(6);
         }
       },
       child: Dialog(
@@ -283,10 +250,12 @@ class _AddCemeteryDialogState extends State<AddCemeteryDialog> {
 
                   // GPS button inside dialog
                   AppButton(
-                    onPressed: _getCurrentGps,
+                    onPressed: () {
+                      widget.bloc.add(const DigitizeEvent.getCurrentGps());
+                    },
                     text: context.l10n.determine,
                     icon: Icons.gps_fixed,
-                    isLoading: _isGpsLoading,
+                    isLoading: state.gpsStatus == GpsStatus.loading,
                   ),
                   const SizedBox(height: 24),
 
