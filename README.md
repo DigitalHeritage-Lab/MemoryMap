@@ -1,57 +1,93 @@
-# 🏛️ MemoryMap — Digital Heritage Platform
-
-[![Flutter](https://img.shields.io/badge/Flutter-3.22+-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.4+-0175C2?logo=dart&logoColor=white)](https://dart.dev)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-green?logo=supabase&logoColor=white)](https://supabase.com)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-blue)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-**MemoryMap** — це сучасний, високопродуктивний кросплатформний мобільний додаток на Flutter для оцифрування, каталогізації та інтерактивного картування історичних некрополів та індивідуальних поховань України. Проєкт покликаний зберегти культурну спадщину через зручні інструменти збору GPS-даних, біографічних описів та фотофіксації безпосередньо «у полі».
-
 <p align="center">
-  <img src="assets/images/mockup_cemetery.png" width="380" alt="Cemeteries Search Screen">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/images/mockup_digitize.png" width="380" alt="Digitize Grave Screen">
+    <img src="assets/images/mockup_cemetery.png" width="49%"/>
+    <img src="assets/images/mockup_digitize.png" width="49%"/>
 </p>
 
+<p align="center">
+    <a href="https://github.com/DigitalHeritage-Lab/MemoryMap/actions/workflows/ci.yml">
+        <img src="https://img.shields.io/github/actions/workflow/status/DigitalHeritage-Lab/MemoryMap/ci.yml?event=push&branch=main&label=CI%20%2F%20Tests&labelColor=333940&logo=github&color=10B981" alt="CI / Tests">
+    </a>
+    <a href="https://github.com/DigitalHeritage-Lab/MemoryMap">
+        <img src="https://img.shields.io/github/stars/DigitalHeritage-Lab/MemoryMap?style=flat&label=stars&labelColor=333940&color=8957e5&logo=github" alt="GitHub Stars">
+    </a>
+    <a href="https://github.com/DigitalHeritage-Lab/MemoryMap/contributors">
+        <img src="https://img.shields.io/github/contributors/DigitalHeritage-Lab/MemoryMap?logo=github&labelColor=333940&color=10B981" alt="Contributors">
+    </a>
+    <a href="https://github.com/DigitalHeritage-Lab/MemoryMap/issues">
+        <img src="https://img.shields.io/github/issues/DigitalHeritage-Lab/MemoryMap?style=flat&label=issues&labelColor=333940&color=red&logo=github" alt="Issues">
+    </a>
+    <a href="LICENSE">
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=github&labelColor=333940" alt="MIT License">
+    </a>
+</p>
+
+<p align="center">
+  <a href="#-основні-можливості">Можливості</a> •
+  <a href="#%EF%B8%8F-технологічний-стек">Стек</a> •
+  <a href="#-структура-проєкту">Структура</a> •
+  <a href="#-швидкий-старт-для-розробників">Старт</a> •
+  <a href=".github/CONTRIBUTING.md">Contributing</a>
+</p>
+
+# 🏛️ MemoryMap — Digital Heritage Platform
+
+**MemoryMap** — кросплатформний Flutter-додаток для оцифрування, каталогізації та інтерактивного картування некрополів та поховань України. Проєкт зберігає культурну спадщину через зручні інструменти збору GPS-даних, біографічних описів та фотофіксації безпосередньо «у полі».
 
 ---
 
 ## 🌟 Основні можливості
 
-- 📍 **Інтерактивна карта некрополів**  
-  Візуалізація цвинтарів на карті на основі OpenStreetMap (використовуючи `flutter_map` з темним дизайном CartoDB). Швидкий перегляд деталей та фільтрація за відстанню від користувача.
-- 📱 **Оцифрування «у полі» (Digitization Flow)**  
-  Інтуїтивний покроковий майстер для додавання нових поховань та цвинтарів:
-  * Інтеграція з геоданими (автоматичне визначення координат через GPS або вибір точки на карті).
-  * Динамічний вибір адміністративного поділу: Область ➡️ Район ➡️ Громада/Населений пункт.
-  * Фотофіксація пам'ятників та розпізнавання дат життя.
-- 🔍 **Розумний пошук та фільтрація**  
-  Швидкий повнотекстовий пошук за ім'ям, датами життя, біографією, а також пошук цвинтарів за локацією чи назвою.
-- 📶 **Стійкість та оптимізація**  
-  * Реалізовано плавний безкінечний скролінг (Infinite Pagination) через кастомні міксини.
-  * Мінімізація затримок інтерфейсу шляхом перенесення важких розрахунків на сторону бази даних (Supabase RPC) та використання "дурних" presentational-віджетів для кращого перевикористання елементів Flutter.
-  * Гарні Skeleton-ефекти під час завантаження даних.
+- 📍 **Інтерактивна карта некрополів** — OpenStreetMap з темним дизайном CartoDB, фільтрація за відстанню
+- 📱 **Оцифрування «у полі»** — покроковий майстер з GPS, адміністративним вибором (Область → Район → Громада) та фотофіксацією
+- 🔍 **Розумний пошук** — повнотекстовий пошук на стороні БД (Supabase RPC), без локальної фільтрації
+- ♾️ **Infinite Pagination** — безкінечний скролінг через `ScrollPaginationMixin`, Skeleton-ефекти
+- 🇺🇦 **Повна локалізація** — українська мова через ARB-файли, `context.l10n`
 
 ---
 
-## 🎨 Дизайн-система (Branding)
+## 🖼️ Preview
 
-Інтерфейс виконаний у преміальній, глибокій кольоровій гамі, що відповідає тематиці збереження пам'яті:
-- ⬛ **Slate Dark Mode** (`#0F172A` / `#1E293B`) — глибокі фони, що не втомлюють очі при сонячному світлі під час польових робіт.
-- 🟢 **Emerald Green** (`#10B981` / `#064E3B`) — колір надії, життя та природи для акцентів та успішних дій.
-- 🟡 **Gold / Amber** (`#F59E0B`) — для навігації, GPS-координат та важливих статусів.
+<table>
+  <tr>
+    <th>
+      <a href="lib/components/cemeteries/widget/body/cemeteries_body.dart">Список цвинтарів</a>
+      |
+      <a href="lib/components/cemeteries/bloc/cemeteries_bloc.dart">BLoC</a>
+    </th>
+    <th>
+      <a href="lib/components/digitize/widget/body/digitize_body.dart">Оцифрування могили</a>
+      |
+      <a href="lib/components/digitize/bloc/digitize_bloc.dart">BLoC</a>
+    </th>
+  </tr>
+  <tr>
+    <th>
+      <a href="lib/components/cemeteries/widget/body/cemeteries_body.dart">
+        <img src="assets/images/mockup_cemetery.png" alt="Cemeteries Screen" width="300"/>
+      </a>
+    </th>
+    <th>
+      <a href="lib/components/digitize/widget/body/digitize_body.dart">
+        <img src="assets/images/mockup_digitize.png" alt="Digitize Screen" width="300"/>
+      </a>
+    </th>
+  </tr>
+</table>
 
 ---
 
 ## 🛠️ Технологічний стек
 
-* **Core:** [Flutter SDK](https://flutter.dev) (Макети адаптовані під стандарт `390x844` за допомогою `flutter_screenutil`).
-* **Державний менеджмент:** [Bloc](https://bloclibrary.dev/) (класи станів спрощені за допомогою `freezed` для запобігання зайвим ребілдам).
-* **Навігація:** [GoRouter](https://pub.dev/packages/go_router) з декларативними шляхами.
-* **База даних & Бекенд:** [Supabase](https://supabase.com) (PostgreSQL з географічними розширеннями PostGIS). Взаємодія здійснюється виключно через безпечні збережені процедури (RPC) для мінімізації накладних витрат мережі та захисту User ID.
-* **Картографія:** `flutter_map` + `latlong2`.
-* **Локалізація:** Повна підтримка української мови (`context.l10n`) через ARB-файли.
+| Шар | Технологія |
+|-----|-----------|
+| **UI** | [Flutter 3.24+](https://flutter.dev) · `flutter_screenutil` |
+| **Стан** | [flutter_bloc](https://bloclibrary.dev/) · `freezed` |
+| **Навігація** | [go_router](https://pub.dev/packages/go_router) |
+| **Бекенд** | [Supabase](https://supabase.com) (PostgreSQL + PostGIS, тільки RPC) |
+| **Карти** | [flutter_map](https://pub.dev/packages/flutter_map) · `latlong2` |
+| **DI** | [injectable](https://pub.dev/packages/injectable) · `get_it` |
+| **Локалізація** | ARB · `flutter_localizations` · `intl` |
+| **Лінтинг** | [very_good_analysis](https://pub.dev/packages/very_good_analysis) |
 
 ---
 
@@ -59,60 +95,58 @@
 
 ```
 lib/
-├── bootstrap.dart          # Ініціалізація сервісів, BlocObserver та обробка глобальних помилок
-├── main.dart               # Точка входу, конфігурація MaterialApp та теми
-├── components/             # Модулі додатку за фічами
-│   ├── cemeteries/         # Екрани, BLoC та плитки списку цвинтарів
-│   ├── digitize/           # Логіка та форми оцифрування нових поховань
-│   ├── graves/             # Індивідуальні картки поховань, біографії та дати
-│   ├── home/               # Головний екран та Bottom Navigation Bar
-│   └── map/                # Інтерактивна мапа та прев'ю маркерів
-├── shared/                 # Спільний UI, утиліти та дизайн-система
-│   ├── mixin/              # ScrollPaginationMixin для нескінченних списків
-│   ├── extension/          # ErrorCodeExtension для перекладу кодів помилок БД
-│   └── theme/              # Токени кольорів (AppColors) та загальні віджети (AppButton, AppScaffold)
-└── l10n/                   # Локалізаційні ресурси (ARB)
+├── bootstrap.dart              # Ініціалізація сервісів та BlocObserver
+├── main.dart                   # Точка входу, MaterialApp + тема
+├── components/                 # Фіча-модулі (BLoC + View + Widget)
+│   ├── cemeteries/             # Список, деталі цвинтаря, фільтр за локацією
+│   ├── digitize/               # Форма оцифрування: GPS, адмін-дропдауни, дати
+│   ├── graves/                 # Список та перегляд поховань
+│   ├── home/                   # Bottom Navigation Bar
+│   └── map/                    # Інтерактивна карта з маркерами
+└── shared/                     # Спільний UI, утиліти, дизайн-система
+    ├── extension/              # ErrorCodeExtension
+    ├── mixin/                  # ScrollPaginationMixin
+    └── theme/                  # AppColors, AppButton, AppScaffold
 ```
 
 ---
 
 ## 🚀 Швидкий старт для розробників
 
-### 1. Передумови
-* Встановлений [Flutter SDK](https://docs.flutter.dev/get-started/install) (версія `>= 3.22.0`).
-* Встановлений [Docker](https://www.docker.com/) (для локального розгортання Supabase).
+### Передумови
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) `>= 3.24.0`
+- [Docker](https://www.docker.com/) (для локального Supabase)
 
-### 2. Клонування та налаштування локальної бази
-Запуск локального оточення Supabase з міграціями та початковими даними адміністративного поділу України (області, громади, міста):
+### Локальна база даних (Supabase)
+
 ```bash
-cd supabase
-supabase start
+supabase start          # Запуск PostgreSQL + Auth + Storage
 ```
-Це автоматично розгорне локальну БД PostgreSQL на порту `54321` та запустить міграції з папки `supabase/migrations`.
 
-### 3. Запуск генерації коду
-Проєкт використовує генератори коду для `freezed`, `injectable` та JSON-серіалізації. Запустіть build_runner:
+### Кодогенерація
+
 ```bash
 dart run build_runner build --delete-conflicting-outputs
 ```
 
-### 4. Запуск додатку
+### Запуск
+
 ```bash
 flutter run
 ```
 
 ---
 
-## 🧪 Тестування та Аналіз коду
+## 🧪 Контроль якості
 
-Проєкт дотримується суворих стандартів якості (`very_good_analysis` з увімкненими додатковими правилами lint). 
-
-Перед створенням Pull Request обов'язково перевірте код локально:
 ```bash
-# Статичний аналіз (повинен повернути "No issues found!")
-flutter analyze --fatal-warnings
+# Форматування
+dart format .
 
-# Запуск юніт та віджет тестів із покриттям
+# Аналіз (не повинно бути попереджень)
+flutter analyze --fatal-warnings --fatal-infos
+
+# Тести
 flutter test --coverage
 ```
 
@@ -120,4 +154,4 @@ flutter test --coverage
 
 ## 📄 Ліцензія
 
-Цей проєкт поширюється під ліцензією MIT. Деталі див. у файлі [LICENSE](LICENSE).
+Поширюється під [MIT License](LICENSE).
