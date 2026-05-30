@@ -37,6 +37,7 @@
   "invalidLifespan": "Вік не може перевищувати 120 років",
   "fullNameTooShort": "Будь ласка, введіть щонайменше ім'я та прізвище",
   "coordinatesTooFar": "Координати знаходяться занадто далеко від вибраного цвинтаря",
+  "duplicateGrave": "Ця фотографія або могила вже була додана раніше",
   "cemeteryLabel": "Цвинтар",
   "gpsLocationLabel": "Місцезнаходження (GPS)",
   "coordinatesNotDetermined": "Координати не визначено",

@@ -55,9 +55,17 @@ Future<Either<Failure, T>> eitherFutureHelper<T>(
       stackTrace: stackTrace,
       name: 'ErrorHelper',
     );
+
+    var message = e.toString();
+
+    if (message.contains('DUPLICATE_GRAVE_DETECTED') ||
+        message.contains('DUPLICATE_GRAVE')) {
+      message = 'duplicateGrave';
+    }
+
     return Left(
       Failure(
-        e.toString(),
+        message,
         exception: e,
         stackTrace: stackTrace,
       ),
@@ -76,9 +84,16 @@ Either<Failure, T> eitherHelper<T>(T Function() action) {
       stackTrace: stackTrace,
       name: 'ErrorHelper',
     );
+    var message = e.toString();
+
+    if (message.contains('DUPLICATE_GRAVE_DETECTED') ||
+        message.contains('DUPLICATE_GRAVE')) {
+      message = 'duplicateGrave';
+    }
+
     return Left(
       Failure(
-        e.toString(),
+        message,
         exception: e,
         stackTrace: stackTrace,
       ),

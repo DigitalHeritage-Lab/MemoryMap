@@ -320,6 +320,12 @@ abstract class AppLocalizations {
   /// **'Coordinates are too far from the selected cemetery'**
   String get coordinatesTooFar;
 
+  /// No description provided for @duplicateGrave.
+  ///
+  /// In en, this message translates to:
+  /// **'This photo or grave has already been added previously'**
+  String get duplicateGrave;
+
   /// No description provided for @cemeteryLabel.
   ///
   /// In en, this message translates to:

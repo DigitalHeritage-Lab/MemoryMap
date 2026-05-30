@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:memory_map/shared/helper/error_helper.dart';
 import 'package:memory_map/shared/models/grave.dart';
@@ -40,6 +45,29 @@ class SupabaseGraveRepository implements GraveRepository {
   @override
   Future<Either<Failure, Grave>> addGrave(Grave grave) {
     return eitherFutureHelper(() async {
+      String? hashString;
+
+      // Calculate hash on client
+      if (grave.photoUrl.isNotEmpty) {
+        final file = File(grave.photoUrl);
+        if (file.existsSync()) {
+          final bytes = await file.readAsBytes();
+          hashString = await compute(
+            (List<int> bytes) => sha256.convert(bytes).toString(),
+            bytes,
+          );
+        }
+      }
+
+      // Fallback to text hash
+      if (hashString == null) {
+        final data = '${grave.name}${grave.birthDate}${grave.deathDate}';
+        hashString = await compute(
+          (String data) => md5.convert(utf8.encode(data)).toString(),
+          data,
+        );
+      }
+
       final params = <String, dynamic>{
         'p_cemetery_id': grave.cemeteryId,
         'p_name': grave.name,
@@ -48,6 +76,7 @@ class SupabaseGraveRepository implements GraveRepository {
         'p_latitude': grave.latitude,
         'p_longitude': grave.longitude,
         'p_bio': grave.bio,
+        'p_hash': hashString,
         if (grave.photoUrl.isNotEmpty) 'p_photo_url': grave.photoUrl,
       };
 
