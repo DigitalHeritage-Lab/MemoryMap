@@ -1,7 +1,7 @@
-import 'package:empty_template/components/graves/bloc/graves_bloc.dart';
-import 'package:empty_template/shared/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:memory_map/components/graves/bloc/graves_bloc.dart';
+import 'package:memory_map/shared/di/injection.dart';
 
 class GravesBlocProvider extends StatelessWidget {
   const GravesBlocProvider({required this.child, super.key});

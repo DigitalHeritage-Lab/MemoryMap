@@ -1,6 +1,6 @@
-import 'package:empty_template/shared/helper/error_helper.dart';
-import 'package:empty_template/shared/models/admin_division.dart';
-import 'package:empty_template/shared/models/cemetery.dart';
+import 'package:memory_map/shared/helper/error_helper.dart';
+import 'package:memory_map/shared/models/admin_division.dart';
+import 'package:memory_map/shared/models/cemetery.dart';
 
 abstract class CemeteryRepository {
   Future<Either<Failure, List<Cemetery>>> getCemeteries({

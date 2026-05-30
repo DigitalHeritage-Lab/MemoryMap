@@ -1,8 +1,8 @@
-import 'package:empty_template/components/cemeteries/widget/bloc_provider/cemeteries_bloc_provider.dart';
-import 'package:empty_template/components/cemeteries/widget/body/cemeteries_body.dart';
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:memory_map/components/cemeteries/widget/bloc_provider/cemeteries_bloc_provider.dart';
+import 'package:memory_map/components/cemeteries/widget/body/cemeteries_body.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class CemeteriesScreen extends StatelessWidget {
   const CemeteriesScreen({super.key});

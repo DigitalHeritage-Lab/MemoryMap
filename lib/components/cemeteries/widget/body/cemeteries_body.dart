@@ -1,11 +1,11 @@
-import 'package:empty_template/components/cemeteries/bloc/cemeteries_bloc.dart';
-import 'package:empty_template/components/cemeteries/widget/location_filter_bar.dart';
-import 'package:empty_template/components/cemeteries/widget/map_location_picker_dialog.dart';
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:memory_map/components/cemeteries/bloc/cemeteries_bloc.dart';
+import 'package:memory_map/components/cemeteries/widget/location_filter_bar.dart';
+import 'package:memory_map/components/cemeteries/widget/map_location_picker_dialog.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CemeteriesBody extends StatefulWidget {

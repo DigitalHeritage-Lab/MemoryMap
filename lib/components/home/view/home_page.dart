@@ -1,7 +1,7 @@
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -24,6 +24,8 @@ class HomePage extends StatelessWidget {
       currentIndex = 2;
     } else if (location.startsWith('/digitize')) {
       currentIndex = 3;
+    } else if (location.startsWith('/profile')) {
+      currentIndex = 4;
     }
 
     return AppScaffold(
@@ -40,6 +42,8 @@ class HomePage extends StatelessWidget {
               context.go('/graves');
             case 3:
               context.go('/digitize');
+            case 4:
+              context.go('/profile');
           }
         },
         backgroundColor: const Color(0xFF1E293B), // Slate 800
@@ -71,6 +75,11 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.add_circle_outline),
             activeIcon: const Icon(Icons.add_circle),
             label: context.l10n.navDigitize,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person_outline),
+            activeIcon: const Icon(Icons.person),
+            label: context.l10n.navProfile,
           ),
         ],
       ),

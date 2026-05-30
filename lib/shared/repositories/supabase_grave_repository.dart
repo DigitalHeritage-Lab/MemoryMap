@@ -1,7 +1,7 @@
-import 'package:empty_template/shared/helper/error_helper.dart';
-import 'package:empty_template/shared/models/grave.dart';
-import 'package:empty_template/shared/repositories/grave_repository.dart';
 import 'package:injectable/injectable.dart';
+import 'package:memory_map/shared/helper/error_helper.dart';
+import 'package:memory_map/shared/models/grave.dart';
+import 'package:memory_map/shared/repositories/grave_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 @LazySingleton(as: GraveRepository)

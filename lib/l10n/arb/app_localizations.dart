@@ -128,6 +128,12 @@ abstract class AppLocalizations {
   /// **'Map'**
   String get navMap;
 
+  /// No description provided for @navProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get navProfile;
+
   /// No description provided for @details.
   ///
   /// In en, this message translates to:
@@ -535,6 +541,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'6 Baykova St'**
   String get cemeteryAddressHint;
+
+  /// No description provided for @inDevelopment.
+  ///
+  /// In en, this message translates to:
+  /// **'In development...'**
+  String get inDevelopment;
 }
 
 class _AppLocalizationsDelegate

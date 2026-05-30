@@ -1,8 +1,8 @@
-import 'package:empty_template/components/digitize/widget/bloc_provider/digitize_bloc_provider.dart';
-import 'package:empty_template/components/digitize/widget/body/digitize_body.dart';
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:memory_map/components/digitize/widget/bloc_provider/digitize_bloc_provider.dart';
+import 'package:memory_map/components/digitize/widget/body/digitize_body.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class DigitizeScreen extends StatelessWidget {
   const DigitizeScreen({super.key});

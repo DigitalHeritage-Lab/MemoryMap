@@ -1,11 +1,12 @@
-import 'package:empty_template/components/cemeteries/view/cemeteries_view.dart';
-import 'package:empty_template/components/cemeteries/view/cemetery_detail_view.dart';
-import 'package:empty_template/components/digitize/view/digitize_view.dart';
-import 'package:empty_template/components/graves/view/graves_view.dart';
-import 'package:empty_template/components/home/view/home_page.dart';
-import 'package:empty_template/components/map/view/map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:memory_map/components/cemeteries/view/cemeteries_view.dart';
+import 'package:memory_map/components/cemeteries/view/cemetery_detail_view.dart';
+import 'package:memory_map/components/digitize/view/digitize_view.dart';
+import 'package:memory_map/components/graves/view/graves_view.dart';
+import 'package:memory_map/components/home/view/home_page.dart';
+import 'package:memory_map/components/map/view/map_view.dart';
+import 'package:memory_map/components/profile/view/profile_view.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey =
@@ -45,6 +46,10 @@ final appRouter = GoRouter(
         GoRoute(
           path: '/digitize',
           builder: (context, state) => const DigitizeScreen(),
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) => const ProfileScreen(),
         ),
       ],
     ),

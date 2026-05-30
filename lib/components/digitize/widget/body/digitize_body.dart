@@ -1,11 +1,11 @@
-import 'package:empty_template/components/digitize/bloc/digitize_bloc.dart';
-import 'package:empty_template/components/digitize/widget/add_cemetery_dialog.dart';
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart';
+import 'package:memory_map/components/digitize/widget/add_cemetery_dialog.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class DigitizeBody extends StatefulWidget {
   const DigitizeBody({super.key});

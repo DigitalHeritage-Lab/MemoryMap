@@ -1,10 +1,10 @@
 import 'dart:developer' show log;
 
 import 'package:bloc/bloc.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart'
     show Colors, Widget, WidgetsFlutterBinding, runApp;
 import 'package:flutter/services.dart';
+import 'package:memory_map/shared/shared.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppBlocObserver extends BlocObserver {

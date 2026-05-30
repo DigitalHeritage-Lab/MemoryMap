@@ -1,10 +1,10 @@
-import 'package:empty_template/components/cemeteries/bloc/cemetery_detail_bloc.dart';
-import 'package:empty_template/components/cemeteries/widget/grave_list_tile.dart';
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:memory_map/components/cemeteries/bloc/cemetery_detail_bloc.dart';
+import 'package:memory_map/components/cemeteries/widget/grave_list_tile.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class CemeteryDetailBody extends StatefulWidget {
   const CemeteryDetailBody({super.key});

@@ -1,5 +1,5 @@
-import 'package:empty_template/l10n/l10n.dart';
 import 'package:flutter/widgets.dart';
+import 'package:memory_map/l10n/l10n.dart';
 
 /// Extension that converts a BLoC error-code string (e.g. 'requiredField')
 /// into a localized human-readable message.
