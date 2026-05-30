@@ -98,5 +98,13 @@
   "latitude": "Широта (Lat)",
   "longitude": "Довгота (Lng)",
   "cemeteryAddressHint": "вул. Байкова, 6",
-  "inDevelopment": "В розробці..."
+  "inDevelopment": "В розробці...",
+  "yearsOld": "{count, plural, =1{{count} рік} few{{count} роки} many{{count} років} other{{count} років}}",
+  "@yearsOld": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

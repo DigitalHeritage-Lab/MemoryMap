@@ -115,5 +115,13 @@
   "latitude": "Latitude (Lat)",
   "longitude": "Longitude (Lng)",
   "cemeteryAddressHint": "6 Baykova St",
-  "inDevelopment": "In development..."
+  "inDevelopment": "In development...",
+  "yearsOld": "{count, plural, =1{{count} year} other{{count} years}}",
+  "@yearsOld": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

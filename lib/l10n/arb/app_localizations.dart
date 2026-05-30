@@ -547,6 +547,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'In development...'**
   String get inDevelopment;
+
+  /// No description provided for @yearsOld.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{{count} year} other{{count} years}}'**
+  String yearsOld(int count);
 }
 
 class _AppLocalizationsDelegate
