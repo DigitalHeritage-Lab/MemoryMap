@@ -46,13 +46,7 @@ class GraveListTile extends StatelessWidget {
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 4),
-          child: Text(
-            '${grave.birthDate}  —  ${grave.deathDate}',
-            style: const TextStyle(
-              color: AppColors.slate400,
-              fontSize: 13,
-            ),
-          ),
+          child: GraveDatesWidget(grave: grave),
         ),
         trailing: const Icon(
           Icons.arrow_forward_ios,
@@ -158,12 +152,18 @@ class _GraveDetailsSheet extends StatelessWidget {
 
           // Dates
           Center(
-            child: Text(
-              '${grave.birthDate}  —  ${grave.deathDate}',
-              style: const TextStyle(
+            child: GraveDatesWidget(
+              grave: grave,
+              centerAlign: true,
+              datesStyle: const TextStyle(
                 color: AppColors.emerald,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
+              ),
+              lifespanStyle: const TextStyle(
+                color: AppColors.emerald,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

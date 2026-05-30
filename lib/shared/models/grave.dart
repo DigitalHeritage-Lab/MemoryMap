@@ -37,6 +37,17 @@ class Grave extends Equatable {
   final String bio;
   final String photoUrl;
 
+  int? get lifespan {
+    try {
+      final birthYear = int.tryParse(birthDate.split('-').first);
+      final deathYear = int.tryParse(deathDate.split('-').first);
+      if (birthYear != null && deathYear != null) {
+        return deathYear - birthYear;
+      }
+    } on Object catch (_) {}
+    return null;
+  }
+
   @override
   List<Object?> get props => [
         id,

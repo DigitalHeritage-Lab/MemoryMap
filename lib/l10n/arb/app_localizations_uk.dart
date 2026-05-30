@@ -248,4 +248,17 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get inDevelopment => 'В розробці...';
+
+  @override
+  String yearsOld(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count років',
+      many: '$count років',
+      few: '$count роки',
+      one: '$count рік',
+    );
+    return '$_temp0';
+  }
 }

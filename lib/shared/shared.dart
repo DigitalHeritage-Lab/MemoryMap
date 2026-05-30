@@ -16,6 +16,7 @@ export 'repositories/grave_repository.dart';
 export 'widget/app_button.dart';
 export 'widget/app_network_image.dart';
 export 'widget/app_scaffold.dart';
+export 'widget/grave_dates_widget.dart';
 export 'widget/sending_text_widget.dart';
 export 'widget/text_field_widget.dart';
 export 'widget/try_again_widget.dart';

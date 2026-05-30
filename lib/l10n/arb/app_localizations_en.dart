@@ -246,4 +246,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inDevelopment => 'In development...';
+
+  @override
+  String yearsOld(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count years',
+      one: '$count year',
+    );
+    return '$_temp0';
+  }
 }
