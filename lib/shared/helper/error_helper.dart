@@ -56,7 +56,7 @@ Future<Either<Failure, T>> eitherFutureHelper<T>(
       name: 'ErrorHelper',
     );
 
-    String message = e.toString();
+    var message = e.toString();
 
     if (message.contains('DUPLICATE_GRAVE_DETECTED') ||
         message.contains('DUPLICATE_GRAVE')) {
