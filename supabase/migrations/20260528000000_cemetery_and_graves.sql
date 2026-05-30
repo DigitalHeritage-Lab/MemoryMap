@@ -36,7 +36,7 @@ CREATE POLICY "Allow public read cemeteries" ON public.cemeteries FOR SELECT USI
 CREATE POLICY "Allow public read graves" ON public.graves FOR SELECT USING (true);
 
 -- Insert policies: Authenticated users can insert graves
-CREATE POLICY "Allow authenticated insert graves" ON public.graves FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+CREATE POLICY "Allow authenticated insert graves" ON public.graves FOR INSERT WITH CHECK ((select auth.uid()) IS NOT NULL);
 
 -- Helper function to simulate public.current_user_id()
 CREATE OR REPLACE FUNCTION public.current_user_id()
