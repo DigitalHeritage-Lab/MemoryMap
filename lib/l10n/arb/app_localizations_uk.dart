@@ -126,6 +126,10 @@ class AppLocalizationsUk extends AppLocalizations {
       'Координати знаходяться занадто далеко від вибраного цвинтаря';
 
   @override
+  String get duplicateGrave =>
+      'Ця фотографія або могила вже була додана раніше';
+
+  @override
   String get cemeteryLabel => 'Цвинтар';
 
   @override

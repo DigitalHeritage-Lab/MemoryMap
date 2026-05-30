@@ -11,6 +11,7 @@ class Grave extends Equatable {
     required this.longitude,
     required this.bio,
     required this.photoUrl,
+    this.hash,
   });
 
   factory Grave.fromJson(Map<String, dynamic> json) {
@@ -24,6 +25,7 @@ class Grave extends Equatable {
       longitude: (json['longitude'] as num).toDouble(),
       bio: (json['bio'] as String?) ?? '',
       photoUrl: (json['photo_url'] as String?) ?? '',
+      hash: json['hash'] as String?,
     );
   }
 
@@ -36,6 +38,7 @@ class Grave extends Equatable {
   final double longitude;
   final String bio;
   final String photoUrl;
+  final String? hash;
 
   int? get lifespan {
     try {
@@ -59,6 +62,7 @@ class Grave extends Equatable {
         longitude,
         bio,
         photoUrl,
+        hash,
       ];
 
   Map<String, dynamic> toJson() {
@@ -72,6 +76,7 @@ class Grave extends Equatable {
       'longitude': longitude,
       'bio': bio,
       'photo_url': photoUrl,
+      if (hash != null) 'hash': hash,
     };
   }
 
@@ -85,6 +90,7 @@ class Grave extends Equatable {
     double? longitude,
     String? bio,
     String? photoUrl,
+    String? hash,
   }) {
     return Grave(
       id: id ?? this.id,
@@ -96,6 +102,7 @@ class Grave extends Equatable {
       longitude: longitude ?? this.longitude,
       bio: bio ?? this.bio,
       photoUrl: photoUrl ?? this.photoUrl,
+      hash: hash ?? this.hash,
     );
   }
 }

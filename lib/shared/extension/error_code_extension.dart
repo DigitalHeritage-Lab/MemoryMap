@@ -27,6 +27,8 @@ extension ErrorCodeExtension on String? {
         return l10n.invalidLifespan;
       case 'coordinatesTooFar':
         return l10n.coordinatesTooFar;
+      case 'duplicateGrave':
+        return l10n.duplicateGrave;
       default:
         return null;
     }

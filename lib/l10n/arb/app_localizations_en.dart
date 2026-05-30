@@ -124,6 +124,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Coordinates are too far from the selected cemetery';
 
   @override
+  String get duplicateGrave =>
+      'This photo or grave has already been added previously';
+
+  @override
   String get cemeteryLabel => 'Cemetery';
 
   @override
