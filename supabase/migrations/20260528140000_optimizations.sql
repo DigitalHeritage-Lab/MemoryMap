@@ -1,7 +1,8 @@
 -- Migration: Add optimizations (indexes and parameterized filters)
 
 -- Enable pg_trgm extension for fuzzy matching ILIKE queries
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE SCHEMA IF NOT EXISTS extensions;
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA extensions;
 
 -- Create indexes for graves table
 -- 1. Index on foreign key cemetery_id for fast filtering in rpc_get_graves
@@ -12,16 +13,16 @@ CREATE INDEX IF NOT EXISTS idx_graves_created_at ON public.graves(created_at DES
 
 -- Create Trigram GIN indexes for ILIKE searches
 -- 3. Trigram GIN index for cemetery search by name
-CREATE INDEX IF NOT EXISTS idx_cemeteries_name_trgm ON public.cemeteries USING gin (name gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_cemeteries_name_trgm ON public.cemeteries USING gin (name extensions.gin_trgm_ops);
 
 -- 4. Trigram GIN index for cemetery search by location
-CREATE INDEX IF NOT EXISTS idx_cemeteries_location_trgm ON public.cemeteries USING gin (location gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_cemeteries_location_trgm ON public.cemeteries USING gin (location extensions.gin_trgm_ops);
 
 -- 5. Trigram GIN index for grave search by name
-CREATE INDEX IF NOT EXISTS idx_graves_name_trgm ON public.graves USING gin (name gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_graves_name_trgm ON public.graves USING gin (name extensions.gin_trgm_ops);
 
 -- 6. Trigram GIN index for grave search by bio
-CREATE INDEX IF NOT EXISTS idx_graves_bio_trgm ON public.graves USING gin (bio gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_graves_bio_trgm ON public.graves USING gin (bio extensions.gin_trgm_ops);
 
 
 -- 7. Update rpc_get_cemeteries function to support filtering by ID at database level.
