@@ -39,15 +39,17 @@ class TextFieldWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          labelText,
-          style: const TextStyle(
-            color: AppColors.slate400, // Slate 400
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
+        if (labelText.isNotEmpty) ...[
+          Text(
+            labelText,
+            style: const TextStyle(
+              color: AppColors.slate400, // Slate 400
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
+          const SizedBox(height: 8),
+        ],
         TextFormField(
           controller: controller,
           readOnly: readOnly,
