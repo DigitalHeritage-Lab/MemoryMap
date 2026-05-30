@@ -46,7 +46,7 @@ AS $$
 BEGIN
   RETURN auth.uid()::VARCHAR;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 
 -- 3. RPC to Get Cemeteries
@@ -73,7 +73,7 @@ BEGIN
        OR c.name ILIKE '%' || p_query || '%' 
        OR c.location ILIKE '%' || p_query || '%';
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 
 -- 4. RPC to Search/Get Graves with Pagination & Filtering
@@ -122,7 +122,7 @@ BEGIN
     LIMIT p_limit
     OFFSET p_offset;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 
 -- 5. RPC to Add a Grave (with validation & secure user ID retrieval inside logic)
@@ -206,4 +206,4 @@ BEGIN
     FROM public.graves g
     WHERE g.id = v_new_grave_id;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;

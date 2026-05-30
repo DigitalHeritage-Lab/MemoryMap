@@ -115,4 +115,4 @@ EXCEPTION
             'user_id', v_user_id
         )::text, ERRCODE = 'P0001';
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;

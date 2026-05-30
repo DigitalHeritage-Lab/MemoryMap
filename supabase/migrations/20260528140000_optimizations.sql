@@ -54,4 +54,4 @@ BEGIN
        OR c.name ILIKE '%' || p_query || '%' 
        OR c.location ILIKE '%' || p_query || '%');
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;

@@ -89,7 +89,7 @@ BEGIN
         END ASC,
         c.name ASC;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 
 -- 3. Create rpc_add_cemetery function for creating cemeteries
@@ -185,7 +185,7 @@ BEGIN
     LEFT JOIN public.cemetery_images img ON c.photo_id = img.id
     WHERE c.id = v_new_cemetery_id;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 -- Grant execute permissions to public
 GRANT EXECUTE ON FUNCTION public.rpc_get_cemeteries(TEXT, UUID, DOUBLE PRECISION, DOUBLE PRECISION, UUID, UUID, UUID) TO public;

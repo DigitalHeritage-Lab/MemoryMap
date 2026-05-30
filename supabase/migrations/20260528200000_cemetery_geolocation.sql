@@ -54,4 +54,4 @@ BEGIN
         END ASC,
         c.name ASC;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;

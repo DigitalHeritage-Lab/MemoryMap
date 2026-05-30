@@ -55,7 +55,7 @@ BEGIN
     FROM public.regions r
     ORDER BY r.name ASC;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 CREATE OR REPLACE FUNCTION public.rpc_get_districts(
     p_region_id UUID
@@ -74,7 +74,7 @@ BEGIN
     WHERE d.region_id = p_region_id
     ORDER BY d.name ASC;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 CREATE OR REPLACE FUNCTION public.rpc_get_settlements(
     p_district_id UUID
@@ -94,7 +94,7 @@ BEGIN
     WHERE s.district_id = p_district_id
     ORDER BY s.name ASC;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY INVOKER;
 
 -- 6. Seed Ukraine regions
 INSERT INTO public.regions (id, name) VALUES
