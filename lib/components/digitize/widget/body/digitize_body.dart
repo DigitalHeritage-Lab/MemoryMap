@@ -321,19 +321,20 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: AppButton(
-                        onPressed: isReadOnly
-                            ? null
-                            : () => context.read<DigitizeBloc>().add(
-                                  const DigitizeEvent.getCurrentGps(),
-                                ),
-                        text: context.l10n.determine,
-                        icon: Icons.my_location,
-                        isLoading: state.gpsStatus == GpsStatus.loading,
-                        width: null,
+                    AppButton(
+                      onPressed: isReadOnly
+                          ? null
+                          : () => context.read<DigitizeBloc>().add(
+                                const DigitizeEvent.getCurrentGps(),
+                              ),
+                      text: context.l10n.determine,
+                      icon: Icons.my_location,
+                      isLoading: state.gpsStatus == GpsStatus.loading,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 14,
+                        horizontal: 24,
                       ),
+                      width: null,
                     ),
                   ],
                 ),

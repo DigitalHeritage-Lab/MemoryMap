@@ -10,6 +10,7 @@ class AppButton extends StatelessWidget {
     this.textColor,
     this.icon,
     this.width = double.infinity,
+    this.padding,
   });
 
   final VoidCallback? onPressed;
@@ -19,6 +20,7 @@ class AppButton extends StatelessWidget {
   final Color? textColor;
   final IconData? icon;
   final double? width;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,8 @@ class AppButton extends StatelessWidget {
           child: Padding(
             // Internal padding to ensure the whole area is clickable and
             // feedback looks good
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            padding: padding ??
+                const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             child: Center(
               child: isLoading
                   ? const SizedBox(
