@@ -284,6 +284,7 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   hintText: context.l10n.bioHint,
                   readOnly: isReadOnly,
                   maxLines: 4,
+                  textInputAction: TextInputAction.done,
                   onChanged: (val) => context
                       .read<DigitizeBloc>()
                       .add(DigitizeEvent.bioChanged(val)),
@@ -345,7 +346,8 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   status: state.status,
                   errorText: state.errorMessage == 'fillAllRequiredFields'
                       ? context.l10n.fillAllRequiredFields
-                      : state.errorMessage,
+                      : state.errorMessage.toLocalizedError(context) ??
+                          state.errorMessage,
                 ),
                 const SizedBox(height: 8),
 

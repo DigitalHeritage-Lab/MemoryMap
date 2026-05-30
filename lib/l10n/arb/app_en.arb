@@ -47,7 +47,7 @@
   "invalidLifespan": "Age cannot exceed 120 years",
   "fullNameTooShort": "Please enter at least first and last name",
   "coordinatesTooFar": "Coordinates are too far from the selected cemetery",
-  "duplicateGrave": "This photo or grave has already been added previously",
+  "duplicateGrave": "It looks like this grave has already been added. Thank you for your contribution!",
   "cemeteryLabel": "Cemetery",
   "gpsLocationLabel": "Location (GPS)",
   "coordinatesNotDetermined": "Coordinates not determined",

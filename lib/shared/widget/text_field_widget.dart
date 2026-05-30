@@ -11,6 +11,7 @@ class TextFieldWidget extends StatelessWidget {
     this.showErrorText = false,
     this.readOnly = false,
     this.keyboardType,
+    this.textInputAction,
     this.maxLines = 1,
     this.onTap,
     this.suffixIcon,
@@ -25,6 +26,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool showErrorText;
   final bool readOnly;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final int maxLines;
   final VoidCallback? onTap;
   final Widget? suffixIcon;
@@ -54,6 +56,7 @@ class TextFieldWidget extends StatelessWidget {
           controller: controller,
           readOnly: readOnly,
           keyboardType: keyboardType,
+          textInputAction: textInputAction,
           maxLines: maxLines,
           onTap: onTap,
           onChanged: onChanged,

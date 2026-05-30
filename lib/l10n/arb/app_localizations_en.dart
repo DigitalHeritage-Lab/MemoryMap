@@ -125,7 +125,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get duplicateGrave =>
-      'This photo or grave has already been added previously';
+      'It looks like this grave has already been added. Thank you for your contribution!';
 
   @override
   String get cemeteryLabel => 'Cemetery';

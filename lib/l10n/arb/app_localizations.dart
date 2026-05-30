@@ -323,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @duplicateGrave.
   ///
   /// In en, this message translates to:
-  /// **'This photo or grave has already been added previously'**
+  /// **'It looks like this grave has already been added. Thank you for your contribution!'**
   String get duplicateGrave;
 
   /// No description provided for @cemeteryLabel.

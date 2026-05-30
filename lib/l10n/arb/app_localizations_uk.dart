@@ -127,7 +127,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get duplicateGrave =>
-      'Ця фотографія або могила вже була додана раніше';
+      'Схоже, цю могилу вже додали раніше. Дякуємо за ваш внесок!';
 
   @override
   String get cemeteryLabel => 'Цвинтар';
