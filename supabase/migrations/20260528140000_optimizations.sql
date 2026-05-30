@@ -40,7 +40,9 @@ RETURNS TABLE (
     latitude DOUBLE PRECISION,
     longitude DOUBLE PRECISION,
     photo_url TEXT
-) AS $$
+)
+SET search_path = ''
+AS $$
 BEGIN
     RETURN QUERY
     SELECT c.id, c.name, c.location, c.description, c.latitude, c.longitude, c.photo_url

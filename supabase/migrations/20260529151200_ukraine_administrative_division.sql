@@ -46,7 +46,9 @@ CREATE OR REPLACE FUNCTION public.rpc_get_regions()
 RETURNS TABLE (
     id UUID,
     name VARCHAR(100)
-) AS $$
+)
+SET search_path = ''
+AS $$
 BEGIN
     RETURN QUERY
     SELECT r.id, r.name
@@ -62,7 +64,9 @@ RETURNS TABLE (
     id UUID,
     region_id UUID,
     name VARCHAR(100)
-) AS $$
+)
+SET search_path = ''
+AS $$
 BEGIN
     RETURN QUERY
     SELECT d.id, d.region_id, d.name
@@ -80,7 +84,9 @@ RETURNS TABLE (
     district_id UUID,
     name VARCHAR(100),
     type VARCHAR(20)
-) AS $$
+)
+SET search_path = ''
+AS $$
 BEGIN
     RETURN QUERY
     SELECT s.id, s.district_id, s.name, s.type

@@ -29,7 +29,9 @@ RETURNS TABLE (
     district_name VARCHAR(100),
     settlement_name VARCHAR(100),
     settlement_type VARCHAR(20)
-) AS $$
+)
+SET search_path = ''
+AS $$
 BEGIN
     RETURN QUERY
     SELECT 
@@ -113,7 +115,9 @@ RETURNS TABLE (
     region_id UUID,
     district_id UUID,
     settlement_id UUID
-) AS $$
+)
+SET search_path = ''
+AS $$
 DECLARE
     v_user_id VARCHAR(128) := public.current_user_id();
     v_new_cemetery_id UUID;

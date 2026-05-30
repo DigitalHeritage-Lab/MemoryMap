@@ -40,7 +40,9 @@ CREATE POLICY "Allow authenticated insert graves" ON public.graves FOR INSERT WI
 
 -- Helper function to simulate public.current_user_id()
 CREATE OR REPLACE FUNCTION public.current_user_id()
-RETURNS VARCHAR AS $$
+RETURNS VARCHAR
+SET search_path = ''
+AS $$
 BEGIN
   RETURN auth.uid()::VARCHAR;
 END;
@@ -59,7 +61,9 @@ RETURNS TABLE (
     latitude DOUBLE PRECISION,
     longitude DOUBLE PRECISION,
     photo_url TEXT
-) AS $$
+)
+SET search_path = ''
+AS $$
 BEGIN
     RETURN QUERY
     SELECT c.id, c.name, c.location, c.description, c.latitude, c.longitude, c.photo_url
@@ -89,7 +93,9 @@ RETURNS TABLE (
     longitude DOUBLE PRECISION,
     bio TEXT,
     photo_url TEXT
-) AS $$
+)
+SET search_path = ''
+AS $$
 BEGIN
     RETURN QUERY
     SELECT 
@@ -140,7 +146,9 @@ RETURNS TABLE (
     longitude DOUBLE PRECISION,
     bio TEXT,
     photo_url TEXT
-) AS $$
+)
+SET search_path = ''
+AS $$
 DECLARE
     v_user_id VARCHAR(128) := public.current_user_id();
     v_new_grave_id UUID;

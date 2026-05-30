@@ -28,7 +28,9 @@ RETURNS TABLE (
     longitude DOUBLE PRECISION,
     bio TEXT,
     photo_url TEXT
-) AS $$
+)
+SET search_path = ''
+AS $$
 DECLARE
     v_user_id VARCHAR(128) := public.current_user_id();
     v_new_grave_id UUID;
