@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer' show log;
 
 // --- Simple Either Implementation ---
@@ -57,37 +56,11 @@ Future<Either<Failure, T>> eitherFutureHelper<T>(
       name: 'ErrorHelper',
     );
 
-    var message = e.toString();
-    try {
-      // Attempt to parse JSON error message (e.g. from Supabase RPC)
-      final String jsonStr;
-      if (e is FormatException) {
-        jsonStr = e.message;
-      } else {
-        // Extract json string if the message contains one
-        final match = RegExp(r'\{.*\}').firstMatch(message);
-        jsonStr = match != null ? match.group(0)! : message;
-      }
+    String message = e.toString();
 
-      final json = jsonDecode(jsonStr) as Map<String, dynamic>;
-
-      if (json.containsKey('formatted_error')) {
-        final formattedError = json['formatted_error'] as String;
-        if (formattedError == 'DUPLICATE_GRAVE_DETECTED') {
-          message = 'duplicateGrave';
-        } else {
-          message = formattedError;
-        }
-      } else if (json.containsKey('code')) {
-        final code = json['code'] as String;
-        if (code == 'DUPLICATE_GRAVE') {
-          message = 'duplicateGrave';
-        } else {
-          message = json['message'] as String? ?? code;
-        }
-      }
-    } on Object catch (_) {
-      // Ignore JSON parse errors, keep original message
+    if (message.contains('DUPLICATE_GRAVE_DETECTED') ||
+        message.contains('DUPLICATE_GRAVE')) {
+      message = 'duplicateGrave';
     }
 
     return Left(
@@ -111,9 +84,16 @@ Either<Failure, T> eitherHelper<T>(T Function() action) {
       stackTrace: stackTrace,
       name: 'ErrorHelper',
     );
+    var message = e.toString();
+
+    if (message.contains('DUPLICATE_GRAVE_DETECTED') ||
+        message.contains('DUPLICATE_GRAVE')) {
+      message = 'duplicateGrave';
+    }
+
     return Left(
       Failure(
-        e.toString(),
+        message,
         exception: e,
         stackTrace: stackTrace,
       ),
