@@ -5,6 +5,7 @@
   "navGraves": "Пошук",
   "navDigitize": "Оцифрувати",
   "navMap": "Карта",
+  "navProfile": "Профіль",
   "details": "Детальніше",
   "searchCemeteriesHint": "Пошук цвинтарів...",
   "searchGravesHint": "Пошук могил за ПІБ...",
@@ -96,5 +97,6 @@
   "cancel": "Скасувати",
   "latitude": "Широта (Lat)",
   "longitude": "Довгота (Lng)",
-  "cemeteryAddressHint": "вул. Байкова, 6"
+  "cemeteryAddressHint": "вул. Байкова, 6",
+  "inDevelopment": "В розробці..."
 }

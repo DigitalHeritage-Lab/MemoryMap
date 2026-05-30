@@ -1,7 +1,7 @@
-import 'package:empty_template/components/digitize/bloc/digitize_bloc.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart';
+import 'package:memory_map/shared/shared.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockGeolocatorPlatform extends GeolocatorPlatform

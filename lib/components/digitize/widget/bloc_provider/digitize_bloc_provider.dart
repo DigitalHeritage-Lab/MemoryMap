@@ -1,7 +1,7 @@
-import 'package:empty_template/components/digitize/bloc/digitize_bloc.dart';
-import 'package:empty_template/shared/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart';
+import 'package:memory_map/shared/di/injection.dart';
 
 class DigitizeBlocProvider extends StatelessWidget {
   const DigitizeBlocProvider({required this.child, super.key});

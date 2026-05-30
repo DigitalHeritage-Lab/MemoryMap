@@ -1,3 +1,5 @@
+export 'bloc/app_version/app_version_cubit.dart';
+export 'bloc/app_version/app_version_state.dart';
 export 'bloc/safe_bloc.dart';
 export 'constants/enum.dart';
 export 'constants/theme/app_colors.dart';
@@ -17,3 +19,4 @@ export 'widget/app_scaffold.dart';
 export 'widget/sending_text_widget.dart';
 export 'widget/text_field_widget.dart';
 export 'widget/try_again_widget.dart';
+export 'widget/version_widget.dart';

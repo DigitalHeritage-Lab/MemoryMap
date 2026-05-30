@@ -8,6 +8,7 @@
   "navGraves": "Search",
   "navDigitize": "Digitize",
   "navMap": "Map",
+  "navProfile": "Profile",
   "details": "Details",
   "searchCemeteriesHint": "Search cemeteries...",
   "searchGravesHint": "Search graves by name...",
@@ -113,5 +114,6 @@
   "cancel": "Cancel",
   "latitude": "Latitude (Lat)",
   "longitude": "Longitude (Lng)",
-  "cemeteryAddressHint": "6 Baykova St"
+  "cemeteryAddressHint": "6 Baykova St",
+  "inDevelopment": "In development..."
 }

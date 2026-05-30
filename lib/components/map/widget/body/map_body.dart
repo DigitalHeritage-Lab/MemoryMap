@@ -1,11 +1,11 @@
-import 'package:empty_template/components/map/bloc/map_bloc.dart';
-import 'package:empty_template/components/map/widget/cemetery_preview_card.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart' hide MapEvent;
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:memory_map/components/map/bloc/map_bloc.dart';
+import 'package:memory_map/components/map/widget/cemetery_preview_card.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class MapBody extends StatefulWidget {
   const MapBody({super.key});

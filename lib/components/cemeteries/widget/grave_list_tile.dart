@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class GraveListTile extends StatelessWidget {
   const GraveListTile({required this.grave, super.key});

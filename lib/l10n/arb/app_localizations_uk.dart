@@ -24,6 +24,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get navMap => 'Карта';
 
   @override
+  String get navProfile => 'Профіль';
+
+  @override
   String get details => 'Детальніше';
 
   @override
@@ -242,4 +245,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get cemeteryAddressHint => 'вул. Байкова, 6';
+
+  @override
+  String get inDevelopment => 'В розробці...';
 }

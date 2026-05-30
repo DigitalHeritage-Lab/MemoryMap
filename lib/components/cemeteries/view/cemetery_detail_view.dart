@@ -1,7 +1,7 @@
-import 'package:empty_template/components/cemeteries/widget/bloc_provider/cemetery_detail_bloc_provider.dart';
-import 'package:empty_template/components/cemeteries/widget/body/cemetery_detail_body.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:memory_map/components/cemeteries/widget/bloc_provider/cemetery_detail_bloc_provider.dart';
+import 'package:memory_map/components/cemeteries/widget/body/cemetery_detail_body.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class CemeteryDetailScreen extends StatelessWidget {
   const CemeteryDetailScreen({

@@ -1,5 +1,5 @@
-import 'package:empty_template/shared/helper/error_helper.dart';
-import 'package:empty_template/shared/models/grave.dart';
+import 'package:memory_map/shared/helper/error_helper.dart';
+import 'package:memory_map/shared/models/grave.dart';
 
 abstract class GraveRepository {
   Future<Either<Failure, List<Grave>>> getGraves({

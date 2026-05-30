@@ -1,9 +1,9 @@
-import 'package:empty_template/components/graves/bloc/graves_bloc.dart';
-import 'package:empty_template/components/graves/widget/grave_list_tile.dart';
-import 'package:empty_template/l10n/l10n.dart';
-import 'package:empty_template/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:memory_map/components/graves/bloc/graves_bloc.dart';
+import 'package:memory_map/components/graves/widget/grave_list_tile.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class GravesBody extends StatefulWidget {

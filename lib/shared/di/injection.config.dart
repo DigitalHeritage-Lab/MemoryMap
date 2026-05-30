@@ -9,26 +9,28 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:empty_template/components/cemeteries/bloc/cemeteries_bloc.dart'
-    as _i705;
-import 'package:empty_template/components/cemeteries/bloc/cemetery_detail_bloc.dart'
-    as _i599;
-import 'package:empty_template/components/digitize/bloc/digitize_bloc.dart'
-    as _i140;
-import 'package:empty_template/components/graves/bloc/graves_bloc.dart'
-    as _i607;
-import 'package:empty_template/components/map/bloc/map_bloc.dart' as _i953;
-import 'package:empty_template/shared/repositories/cemetery_repository.dart'
-    as _i359;
-import 'package:empty_template/shared/repositories/grave_repository.dart'
-    as _i1040;
-import 'package:empty_template/shared/repositories/supabase_cemetery_repository.dart'
-    as _i142;
-import 'package:empty_template/shared/repositories/supabase_grave_repository.dart'
-    as _i523;
-import 'package:empty_template/shared/shared.dart' as _i525;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:memory_map/components/cemeteries/bloc/cemeteries_bloc.dart'
+    as _i943;
+import 'package:memory_map/components/cemeteries/bloc/cemetery_detail_bloc.dart'
+    as _i119;
+import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart'
+    as _i603;
+import 'package:memory_map/components/graves/bloc/graves_bloc.dart' as _i841;
+import 'package:memory_map/components/map/bloc/map_bloc.dart' as _i597;
+import 'package:memory_map/shared/bloc/app_version/app_version_cubit.dart'
+    as _i499;
+import 'package:memory_map/shared/repositories/app_info_repository.dart'
+    as _i225;
+import 'package:memory_map/shared/repositories/cemetery_repository.dart'
+    as _i90;
+import 'package:memory_map/shared/repositories/grave_repository.dart' as _i175;
+import 'package:memory_map/shared/repositories/supabase_cemetery_repository.dart'
+    as _i771;
+import 'package:memory_map/shared/repositories/supabase_grave_repository.dart'
+    as _i299;
+import 'package:memory_map/shared/shared.dart' as _i473;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -42,24 +44,27 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.lazySingleton<_i359.CemeteryRepository>(
-        () => _i142.SupabaseCemeteryRepository(gh<_i454.SupabaseClient>()));
-    gh.lazySingleton<_i1040.GraveRepository>(
-        () => _i523.SupabaseGraveRepository(gh<_i454.SupabaseClient>()));
-    gh.factory<_i607.GravesBloc>(
-        () => _i607.GravesBloc(gh<_i525.GraveRepository>()));
-    gh.factory<_i705.CemeteriesBloc>(
-        () => _i705.CemeteriesBloc(gh<_i525.CemeteryRepository>()));
-    gh.factory<_i953.MapBloc>(
-        () => _i953.MapBloc(gh<_i525.CemeteryRepository>()));
-    gh.factory<_i599.CemeteryDetailBloc>(() => _i599.CemeteryDetailBloc(
-          gh<_i525.CemeteryRepository>(),
-          gh<_i525.GraveRepository>(),
+    gh.singleton<_i225.AppInfoRepository>(() => _i225.AppInfoRepository());
+    gh.lazySingleton<_i175.GraveRepository>(
+        () => _i299.SupabaseGraveRepository(gh<_i454.SupabaseClient>()));
+    gh.factory<_i499.AppVersionCubit>(() =>
+        _i499.AppVersionCubit(buildRepository: gh<_i225.AppInfoRepository>()));
+    gh.factory<_i841.GravesBloc>(
+        () => _i841.GravesBloc(gh<_i473.GraveRepository>()));
+    gh.lazySingleton<_i90.CemeteryRepository>(
+        () => _i771.SupabaseCemeteryRepository(gh<_i454.SupabaseClient>()));
+    gh.factory<_i119.CemeteryDetailBloc>(() => _i119.CemeteryDetailBloc(
+          gh<_i473.CemeteryRepository>(),
+          gh<_i473.GraveRepository>(),
         ));
-    gh.factory<_i140.DigitizeBloc>(() => _i140.DigitizeBloc(
-          gh<_i525.CemeteryRepository>(),
-          gh<_i525.GraveRepository>(),
+    gh.factory<_i603.DigitizeBloc>(() => _i603.DigitizeBloc(
+          gh<_i473.CemeteryRepository>(),
+          gh<_i473.GraveRepository>(),
         ));
+    gh.factory<_i943.CemeteriesBloc>(
+        () => _i943.CemeteriesBloc(gh<_i473.CemeteryRepository>()));
+    gh.factory<_i597.MapBloc>(
+        () => _i597.MapBloc(gh<_i473.CemeteryRepository>()));
     return this;
   }
 }

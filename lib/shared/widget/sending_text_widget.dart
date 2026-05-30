@@ -1,5 +1,5 @@
-import 'package:empty_template/shared/constants/enum.dart';
 import 'package:flutter/material.dart';
+import 'package:memory_map/shared/constants/enum.dart';
 
 class SendingTextWidget extends StatelessWidget {
   const SendingTextWidget({

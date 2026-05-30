@@ -1,8 +1,8 @@
-import 'package:empty_template/shared/helper/error_helper.dart';
-import 'package:empty_template/shared/models/admin_division.dart';
-import 'package:empty_template/shared/models/cemetery.dart';
-import 'package:empty_template/shared/repositories/cemetery_repository.dart';
 import 'package:injectable/injectable.dart';
+import 'package:memory_map/shared/helper/error_helper.dart';
+import 'package:memory_map/shared/models/admin_division.dart';
+import 'package:memory_map/shared/models/cemetery.dart';
+import 'package:memory_map/shared/repositories/cemetery_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 @LazySingleton(as: CemeteryRepository)

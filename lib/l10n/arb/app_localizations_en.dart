@@ -24,6 +24,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navMap => 'Map';
 
   @override
+  String get navProfile => 'Profile';
+
+  @override
   String get details => 'Details';
 
   @override
@@ -240,4 +243,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cemeteryAddressHint => '6 Baykova St';
+
+  @override
+  String get inDevelopment => 'In development...';
 }
