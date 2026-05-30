@@ -46,7 +46,7 @@ class SupabaseGraveRepository implements GraveRepository {
   Future<Either<Failure, Grave>> addGrave(Grave grave) {
     return eitherFutureHelper(() async {
       String? hashString;
-      
+
       // Calculate hash on client
       if (grave.photoUrl.isNotEmpty) {
         final file = File(grave.photoUrl);
@@ -58,7 +58,7 @@ class SupabaseGraveRepository implements GraveRepository {
           );
         }
       }
-      
+
       // Fallback to text hash
       if (hashString == null) {
         final data = '${grave.name}${grave.birthDate}${grave.deathDate}';
