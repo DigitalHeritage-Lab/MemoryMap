@@ -38,8 +38,13 @@ CREATE POLICY "Allow public read settlements" ON public.settlements FOR SELECT U
 
 -- 4. Add administrative division links to cemeteries table
 ALTER TABLE public.cemeteries ADD COLUMN region_id UUID REFERENCES public.regions(id);
+CREATE INDEX IF NOT EXISTS idx_cemeteries_region_id ON public.cemeteries(region_id);
+
 ALTER TABLE public.cemeteries ADD COLUMN district_id UUID REFERENCES public.districts(id);
+CREATE INDEX IF NOT EXISTS idx_cemeteries_district_id ON public.cemeteries(district_id);
+
 ALTER TABLE public.cemeteries ADD COLUMN settlement_id UUID REFERENCES public.settlements(id);
+CREATE INDEX IF NOT EXISTS idx_cemeteries_settlement_id ON public.cemeteries(settlement_id);
 
 -- 5. Create RPC functions for cascading dropdowns
 CREATE OR REPLACE FUNCTION public.rpc_get_regions()

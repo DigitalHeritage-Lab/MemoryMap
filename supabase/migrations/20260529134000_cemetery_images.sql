@@ -15,6 +15,7 @@ CREATE POLICY "Allow public read cemetery_images" ON public.cemetery_images FOR 
 
 -- 2. Add photo_id column referencing public.cemetery_images(id)
 ALTER TABLE public.cemeteries ADD COLUMN photo_id UUID REFERENCES public.cemetery_images(id);
+CREATE INDEX IF NOT EXISTS idx_cemeteries_photo_id ON public.cemeteries(photo_id);
 
 -- 3. Populate public.cemetery_images with existing non-null photo_urls and update public.cemeteries
 WITH inserted_images AS (
