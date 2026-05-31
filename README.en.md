@@ -41,6 +41,7 @@
 ## 🌟 Key Features
 
 - 📍 **Interactive Necropolis Map** — OpenStreetMap with a CartoDB dark theme, distance filtering.
+- 🤖 **AI Digitization (Gemini OCR)** — Intelligent text recognition (names, birth/death dates) from headstone photos using asynchronous Supabase Edge Functions and the Google Gemini API.
 - 📱 **In-Field Digitization** — Step-by-step wizard with GPS, administrative selection (Region → District → Community), and photo capture.
 - 🔍 **Smart Search** — Full-text search executed on the database side (Supabase RPC), eliminating the need for local filtering.
 - ♾️ **Infinite Pagination** — Seamless scrolling utilizing `ScrollPaginationMixin` and Skeleton loading effects.
@@ -86,7 +87,7 @@
 | **UI** | [Flutter 3.24+](https://flutter.dev) · `flutter_screenutil` |
 | **State** | [flutter_bloc](https://bloclibrary.dev/) · `freezed` |
 | **Navigation** | [go_router](https://pub.dev/packages/go_router) |
-| **Backend** | [Supabase](https://supabase.com) (PostgreSQL + PostGIS, RPC only) |
+| **Backend** | [Supabase](https://supabase.com) (PostgreSQL + PostGIS, Edge Functions, RPC) · Google Gemini API |
 | **Maps** | [flutter_map](https://pub.dev/packages/flutter_map) · `latlong2` |
 | **DI** | [injectable](https://pub.dev/packages/injectable) · `get_it` |
 | **Localization** | ARB · `flutter_localizations` · `intl` |
