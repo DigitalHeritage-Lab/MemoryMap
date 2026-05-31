@@ -327,7 +327,11 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
 
     result.fold(
       (failure) => emit(
-        state.copyWith(ocrStatus: OcrStatus.error),
+        state.copyWith(
+          ocrStatus: OcrStatus.error,
+          errorMessage: failure.message,
+          showErrors: true,
+        ),
       ),
       (ocrResult) => emit(
         state.copyWith(

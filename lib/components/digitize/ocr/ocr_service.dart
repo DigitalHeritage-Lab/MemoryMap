@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class OcrResult {
   OcrResult({
@@ -20,45 +18,73 @@ class OcrResult {
 @lazySingleton
 class OcrService {
   Future<OcrResult> processImage(String imagePath) async {
-    log('GEMINI OCR START for $imagePath');
-    final apiKey = dotenv.env['GEMINI_API_KEY'];
-    if (apiKey == null || apiKey.isEmpty) {
-      throw Exception('GEMINI_API_KEY is not set in .env file');
-    }
+    log('ASYNC OCR START for $imagePath');
+    final supabase = Supabase.instance.client;
 
-    final model = GenerativeModel(
-      model: 'gemini-1.5-flash',
-      apiKey: apiKey,
-      generationConfig: GenerationConfig(
-        responseMimeType: 'application/json',
-      ),
+    // 1. Upload image to Storage
+    final ext = imagePath.split('.').last;
+    final fileName = '${DateTime.now().millisecondsSinceEpoch}.$ext';
+    final file = File(imagePath);
+
+    await supabase.storage.from('grave_photos').upload(fileName, file);
+
+    // 2. Create ocr_requests row via RPC
+    final response = await supabase.rpc('rpc_create_ocr_request', params: {
+      'p_file_path': fileName,
+    });
+
+    // The RPC returns a list of rows, we take the first one's id
+    final requestId = (response as List).first['id'] as String;
+
+    // 3. Call Edge Function to start background processing
+    await supabase.functions.invoke(
+      'process-grave-ocr',
+      body: {
+        'requestId': requestId,
+        'photoPath': fileName,
+      },
     );
 
-    final imageBytes = await File(imagePath).readAsBytes();
-    final prompt = TextPart(
-      'Extract the full name (ПІБ), birth date, and death date from this '
-      'grave stone image. '
-      'Return ONLY a valid JSON object with keys: "fullName", "birthDate" '
-      '(format YYYY-MM-DD), "deathDate" (format YYYY-MM-DD). '
-      'If a value is not found, return null for that key.',
-    );
-    final imagePart = DataPart('image/jpeg', imageBytes);
+    // 4. Poll for completion
+    log('Waiting for OCR completion via RPC polling...');
+    int attempts = 0;
+    const maxAttempts = 30; // 30 * 2s = 60 seconds
 
-    final response = await model.generateContent([
-      Content.multi([prompt, imagePart]),
-    ]);
+    while (attempts < maxAttempts) {
+      await Future.delayed(const Duration(seconds: 2));
+      attempts++;
 
-    log('GEMINI RESULT: \n${response.text}');
+      final statusResponse = await supabase.rpc('rpc_get_ocr_request', params: {
+        'p_id': requestId,
+      });
 
-    if (response.text != null) {
-      final data = jsonDecode(response.text!) as Map<String, dynamic>;
-      return OcrResult(
-        fullName: data['fullName'] as String?,
-        birthDate: data['birthDate'] as String?,
-        deathDate: data['deathDate'] as String?,
-      );
+      if (statusResponse == null || (statusResponse as List).isEmpty) {
+        continue; // Wait for the record to be available
+      }
+
+      final statusData = statusResponse.first;
+      final status = statusData['status'] as String;
+
+      if (status == 'processing') {
+        continue;
+      }
+
+      if (status == 'error') {
+        throw Exception(statusData['error_message'] ?? 'Unknown OCR error');
+      }
+
+      if (status == 'complete' && statusData['result_data'] != null) {
+        final data = statusData['result_data'] as Map<String, dynamic>;
+        log('ASYNC OCR RESULT: \n$data');
+        return OcrResult(
+          fullName: data['fullName'] as String?,
+          birthDate: data['birthDate'] as String?,
+          deathDate: data['deathDate'] as String?,
+        );
+      }
     }
-    return OcrResult();
+
+    throw Exception('OCR timed out after 60 seconds');
   }
 
   Future<void> dispose() async {}
