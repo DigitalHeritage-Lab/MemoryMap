@@ -320,9 +320,9 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
     Emitter<DigitizeState> emit,
   ) async {
     emit(state.copyWith(ocrStatus: OcrStatus.loading));
-    
+
     final result = await eitherFutureHelper(() async {
-      return await _ocrService.processImage(event.imagePath);
+      return _ocrService.processImage(event.imagePath);
     });
 
     result.fold(
