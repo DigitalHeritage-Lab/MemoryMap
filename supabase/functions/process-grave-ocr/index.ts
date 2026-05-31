@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.43.4'
-import { GoogleGenerativeAI } from 'https://esm.sh/@google/generative-ai@0.12.0'
+import { GoogleGenerativeAI } from 'https://esm.sh/@google/generative-ai@0.21.0'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -46,7 +46,7 @@ Deno.serve(async (req) => {
 
           const genAI = new GoogleGenerativeAI(Deno.env.get('GEMINI_API_KEY') ?? '')
           const model = genAI.getGenerativeModel({ 
-            model: 'gemini-1.5-flash',
+            model: 'gemini-2.5-flash',
             generationConfig: {
               responseMimeType: 'application/json'
             }
