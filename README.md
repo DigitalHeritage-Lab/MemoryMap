@@ -19,7 +19,11 @@
     <a href="LICENSE">
         <img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg?logo=github&labelColor=333940" alt="PolyForm Noncommercial License">
     </a>
+    <a href="README.en.md">
+        <img src="https://img.shields.io/badge/lang-en-red.svg" alt="English">
+    </a>
 </p>
+
 
 <p align="center">
   <a href="#-основні-можливості">Можливості</a> •
