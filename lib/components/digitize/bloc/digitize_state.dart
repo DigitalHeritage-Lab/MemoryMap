@@ -23,6 +23,8 @@ sealed class DigitizeState with _$DigitizeState {
     @Default('') String birthDate,
     @Default('') String deathDate,
     @Default('') String bio,
+    String? photoPath,
+    String? photoUrl,
     Cemetery? selectedCemetery,
     double? latitude,
     double? longitude,

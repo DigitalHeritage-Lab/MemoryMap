@@ -319,7 +319,12 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
     _RecognizeTextFromImage event,
     Emitter<DigitizeState> emit,
   ) async {
-    emit(state.copyWith(ocrStatus: OcrStatus.loading));
+    emit(
+      state.copyWith(
+        ocrStatus: OcrStatus.loading,
+        photoPath: event.imagePath,
+      ),
+    );
 
     final result = await eitherFutureHelper(() async {
       return _ocrService.processImage(event.imagePath);
@@ -339,6 +344,8 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
           fullName: ocrResult.fullName ?? state.fullName,
           birthDate: ocrResult.birthDate ?? state.birthDate,
           deathDate: ocrResult.deathDate ?? state.deathDate,
+          photoUrl: ocrResult.photoUrl,
+          photoPath: null,
         ),
       ),
     );
@@ -375,7 +382,7 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
       latitude: state.latitude!,
       longitude: state.longitude!,
       bio: state.bio,
-      photoUrl: '',
+      photoUrl: state.photoUrl ?? '',
     );
 
     final result = await _graveRepository.addGrave(grave);
