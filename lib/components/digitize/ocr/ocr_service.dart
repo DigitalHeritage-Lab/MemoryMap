@@ -1,4 +1,4 @@
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:injectable/injectable.dart';
 
 class OcrResult {
@@ -14,13 +14,16 @@ class OcrResult {
 
 @lazySingleton
 class OcrService {
-  final TextRecognizer _textRecognizer = TextRecognizer();
-
   Future<OcrResult> processImage(String imagePath) async {
-    final inputImage = InputImage.fromFilePath(imagePath);
-    final recognizedText = await _textRecognizer.processImage(inputImage);
+    final recognizedText = await FlutterTesseractOcr.extractText(
+      imagePath,
+      language: 'ukr',
+      args: {
+        'preserve_interword_spaces': '1',
+      },
+    );
 
-    return _parseText(recognizedText.text);
+    return _parseText(recognizedText);
   }
 
   OcrResult _parseText(String text) {
@@ -92,7 +95,5 @@ class OcrService {
     return dateStr;
   }
 
-  Future<void> dispose() async {
-    await _textRecognizer.close();
-  }
+  Future<void> dispose() async {}
 }
