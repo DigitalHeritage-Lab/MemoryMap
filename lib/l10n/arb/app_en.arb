@@ -19,7 +19,8 @@
   "save": "Save",
   "saving": "Saving...",
   "saveSuccess": "Saved successfully!",
-  "saveError": "Failed to save: {error}",
+  "saveError": "Save error: {error}",
+  "saveErrorGeneric": "Save error",
   "@saveError": {
     "placeholders": {
       "error": {
@@ -27,7 +28,7 @@
       }
     }
   },
-  "fullName": "Full Name",
+  "fullName": "Deceased Full Name",
   "cemetery": "Cemetery",
   "selectCemetery": "Select Cemetery",
   "bio": "Biography / Epitaph",
@@ -118,6 +119,7 @@
   "cemeteryAddressHint": "6 Baykova St",
   "inDevelopment": "In development...",
   "scanTextOcr": "Scan text (OCR)",
+  "ocrSuccessMessage": "Data recognized! Please verify the correctness.",
   "yearsOld": "{count, plural, =1{{count} year} other{{count} years}}",
   "@yearsOld": {
     "placeholders": {

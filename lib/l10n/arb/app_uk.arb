@@ -17,6 +17,7 @@
   "saving": "Збереження...",
   "saveSuccess": "Успішно збережено!",
   "saveError": "Помилка збереження: {error}",
+  "saveErrorGeneric": "Помилка збереження",
   "fullName": "ПІБ покійного",
   "cemetery": "Цвинтар",
   "selectCemetery": "Виберіть цвинтар",
@@ -101,6 +102,7 @@
   "cemeteryAddressHint": "вул. Байкова, 6",
   "inDevelopment": "В розробці...",
   "scanTextOcr": "Сканувати текст (OCR)",
+  "ocrSuccessMessage": "Дані розпізнано! Перевірте правильність.",
   "yearsOld": "{count, plural, =1{{count} рік} few{{count} роки} many{{count} років} other{{count} років}}",
   "@yearsOld": {
     "placeholders": {

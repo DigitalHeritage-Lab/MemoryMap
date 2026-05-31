@@ -11,6 +11,7 @@ abstract class AppColors {
 
   static const Color emerald = Color(0xFF10B981);
   static const Color deepEmerald = Color(0xFF064E3B);
+  static const Color teal = Color(0xFF0F766E);
   static const Color gold = Color(0xFFD97706);
   static const Color red = Color(0xFFEF4444);
 }

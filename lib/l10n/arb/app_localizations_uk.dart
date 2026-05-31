@@ -62,6 +62,9 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String get saveErrorGeneric => 'Помилка збереження';
+
+  @override
   String get fullName => 'ПІБ покійного';
 
   @override
@@ -255,6 +258,9 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get scanTextOcr => 'Сканувати текст (OCR)';
+
+  @override
+  String get ocrSuccessMessage => 'Дані розпізнано! Перевірте правильність.';
 
   @override
   String yearsOld(int count) {

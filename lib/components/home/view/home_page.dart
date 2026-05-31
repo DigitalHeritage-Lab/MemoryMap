@@ -46,9 +46,9 @@ class HomePage extends StatelessWidget {
               context.go('/profile');
           }
         },
-        backgroundColor: const Color(0xFF1E293B), // Slate 800
-        selectedItemColor: const Color(0xFF10B981), // Emerald 500
-        unselectedItemColor: const Color(0xFF64748B), // Slate 500
+        backgroundColor: AppColors.slate800,
+        selectedItemColor: AppColors.emerald,
+        unselectedItemColor: AppColors.slate500,
         type: BottomNavigationBarType
             .fixed, // Ensure bar stays stable with 4 items
         selectedLabelStyle:
