@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Цей додаток потребує доступ до камери для фотографування пам'ятників і розпізнавання тексту.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Цей додаток потребує доступу до галереї для завантаження фотографій пам'ятників.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Цей додаток потребує доступу до мікрофону для зйомки відео.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Цей додаток використовує вашу геолокацію для сортування та відображення найближчих цвинтарів.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

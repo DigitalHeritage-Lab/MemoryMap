@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:memory_map/components/digitize/ocr/ocr_service.dart';
 import 'package:memory_map/shared/shared.dart';
 
 part 'digitize_bloc.freezed.dart';
@@ -14,6 +15,7 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
   DigitizeBloc(
     this._cemeteryRepository,
     this._graveRepository,
+    this._ocrService,
   ) : super(const DigitizeState()) {
     on<_LoadRegions>(_onLoadRegions);
     on<_RegionChanged>(_onRegionChanged);
@@ -26,12 +28,14 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
     on<_BioChanged>(_onBioChanged);
     on<_CemeterySelected>(_onCemeterySelected);
     on<_GetCurrentGps>(_onGetCurrentGps);
+    on<_RecognizeTextFromImage>(_onRecognizeTextFromImage);
     on<_SubmitGrave>(_onSubmitGrave);
     on<_ResetForm>(_onResetForm);
   }
 
   final CemeteryRepository _cemeteryRepository;
   final GraveRepository _graveRepository;
+  final OcrService _ocrService;
 
   Future<void> _onLoadRegions(
     _LoadRegions event,
@@ -308,6 +312,35 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
           ),
         );
       },
+    );
+  }
+
+  Future<void> _onRecognizeTextFromImage(
+    _RecognizeTextFromImage event,
+    Emitter<DigitizeState> emit,
+  ) async {
+    emit(state.copyWith(ocrStatus: OcrStatus.loading));
+
+    final result = await eitherFutureHelper(() async {
+      return _ocrService.processImage(event.imagePath);
+    });
+
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          ocrStatus: OcrStatus.error,
+          errorMessage: failure.message,
+          showErrors: true,
+        ),
+      ),
+      (ocrResult) => emit(
+        state.copyWith(
+          ocrStatus: OcrStatus.success,
+          fullName: ocrResult.fullName ?? state.fullName,
+          birthDate: ocrResult.birthDate ?? state.birthDate,
+          deathDate: ocrResult.deathDate ?? state.deathDate,
+        ),
+      ),
     );
   }
 

@@ -2,6 +2,8 @@ part of 'digitize_bloc.dart';
 
 enum GpsStatus { idle, loading, success, error }
 
+enum OcrStatus { idle, loading, success, error }
+
 @freezed
 sealed class DigitizeState with _$DigitizeState {
   const factory DigitizeState({
@@ -16,6 +18,7 @@ sealed class DigitizeState with _$DigitizeState {
     District? selectedDistrict,
     Settlement? selectedSettlement,
     @Default(GpsStatus.idle) GpsStatus gpsStatus,
+    @Default(OcrStatus.idle) OcrStatus ocrStatus,
     @Default('') String fullName,
     @Default('') String birthDate,
     @Default('') String deathDate,

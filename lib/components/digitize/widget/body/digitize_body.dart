@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart';
 import 'package:memory_map/components/digitize/widget/add_cemetery_dialog.dart';
@@ -79,8 +80,10 @@ class _DigitizeBodyState extends State<DigitizeBody> {
     return BlocListener<DigitizeBloc, DigitizeState>(
       listenWhen: (prev, curr) =>
           prev.status != curr.status ||
+          prev.ocrStatus != curr.ocrStatus ||
           prev.latitude != curr.latitude ||
           prev.longitude != curr.longitude ||
+          prev.fullName != curr.fullName ||
           prev.birthDate != curr.birthDate ||
           prev.deathDate != curr.deathDate,
       listener: (context, state) {
@@ -97,12 +100,16 @@ class _DigitizeBodyState extends State<DigitizeBody> {
             context.go('/cemeteries/$cemeteryId');
           }
         }
+
         // Sync GPS display field
         if (state.latitude != null && state.longitude != null) {
           _gpsController.text = '${state.latitude!.toStringAsFixed(6)}, '
               '${state.longitude!.toStringAsFixed(6)}';
         }
-        // Sync date fields from state (needed after resetForm)
+        // Sync fields from state (needed after OCR or resetForm)
+        if (state.fullName != _nameController.text) {
+          _nameController.text = state.fullName;
+        }
         if (state.birthDate != _birthDateController.text) {
           _birthDateController.text = state.birthDate;
         }
@@ -110,262 +117,324 @@ class _DigitizeBodyState extends State<DigitizeBody> {
           _deathDateController.text = state.deathDate;
         }
       },
-      child: BlocBuilder<DigitizeBloc, DigitizeState>(
-        builder: (context, state) {
-          final isReadOnly = state.status == LoadingStatus.loading;
-
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Full name
-                TextFieldWidget(
-                  controller: _nameController,
-                  labelText: context.l10n.fullName,
-                  hintText: context.l10n.fullNameHint,
-                  readOnly: isReadOnly,
-                  showErrorText: state.showErrors && state.nameError != null,
-                  errorText: state.nameError.toLocalizedError(context) ?? '',
-                  onChanged: (val) => context
-                      .read<DigitizeBloc>()
-                      .add(DigitizeEvent.fullNameChanged(val)),
+      child: BlocListener<DigitizeBloc, DigitizeState>(
+        listenWhen: (prev, curr) => prev.ocrStatus != curr.ocrStatus,
+        listener: (context, state) {
+          if (state.ocrStatus == OcrStatus.error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  state.errorMessage.toLocalizedError(context) ??
+                      state.errorMessage ??
+                      context.l10n.defaultError,
                 ),
-                const SizedBox(height: 18),
+                backgroundColor: AppColors.red,
+              ),
+            );
+          } else if (state.ocrStatus == OcrStatus.success) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Дані розпізнано! Перевірте правильність.'),
+                backgroundColor: AppColors.emerald,
+              ),
+            );
+          }
+        },
+        child: BlocBuilder<DigitizeBloc, DigitizeState>(
+          builder: (context, state) {
+            final isReadOnly = state.status == LoadingStatus.loading;
 
-                // 1. Region selection
-                _AdminDropdown<Region>(
-                  label: context.l10n.region,
-                  hint: context.l10n.selectRegion,
-                  value: state.selectedRegion,
-                  items: state.regions,
-                  isEnabled: !isReadOnly,
-                  itemLabel: (r) => r.name,
-                  onChanged: (r) => context
-                      .read<DigitizeBloc>()
-                      .add(DigitizeEvent.regionChanged(r)),
-                ),
-                const SizedBox(height: 18),
-
-                // 2. District selection
-                _AdminDropdown<District>(
-                  label: context.l10n.district,
-                  hint: context.l10n.selectDistrict,
-                  value: state.selectedDistrict,
-                  items: state.districts,
-                  isEnabled: !isReadOnly && state.selectedRegion != null,
-                  itemLabel: (d) => d.name,
-                  onChanged: (d) => context
-                      .read<DigitizeBloc>()
-                      .add(DigitizeEvent.districtChanged(d)),
-                ),
-                const SizedBox(height: 18),
-
-                // 3. Settlement selection
-                _AdminDropdown<Settlement>(
-                  label: context.l10n.settlement,
-                  hint: context.l10n.selectSettlement,
-                  value: state.selectedSettlement,
-                  items: state.settlements,
-                  isEnabled: !isReadOnly && state.selectedDistrict != null,
-                  itemLabel: (s) => '${s.type} ${s.name}',
-                  onChanged: (s) => context
-                      .read<DigitizeBloc>()
-                      .add(DigitizeEvent.settlementChanged(s)),
-                ),
-                const SizedBox(height: 18),
-
-                // 4. Cemetery selection
-                _AdminDropdown<Cemetery>(
-                  label: context.l10n.cemeteryLabel,
-                  hint: state.cemeteries.isEmpty &&
-                          state.selectedSettlement != null
-                      ? context.l10n.noCemeteriesInSettlement
-                      : context.l10n.selectCemetery,
-                  value: state.selectedCemetery,
-                  items: state.cemeteries,
-                  isEnabled: !isReadOnly && state.selectedSettlement != null,
-                  hasError: state.showErrors && state.cemeteryError != null,
-                  itemLabel: (c) => c.name,
-                  onChanged: (c) => context
-                      .read<DigitizeBloc>()
-                      .add(DigitizeEvent.cemeterySelected(c)),
-                ),
-                if (state.showErrors && state.cemeteryError != null) ...[
-                  const SizedBox(height: 6),
-                  Text(
-                    state.cemeteryError.toLocalizedError(context) ?? '',
-                    style: const TextStyle(
-                      color: AppColors.red,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-                if (state.selectedSettlement != null) ...[
-                  const SizedBox(height: 10),
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // OCR Button
                   AppButton(
                     onPressed: isReadOnly
                         ? null
                         : () async {
-                            await AddCemeteryDialog.show(
-                              context,
-                              context.read<DigitizeBloc>(),
+                            debugPrint('Opening camera...');
+                            final picker = ImagePicker();
+                            final imageEither = await eitherFutureHelper(() {
+                              return picker.pickImage(
+                                source: ImageSource.camera,
+                                imageQuality: 70,
+                                maxWidth: 1500,
+                                maxHeight: 1500,
+                              );
+                            });
+
+                            imageEither.fold(
+                              (failure) => debugPrint('Camera error: $failure'),
+                              (image) {
+                                debugPrint('Camera returned: ${image?.path}');
+                                if (image != null && context.mounted) {
+                                  context.read<DigitizeBloc>().add(
+                                        DigitizeEvent.recognizeTextFromImage(
+                                          image.path,
+                                        ),
+                                      );
+                                }
+                              },
                             );
                           },
-                    text: context.l10n.addCemetery,
-                    icon: Icons.add,
+                    text: context.l10n.scanTextOcr,
+                    icon: Icons.document_scanner,
+                    isLoading: state.ocrStatus == OcrStatus.loading,
                     backgroundColor: AppColors.slate700,
                     textColor: AppColors.slate50,
                   ),
-                ],
-                const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                // Dates row
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: TextFieldWidget(
-                        controller: _birthDateController,
-                        labelText: context.l10n.birthDate,
-                        hintText: 'рррр-мм-дд',
-                        readOnly: true,
-                        showErrorText:
-                            state.showErrors && state.birthDateError != null,
-                        errorText:
-                            state.birthDateError.toLocalizedError(context) ??
-                                '',
-                        suffixIcon: const Icon(
-                          Icons.calendar_today_outlined,
-                          size: 18,
-                          color: AppColors.slate500,
-                        ),
-                        onTap: isReadOnly
-                            ? null
-                            : () => _pickDate(
-                                  context: context,
-                                  isBirth: true,
-                                ),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextFieldWidget(
-                        controller: _deathDateController,
-                        labelText: context.l10n.deathDate,
-                        hintText: 'рррр-мм-дд',
-                        readOnly: true,
-                        showErrorText:
-                            state.showErrors && state.deathDateError != null,
-                        errorText:
-                            state.deathDateError.toLocalizedError(context) ??
-                                '',
-                        suffixIcon: const Icon(
-                          Icons.calendar_today_outlined,
-                          size: 18,
-                          color: AppColors.slate500,
-                        ),
-                        onTap: isReadOnly
-                            ? null
-                            : () => _pickDate(
-                                  context: context,
-                                  isBirth: false,
-                                ),
+                  // Full name
+                  TextFieldWidget(
+                    controller: _nameController,
+                    labelText: context.l10n.fullName,
+                    hintText: context.l10n.fullNameHint,
+                    readOnly: isReadOnly,
+                    showErrorText: state.showErrors && state.nameError != null,
+                    errorText: state.nameError.toLocalizedError(context) ?? '',
+                    onChanged: (val) => context
+                        .read<DigitizeBloc>()
+                        .add(DigitizeEvent.fullNameChanged(val)),
+                  ),
+                  const SizedBox(height: 18),
+
+                  // 1. Region selection
+                  _AdminDropdown<Region>(
+                    label: context.l10n.region,
+                    hint: context.l10n.selectRegion,
+                    value: state.selectedRegion,
+                    items: state.regions,
+                    isEnabled: !isReadOnly,
+                    itemLabel: (r) => r.name,
+                    onChanged: (r) => context
+                        .read<DigitizeBloc>()
+                        .add(DigitizeEvent.regionChanged(r)),
+                  ),
+                  const SizedBox(height: 18),
+
+                  // 2. District selection
+                  _AdminDropdown<District>(
+                    label: context.l10n.district,
+                    hint: context.l10n.selectDistrict,
+                    value: state.selectedDistrict,
+                    items: state.districts,
+                    isEnabled: !isReadOnly && state.selectedRegion != null,
+                    itemLabel: (d) => d.name,
+                    onChanged: (d) => context
+                        .read<DigitizeBloc>()
+                        .add(DigitizeEvent.districtChanged(d)),
+                  ),
+                  const SizedBox(height: 18),
+
+                  // 3. Settlement selection
+                  _AdminDropdown<Settlement>(
+                    label: context.l10n.settlement,
+                    hint: context.l10n.selectSettlement,
+                    value: state.selectedSettlement,
+                    items: state.settlements,
+                    isEnabled: !isReadOnly && state.selectedDistrict != null,
+                    itemLabel: (s) => '${s.type} ${s.name}',
+                    onChanged: (s) => context
+                        .read<DigitizeBloc>()
+                        .add(DigitizeEvent.settlementChanged(s)),
+                  ),
+                  const SizedBox(height: 18),
+
+                  // 4. Cemetery selection
+                  _AdminDropdown<Cemetery>(
+                    label: context.l10n.cemeteryLabel,
+                    hint: state.cemeteries.isEmpty &&
+                            state.selectedSettlement != null
+                        ? context.l10n.noCemeteriesInSettlement
+                        : context.l10n.selectCemetery,
+                    value: state.selectedCemetery,
+                    items: state.cemeteries,
+                    isEnabled: !isReadOnly && state.selectedSettlement != null,
+                    hasError: state.showErrors && state.cemeteryError != null,
+                    itemLabel: (c) => c.name,
+                    onChanged: (c) => context
+                        .read<DigitizeBloc>()
+                        .add(DigitizeEvent.cemeterySelected(c)),
+                  ),
+                  if (state.showErrors && state.cemeteryError != null) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      state.cemeteryError.toLocalizedError(context) ?? '',
+                      style: const TextStyle(
+                        color: AppColors.red,
+                        fontSize: 12,
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(height: 18),
-
-                // Biography / Epitaph
-                TextFieldWidget(
-                  controller: _bioController,
-                  labelText: context.l10n.bio,
-                  hintText: context.l10n.bioHint,
-                  readOnly: isReadOnly,
-                  maxLines: 4,
-                  textInputAction: TextInputAction.done,
-                  onChanged: (val) => context
-                      .read<DigitizeBloc>()
-                      .add(DigitizeEvent.bioChanged(val)),
-                ),
-                const SizedBox(height: 18),
-
-                // GPS block
-                Text(
-                  context.l10n.gpsLocationLabel,
-                  style: const TextStyle(
-                    color: AppColors.slate400,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: TextFieldWidget(
-                        controller: _gpsController,
-                        labelText: '',
-                        hintText: context.l10n.coordinatesNotDetermined,
-                        readOnly: true,
-                        showErrorText:
-                            state.showErrors && state.gpsError != null,
-                        errorText:
-                            state.gpsError.toLocalizedError(context) ?? '',
-                        prefixIcon: const Icon(
-                          Icons.gps_fixed,
-                          size: 18,
-                          color: AppColors.slate500,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
+                  if (state.selectedSettlement != null) ...[
+                    const SizedBox(height: 10),
                     AppButton(
                       onPressed: isReadOnly
                           ? null
-                          : () => context.read<DigitizeBloc>().add(
-                                const DigitizeEvent.getCurrentGps(),
-                              ),
-                      text: context.l10n.determine,
-                      icon: Icons.my_location,
-                      isLoading: state.gpsStatus == GpsStatus.loading,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 14,
-                        horizontal: 24,
-                      ),
-                      width: null,
+                          : () async {
+                              await AddCemeteryDialog.show(
+                                context,
+                                context.read<DigitizeBloc>(),
+                              );
+                            },
+                      text: context.l10n.addCemetery,
+                      icon: Icons.add,
+                      backgroundColor: AppColors.slate700,
+                      textColor: AppColors.slate50,
                     ),
                   ],
-                ),
-                const SizedBox(height: 32),
+                  const SizedBox(height: 18),
 
-                // Error feedback or status messages
-                SendingTextWidget(
-                  status: state.status,
-                  errorText: state.errorMessage == 'fillAllRequiredFields'
-                      ? context.l10n.fillAllRequiredFields
-                      : state.errorMessage.toLocalizedError(context) ??
-                          state.errorMessage,
-                ),
-                const SizedBox(height: 8),
-
-                // Submit button
-                AppButton(
-                  onPressed: isReadOnly
-                      ? null
-                      : () => context.read<DigitizeBloc>().add(
-                            const DigitizeEvent.submitGrave(),
+                  // Dates row
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          controller: _birthDateController,
+                          labelText: context.l10n.birthDate,
+                          hintText: 'рррр-мм-дд',
+                          readOnly: true,
+                          showErrorText:
+                              state.showErrors && state.birthDateError != null,
+                          errorText:
+                              state.birthDateError.toLocalizedError(context) ??
+                                  '',
+                          suffixIcon: const Icon(
+                            Icons.calendar_today_outlined,
+                            size: 18,
+                            color: AppColors.slate500,
                           ),
-                  text: context.l10n.addGrave,
-                  isLoading: state.status == LoadingStatus.loading,
-                ),
-                const SizedBox(height: 40),
-              ],
-            ),
-          );
-        },
+                          onTap: isReadOnly
+                              ? null
+                              : () => _pickDate(
+                                    context: context,
+                                    isBirth: true,
+                                  ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: TextFieldWidget(
+                          controller: _deathDateController,
+                          labelText: context.l10n.deathDate,
+                          hintText: 'рррр-мм-дд',
+                          readOnly: true,
+                          showErrorText:
+                              state.showErrors && state.deathDateError != null,
+                          errorText:
+                              state.deathDateError.toLocalizedError(context) ??
+                                  '',
+                          suffixIcon: const Icon(
+                            Icons.calendar_today_outlined,
+                            size: 18,
+                            color: AppColors.slate500,
+                          ),
+                          onTap: isReadOnly
+                              ? null
+                              : () => _pickDate(
+                                    context: context,
+                                    isBirth: false,
+                                  ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+
+                  // Biography / Epitaph
+                  TextFieldWidget(
+                    controller: _bioController,
+                    labelText: context.l10n.bio,
+                    hintText: context.l10n.bioHint,
+                    readOnly: isReadOnly,
+                    maxLines: 4,
+                    textInputAction: TextInputAction.done,
+                    onChanged: (val) => context
+                        .read<DigitizeBloc>()
+                        .add(DigitizeEvent.bioChanged(val)),
+                  ),
+                  const SizedBox(height: 18),
+
+                  // GPS block
+                  Text(
+                    context.l10n.gpsLocationLabel,
+                    style: const TextStyle(
+                      color: AppColors.slate400,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          controller: _gpsController,
+                          labelText: '',
+                          hintText: context.l10n.coordinatesNotDetermined,
+                          readOnly: true,
+                          showErrorText:
+                              state.showErrors && state.gpsError != null,
+                          errorText:
+                              state.gpsError.toLocalizedError(context) ?? '',
+                          prefixIcon: const Icon(
+                            Icons.gps_fixed,
+                            size: 18,
+                            color: AppColors.slate500,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      AppButton(
+                        onPressed: isReadOnly
+                            ? null
+                            : () => context.read<DigitizeBloc>().add(
+                                  const DigitizeEvent.getCurrentGps(),
+                                ),
+                        text: context.l10n.determine,
+                        icon: Icons.my_location,
+                        isLoading: state.gpsStatus == GpsStatus.loading,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                          horizontal: 24,
+                        ),
+                        width: null,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Error feedback or status messages
+                  SendingTextWidget(
+                    status: state.status,
+                    errorText: state.errorMessage == 'fillAllRequiredFields'
+                        ? context.l10n.fillAllRequiredFields
+                        : state.errorMessage.toLocalizedError(context) ??
+                            state.errorMessage,
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Submit button
+                  AppButton(
+                    onPressed: isReadOnly
+                        ? null
+                        : () => context.read<DigitizeBloc>().add(
+                              const DigitizeEvent.submitGrave(),
+                            ),
+                    text: context.l10n.addGrave,
+                    isLoading: state.status == LoadingStatus.loading,
+                  ),
+                  const SizedBox(height: 40),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -62,6 +62,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult Function(_CemeterySelected value)? cemeterySelected,
     TResult Function(_GetCurrentGps value)? getCurrentGps,
     TResult Function(_SubmitGrave value)? submitGrave,
+    TResult Function(_RecognizeTextFromImage value)? recognizeTextFromImage,
     TResult Function(_ResetForm value)? resetForm,
     required TResult orElse(),
   }) {
@@ -91,6 +92,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return getCurrentGps(_that);
       case _SubmitGrave() when submitGrave != null:
         return submitGrave(_that);
+      case _RecognizeTextFromImage() when recognizeTextFromImage != null:
+        return recognizeTextFromImage(_that);
       case _ResetForm() when resetForm != null:
         return resetForm(_that);
       case _:
@@ -125,6 +128,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
     required TResult Function(_CemeterySelected value) cemeterySelected,
     required TResult Function(_GetCurrentGps value) getCurrentGps,
     required TResult Function(_SubmitGrave value) submitGrave,
+    required TResult Function(_RecognizeTextFromImage value)
+        recognizeTextFromImage,
     required TResult Function(_ResetForm value) resetForm,
   }) {
     final _that = this;
@@ -153,6 +158,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return getCurrentGps(_that);
       case _SubmitGrave():
         return submitGrave(_that);
+      case _RecognizeTextFromImage():
+        return recognizeTextFromImage(_that);
       case _ResetForm():
         return resetForm(_that);
     }
@@ -184,6 +191,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult? Function(_CemeterySelected value)? cemeterySelected,
     TResult? Function(_GetCurrentGps value)? getCurrentGps,
     TResult? Function(_SubmitGrave value)? submitGrave,
+    TResult? Function(_RecognizeTextFromImage value)? recognizeTextFromImage,
     TResult? Function(_ResetForm value)? resetForm,
   }) {
     final _that = this;
@@ -212,6 +220,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return getCurrentGps(_that);
       case _SubmitGrave() when submitGrave != null:
         return submitGrave(_that);
+      case _RecognizeTextFromImage() when recognizeTextFromImage != null:
+        return recognizeTextFromImage(_that);
       case _ResetForm() when resetForm != null:
         return resetForm(_that);
       case _:
@@ -247,6 +257,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult Function(Cemetery? value)? cemeterySelected,
     TResult Function()? getCurrentGps,
     TResult Function()? submitGrave,
+    TResult Function(String imagePath)? recognizeTextFromImage,
     TResult Function()? resetForm,
     required TResult orElse(),
   }) {
@@ -277,6 +288,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return getCurrentGps();
       case _SubmitGrave() when submitGrave != null:
         return submitGrave();
+      case _RecognizeTextFromImage() when recognizeTextFromImage != null:
+        return recognizeTextFromImage(_that.imagePath);
       case _ResetForm() when resetForm != null:
         return resetForm();
       case _:
@@ -313,6 +326,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     required TResult Function(Cemetery? value) cemeterySelected,
     required TResult Function() getCurrentGps,
     required TResult Function() submitGrave,
+    required TResult Function(String imagePath) recognizeTextFromImage,
     required TResult Function() resetForm,
   }) {
     final _that = this;
@@ -342,6 +356,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return getCurrentGps();
       case _SubmitGrave():
         return submitGrave();
+      case _RecognizeTextFromImage():
+        return recognizeTextFromImage(_that.imagePath);
       case _ResetForm():
         return resetForm();
     }
@@ -375,6 +391,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult? Function(Cemetery? value)? cemeterySelected,
     TResult? Function()? getCurrentGps,
     TResult? Function()? submitGrave,
+    TResult? Function(String imagePath)? recognizeTextFromImage,
     TResult? Function()? resetForm,
   }) {
     final _that = this;
@@ -404,6 +421,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return getCurrentGps();
       case _SubmitGrave() when submitGrave != null:
         return submitGrave();
+      case _RecognizeTextFromImage() when recognizeTextFromImage != null:
+        return recognizeTextFromImage(_that.imagePath);
       case _ResetForm() when resetForm != null:
         return resetForm();
       case _:
@@ -1104,6 +1123,72 @@ class _SubmitGrave implements DigitizeEvent {
 
 /// @nodoc
 
+class _RecognizeTextFromImage implements DigitizeEvent {
+  const _RecognizeTextFromImage(this.imagePath);
+
+  final String imagePath;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RecognizeTextFromImageCopyWith<_RecognizeTextFromImage> get copyWith =>
+      __$RecognizeTextFromImageCopyWithImpl<_RecognizeTextFromImage>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _RecognizeTextFromImage &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, imagePath);
+
+  @override
+  String toString() {
+    return 'DigitizeEvent.recognizeTextFromImage(imagePath: $imagePath)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$RecognizeTextFromImageCopyWith<$Res>
+    implements $DigitizeEventCopyWith<$Res> {
+  factory _$RecognizeTextFromImageCopyWith(_RecognizeTextFromImage value,
+          $Res Function(_RecognizeTextFromImage) _then) =
+      __$RecognizeTextFromImageCopyWithImpl;
+  @useResult
+  $Res call({String imagePath});
+}
+
+/// @nodoc
+class __$RecognizeTextFromImageCopyWithImpl<$Res>
+    implements _$RecognizeTextFromImageCopyWith<$Res> {
+  __$RecognizeTextFromImageCopyWithImpl(this._self, this._then);
+
+  final _RecognizeTextFromImage _self;
+  final $Res Function(_RecognizeTextFromImage) _then;
+
+  /// Create a copy of DigitizeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? imagePath = null,
+  }) {
+    return _then(_RecognizeTextFromImage(
+      null == imagePath
+          ? _self.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
 class _ResetForm implements DigitizeEvent {
   const _ResetForm();
 
@@ -1135,6 +1220,7 @@ mixin _$DigitizeState {
   District? get selectedDistrict;
   Settlement? get selectedSettlement;
   GpsStatus get gpsStatus;
+  OcrStatus get ocrStatus;
   String get fullName;
   String get birthDate;
   String get deathDate;
@@ -1178,6 +1264,8 @@ mixin _$DigitizeState {
                 other.selectedSettlement == selectedSettlement) &&
             (identical(other.gpsStatus, gpsStatus) ||
                 other.gpsStatus == gpsStatus) &&
+            (identical(other.ocrStatus, ocrStatus) ||
+                other.ocrStatus == ocrStatus) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.birthDate, birthDate) ||
@@ -1213,6 +1301,7 @@ mixin _$DigitizeState {
         selectedDistrict,
         selectedSettlement,
         gpsStatus,
+        ocrStatus,
         fullName,
         birthDate,
         deathDate,
@@ -1227,7 +1316,7 @@ mixin _$DigitizeState {
 
   @override
   String toString() {
-    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
+    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, ocrStatus: $ocrStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
   }
 }
 
@@ -1249,6 +1338,7 @@ abstract mixin class $DigitizeStateCopyWith<$Res> {
       District? selectedDistrict,
       Settlement? selectedSettlement,
       GpsStatus gpsStatus,
+      OcrStatus ocrStatus,
       String fullName,
       String birthDate,
       String deathDate,
@@ -1285,6 +1375,7 @@ class _$DigitizeStateCopyWithImpl<$Res>
     Object? selectedDistrict = freezed,
     Object? selectedSettlement = freezed,
     Object? gpsStatus = null,
+    Object? ocrStatus = null,
     Object? fullName = null,
     Object? birthDate = null,
     Object? deathDate = null,
@@ -1341,6 +1432,10 @@ class _$DigitizeStateCopyWithImpl<$Res>
           ? _self.gpsStatus
           : gpsStatus // ignore: cast_nullable_to_non_nullable
               as GpsStatus,
+      ocrStatus: null == ocrStatus
+          ? _self.ocrStatus
+          : ocrStatus // ignore: cast_nullable_to_non_nullable
+              as OcrStatus,
       fullName: null == fullName
           ? _self.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -1488,6 +1583,7 @@ extension DigitizeStatePatterns on DigitizeState {
             District? selectedDistrict,
             Settlement? selectedSettlement,
             GpsStatus gpsStatus,
+            OcrStatus ocrStatus,
             String fullName,
             String birthDate,
             String deathDate,
@@ -1516,6 +1612,7 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.selectedDistrict,
             _that.selectedSettlement,
             _that.gpsStatus,
+            _that.ocrStatus,
             _that.fullName,
             _that.birthDate,
             _that.deathDate,
@@ -1558,6 +1655,7 @@ extension DigitizeStatePatterns on DigitizeState {
             District? selectedDistrict,
             Settlement? selectedSettlement,
             GpsStatus gpsStatus,
+            OcrStatus ocrStatus,
             String fullName,
             String birthDate,
             String deathDate,
@@ -1585,6 +1683,7 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.selectedDistrict,
             _that.selectedSettlement,
             _that.gpsStatus,
+            _that.ocrStatus,
             _that.fullName,
             _that.birthDate,
             _that.deathDate,
@@ -1624,6 +1723,7 @@ extension DigitizeStatePatterns on DigitizeState {
             District? selectedDistrict,
             Settlement? selectedSettlement,
             GpsStatus gpsStatus,
+            OcrStatus ocrStatus,
             String fullName,
             String birthDate,
             String deathDate,
@@ -1651,6 +1751,7 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.selectedDistrict,
             _that.selectedSettlement,
             _that.gpsStatus,
+            _that.ocrStatus,
             _that.fullName,
             _that.birthDate,
             _that.deathDate,
@@ -1682,6 +1783,7 @@ class _DigitizeState extends DigitizeState {
       this.selectedDistrict,
       this.selectedSettlement,
       this.gpsStatus = GpsStatus.idle,
+      this.ocrStatus = OcrStatus.idle,
       this.fullName = '',
       this.birthDate = '',
       this.deathDate = '',
@@ -1754,6 +1856,9 @@ class _DigitizeState extends DigitizeState {
   final GpsStatus gpsStatus;
   @override
   @JsonKey()
+  final OcrStatus ocrStatus;
+  @override
+  @JsonKey()
   final String fullName;
   @override
   @JsonKey()
@@ -1811,6 +1916,8 @@ class _DigitizeState extends DigitizeState {
                 other.selectedSettlement == selectedSettlement) &&
             (identical(other.gpsStatus, gpsStatus) ||
                 other.gpsStatus == gpsStatus) &&
+            (identical(other.ocrStatus, ocrStatus) ||
+                other.ocrStatus == ocrStatus) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.birthDate, birthDate) ||
@@ -1846,6 +1953,7 @@ class _DigitizeState extends DigitizeState {
         selectedDistrict,
         selectedSettlement,
         gpsStatus,
+        ocrStatus,
         fullName,
         birthDate,
         deathDate,
@@ -1860,7 +1968,7 @@ class _DigitizeState extends DigitizeState {
 
   @override
   String toString() {
-    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
+    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, ocrStatus: $ocrStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
   }
 }
 
@@ -1884,6 +1992,7 @@ abstract mixin class _$DigitizeStateCopyWith<$Res>
       District? selectedDistrict,
       Settlement? selectedSettlement,
       GpsStatus gpsStatus,
+      OcrStatus ocrStatus,
       String fullName,
       String birthDate,
       String deathDate,
@@ -1920,6 +2029,7 @@ class __$DigitizeStateCopyWithImpl<$Res>
     Object? selectedDistrict = freezed,
     Object? selectedSettlement = freezed,
     Object? gpsStatus = null,
+    Object? ocrStatus = null,
     Object? fullName = null,
     Object? birthDate = null,
     Object? deathDate = null,
@@ -1976,6 +2086,10 @@ class __$DigitizeStateCopyWithImpl<$Res>
           ? _self.gpsStatus
           : gpsStatus // ignore: cast_nullable_to_non_nullable
               as GpsStatus,
+      ocrStatus: null == ocrStatus
+          ? _self.ocrStatus
+          : ocrStatus // ignore: cast_nullable_to_non_nullable
+              as OcrStatus,
       fullName: null == fullName
           ? _self.fullName
           : fullName // ignore: cast_nullable_to_non_nullable

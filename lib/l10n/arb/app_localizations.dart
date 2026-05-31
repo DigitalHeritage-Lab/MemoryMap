@@ -554,6 +554,12 @@ abstract class AppLocalizations {
   /// **'In development...'**
   String get inDevelopment;
 
+  /// No description provided for @scanTextOcr.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan text (OCR)'**
+  String get scanTextOcr;
+
   /// No description provided for @yearsOld.
   ///
   /// In en, this message translates to:

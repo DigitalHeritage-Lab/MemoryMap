@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart';
+import 'package:memory_map/components/digitize/ocr/ocr_service.dart';
 import 'package:memory_map/shared/shared.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -37,6 +38,16 @@ class MockGeolocatorPlatform extends GeolocatorPlatform
           speedAccuracy: 0,
         );
   }
+}
+
+class MockOcrService implements OcrService {
+  @override
+  Future<OcrResult> processImage(String imagePath) async {
+    return OcrResult();
+  }
+
+  @override
+  Future<void> dispose() async {}
 }
 
 class MockCemeteryRepository implements CemeteryRepository {
@@ -117,10 +128,12 @@ void main() {
   late MockCemeteryRepository mockCemeteryRepo;
   late MockGraveRepository mockGraveRepo;
   late MockGeolocatorPlatform mockGeolocator;
+  late MockOcrService mockOcrService;
 
   setUp(() {
     mockCemeteryRepo = MockCemeteryRepository();
     mockGraveRepo = MockGraveRepository();
+    mockOcrService = MockOcrService();
     mockGeolocator = MockGeolocatorPlatform();
     GeolocatorPlatform.instance = mockGeolocator;
   });
@@ -269,7 +282,7 @@ void main() {
 
   group('DigitizeBloc Submission Tests', () {
     test('onSubmitGrave emits error when form is invalid', () async {
-      final bloc = DigitizeBloc(mockCemeteryRepo, mockGraveRepo)
+      final bloc = DigitizeBloc(mockCemeteryRepo, mockGraveRepo, mockOcrService)
         ..add(const DigitizeEvent.submitGrave());
 
       await Future<void>.delayed(const Duration(milliseconds: 100));
@@ -291,7 +304,7 @@ void main() {
         photoUrl: '',
       );
 
-      final bloc = DigitizeBloc(mockCemeteryRepo, mockGraveRepo)
+      final bloc = DigitizeBloc(mockCemeteryRepo, mockGraveRepo, mockOcrService)
         ..add(const DigitizeEvent.fullNameChanged('Тарас Шевченко'))
         ..add(const DigitizeEvent.birthDateChanged('1990-05-05'))
         ..add(const DigitizeEvent.deathDateChanged('2020-05-05'))

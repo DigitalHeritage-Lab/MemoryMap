@@ -37,5 +37,8 @@ sealed class DigitizeEvent with _$DigitizeEvent {
   ) = _CemeterySelected;
   const factory DigitizeEvent.getCurrentGps() = _GetCurrentGps;
   const factory DigitizeEvent.submitGrave() = _SubmitGrave;
+  const factory DigitizeEvent.recognizeTextFromImage(
+    String imagePath,
+  ) = _RecognizeTextFromImage;
   const factory DigitizeEvent.resetForm() = _ResetForm;
 }

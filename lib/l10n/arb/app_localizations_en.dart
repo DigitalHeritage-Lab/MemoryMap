@@ -252,6 +252,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inDevelopment => 'In development...';
 
   @override
+  String get scanTextOcr => 'Scan text (OCR)';
+
+  @override
   String yearsOld(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
