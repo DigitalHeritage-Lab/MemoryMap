@@ -9,10 +9,12 @@ class OcrResult {
     this.fullName,
     this.birthDate,
     this.deathDate,
+    this.photoUrl,
   });
   final String? fullName;
   final String? birthDate;
   final String? deathDate;
+  final String? photoUrl;
 }
 
 @lazySingleton
@@ -81,11 +83,14 @@ class OcrService {
 
       if (status == 'complete' && statusData['result_data'] != null) {
         final data = statusData['result_data'] as Map<String, dynamic>;
-        log('ASYNC OCR RESULT: \n$data');
+        final publicUrl =
+            supabase.storage.from('grave_photos').getPublicUrl(fileName);
+
         return OcrResult(
           fullName: data['fullName'] as String?,
           birthDate: data['birthDate'] as String?,
           deathDate: data['deathDate'] as String?,
+          photoUrl: publicUrl,
         );
       }
     }

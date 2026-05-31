@@ -1225,6 +1225,8 @@ mixin _$DigitizeState {
   String get birthDate;
   String get deathDate;
   String get bio;
+  String? get photoPath;
+  String? get photoUrl;
   Cemetery? get selectedCemetery;
   double? get latitude;
   double? get longitude;
@@ -1273,6 +1275,10 @@ mixin _$DigitizeState {
             (identical(other.deathDate, deathDate) ||
                 other.deathDate == deathDate) &&
             (identical(other.bio, bio) || other.bio == bio) &&
+            (identical(other.photoPath, photoPath) ||
+                other.photoPath == photoPath) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl) &&
             (identical(other.selectedCemetery, selectedCemetery) ||
                 other.selectedCemetery == selectedCemetery) &&
             (identical(other.latitude, latitude) ||
@@ -1306,6 +1312,8 @@ mixin _$DigitizeState {
         birthDate,
         deathDate,
         bio,
+        photoPath,
+        photoUrl,
         selectedCemetery,
         latitude,
         longitude,
@@ -1316,7 +1324,7 @@ mixin _$DigitizeState {
 
   @override
   String toString() {
-    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, ocrStatus: $ocrStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
+    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, ocrStatus: $ocrStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, photoPath: $photoPath, photoUrl: $photoUrl, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
   }
 }
 
@@ -1343,6 +1351,8 @@ abstract mixin class $DigitizeStateCopyWith<$Res> {
       String birthDate,
       String deathDate,
       String bio,
+      String? photoPath,
+      String? photoUrl,
       Cemetery? selectedCemetery,
       double? latitude,
       double? longitude,
@@ -1380,6 +1390,8 @@ class _$DigitizeStateCopyWithImpl<$Res>
     Object? birthDate = null,
     Object? deathDate = null,
     Object? bio = null,
+    Object? photoPath = freezed,
+    Object? photoUrl = freezed,
     Object? selectedCemetery = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
@@ -1452,6 +1464,14 @@ class _$DigitizeStateCopyWithImpl<$Res>
           ? _self.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      photoPath: freezed == photoPath
+          ? _self.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photoUrl: freezed == photoUrl
+          ? _self.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedCemetery: freezed == selectedCemetery
           ? _self.selectedCemetery
           : selectedCemetery // ignore: cast_nullable_to_non_nullable
@@ -1588,6 +1608,8 @@ extension DigitizeStatePatterns on DigitizeState {
             String birthDate,
             String deathDate,
             String bio,
+            String? photoPath,
+            String? photoUrl,
             Cemetery? selectedCemetery,
             double? latitude,
             double? longitude,
@@ -1617,6 +1639,8 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.birthDate,
             _that.deathDate,
             _that.bio,
+            _that.photoPath,
+            _that.photoUrl,
             _that.selectedCemetery,
             _that.latitude,
             _that.longitude,
@@ -1660,6 +1684,8 @@ extension DigitizeStatePatterns on DigitizeState {
             String birthDate,
             String deathDate,
             String bio,
+            String? photoPath,
+            String? photoUrl,
             Cemetery? selectedCemetery,
             double? latitude,
             double? longitude,
@@ -1688,6 +1714,8 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.birthDate,
             _that.deathDate,
             _that.bio,
+            _that.photoPath,
+            _that.photoUrl,
             _that.selectedCemetery,
             _that.latitude,
             _that.longitude,
@@ -1728,6 +1756,8 @@ extension DigitizeStatePatterns on DigitizeState {
             String birthDate,
             String deathDate,
             String bio,
+            String? photoPath,
+            String? photoUrl,
             Cemetery? selectedCemetery,
             double? latitude,
             double? longitude,
@@ -1756,6 +1786,8 @@ extension DigitizeStatePatterns on DigitizeState {
             _that.birthDate,
             _that.deathDate,
             _that.bio,
+            _that.photoPath,
+            _that.photoUrl,
             _that.selectedCemetery,
             _that.latitude,
             _that.longitude,
@@ -1788,6 +1820,8 @@ class _DigitizeState extends DigitizeState {
       this.birthDate = '',
       this.deathDate = '',
       this.bio = '',
+      this.photoPath,
+      this.photoUrl,
       this.selectedCemetery,
       this.latitude,
       this.longitude,
@@ -1870,6 +1904,10 @@ class _DigitizeState extends DigitizeState {
   @JsonKey()
   final String bio;
   @override
+  final String? photoPath;
+  @override
+  final String? photoUrl;
+  @override
   final Cemetery? selectedCemetery;
   @override
   final double? latitude;
@@ -1925,6 +1963,10 @@ class _DigitizeState extends DigitizeState {
             (identical(other.deathDate, deathDate) ||
                 other.deathDate == deathDate) &&
             (identical(other.bio, bio) || other.bio == bio) &&
+            (identical(other.photoPath, photoPath) ||
+                other.photoPath == photoPath) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl) &&
             (identical(other.selectedCemetery, selectedCemetery) ||
                 other.selectedCemetery == selectedCemetery) &&
             (identical(other.latitude, latitude) ||
@@ -1958,6 +2000,8 @@ class _DigitizeState extends DigitizeState {
         birthDate,
         deathDate,
         bio,
+        photoPath,
+        photoUrl,
         selectedCemetery,
         latitude,
         longitude,
@@ -1968,7 +2012,7 @@ class _DigitizeState extends DigitizeState {
 
   @override
   String toString() {
-    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, ocrStatus: $ocrStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
+    return 'DigitizeState(status: $status, adminDataStatus: $adminDataStatus, cemeteryCreationStatus: $cemeteryCreationStatus, regions: $regions, districts: $districts, settlements: $settlements, cemeteries: $cemeteries, selectedRegion: $selectedRegion, selectedDistrict: $selectedDistrict, selectedSettlement: $selectedSettlement, gpsStatus: $gpsStatus, ocrStatus: $ocrStatus, fullName: $fullName, birthDate: $birthDate, deathDate: $deathDate, bio: $bio, photoPath: $photoPath, photoUrl: $photoUrl, selectedCemetery: $selectedCemetery, latitude: $latitude, longitude: $longitude, showErrors: $showErrors, errorMessage: $errorMessage, cemeteryErrorMessage: $cemeteryErrorMessage)';
   }
 }
 
@@ -1997,6 +2041,8 @@ abstract mixin class _$DigitizeStateCopyWith<$Res>
       String birthDate,
       String deathDate,
       String bio,
+      String? photoPath,
+      String? photoUrl,
       Cemetery? selectedCemetery,
       double? latitude,
       double? longitude,
@@ -2034,6 +2080,8 @@ class __$DigitizeStateCopyWithImpl<$Res>
     Object? birthDate = null,
     Object? deathDate = null,
     Object? bio = null,
+    Object? photoPath = freezed,
+    Object? photoUrl = freezed,
     Object? selectedCemetery = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
@@ -2106,6 +2154,14 @@ class __$DigitizeStateCopyWithImpl<$Res>
           ? _self.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      photoPath: freezed == photoPath
+          ? _self.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photoUrl: freezed == photoUrl
+          ? _self.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedCemetery: freezed == selectedCemetery
           ? _self.selectedCemetery
           : selectedCemetery // ignore: cast_nullable_to_non_nullable
