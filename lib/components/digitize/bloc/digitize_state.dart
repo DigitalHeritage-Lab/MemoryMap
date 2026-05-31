@@ -1,6 +1,7 @@
 part of 'digitize_bloc.dart';
 
 enum GpsStatus { idle, loading, success, error }
+
 enum OcrStatus { idle, loading, success, error }
 
 @freezed
