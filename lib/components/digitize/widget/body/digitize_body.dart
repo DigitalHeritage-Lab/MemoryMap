@@ -130,17 +130,30 @@ class _DigitizeBodyState extends State<DigitizeBody> {
                   onPressed: isReadOnly
                       ? null
                       : () async {
+                          debugPrint('Opening camera...');
                           final picker = ImagePicker();
-                          final image = await picker.pickImage(
-                            source: ImageSource.camera,
+                          final imageEither = await eitherFutureHelper(() {
+                            return picker.pickImage(
+                              source: ImageSource.camera,
+                              imageQuality: 70,
+                              maxWidth: 1500,
+                              maxHeight: 1500,
+                            );
+                          });
+
+                          imageEither.fold(
+                            (failure) => debugPrint('Camera error: $failure'),
+                            (image) {
+                              debugPrint('Camera returned: ${image?.path}');
+                              if (image != null && context.mounted) {
+                                context.read<DigitizeBloc>().add(
+                                      DigitizeEvent.recognizeTextFromImage(
+                                        image.path,
+                                      ),
+                                    );
+                              }
+                            },
                           );
-                          if (image != null && context.mounted) {
-                            context.read<DigitizeBloc>().add(
-                                  DigitizeEvent.recognizeTextFromImage(
-                                    image.path,
-                                  ),
-                                );
-                          }
                         },
                   text: context.l10n.scanTextOcr,
                   icon: Icons.document_scanner,
