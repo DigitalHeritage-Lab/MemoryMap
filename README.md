@@ -42,6 +42,7 @@
 ## 🌟 Основні можливості
 
 - 📍 **Інтерактивна карта некрополів** — OpenStreetMap з темним дизайном CartoDB, фільтрація за відстанню
+- 🤖 **AI-Оцифрування (Gemini OCR)** — інтелектуальне розпізнавання тексту (ПІБ, дати народження/смерті) з фотографій надгробків за допомогою асинхронних Supabase Edge Functions та Google Gemini API
 - 📱 **Оцифрування «у полі»** — покроковий майстер з GPS, адміністративним вибором (Область → Район → Громада) та фотофіксацією
 - 🔍 **Розумний пошук** — повнотекстовий пошук на стороні БД (Supabase RPC), без локальної фільтрації
 - ♾️ **Infinite Pagination** — безкінечний скролінг через `ScrollPaginationMixin`, Skeleton-ефекти
@@ -87,7 +88,7 @@
 | **UI** | [Flutter 3.24+](https://flutter.dev) · `flutter_screenutil` |
 | **Стан** | [flutter_bloc](https://bloclibrary.dev/) · `freezed` |
 | **Навігація** | [go_router](https://pub.dev/packages/go_router) |
-| **Бекенд** | [Supabase](https://supabase.com) (PostgreSQL + PostGIS, тільки RPC) |
+| **Бекенд** | [Supabase](https://supabase.com) (PostgreSQL + PostGIS, Edge Functions, RPC) · Google Gemini API |
 | **Карти** | [flutter_map](https://pub.dev/packages/flutter_map) · `latlong2` |
 | **DI** | [injectable](https://pub.dev/packages/injectable) · `get_it` |
 | **Локалізація** | ARB · `flutter_localizations` · `intl` |
