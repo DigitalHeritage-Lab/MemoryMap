@@ -6,15 +6,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-function arrayBufferToBase64(buffer: ArrayBuffer) {
-  let binary = '';
-  const bytes = new Uint8Array(buffer);
-  const len = bytes.byteLength;
-  for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
-}
+import { Buffer } from "node:buffer"
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -50,7 +42,7 @@ Deno.serve(async (req) => {
           if (downloadError) throw downloadError
 
           const arrayBuffer = await fileData.arrayBuffer()
-          const base64Data = arrayBufferToBase64(arrayBuffer)
+          const base64Data = Buffer.from(arrayBuffer).toString('base64')
 
           const genAI = new GoogleGenerativeAI(Deno.env.get('GEMINI_API_KEY') ?? '')
           const model = genAI.getGenerativeModel({ 
