@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 import 'package:memory_map/bootstrap.dart';
 import 'package:memory_map/l10n/arb/app_localizations.dart';
 import 'package:memory_map/shared/shared.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return BlocProvider(
-          create: (context) => getIt<AppVersionCubit>(),
+          create: (context) => GetIt.I.get<AppVersionCubit>(),
           child: MaterialApp.router(
             title: 'MemoryMap',
             debugShowCheckedModeBanner: false,

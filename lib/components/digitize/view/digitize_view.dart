@@ -5,7 +5,8 @@ import 'package:memory_map/l10n/l10n.dart';
 import 'package:memory_map/shared/shared.dart';
 
 class DigitizeScreen extends StatelessWidget {
-  const DigitizeScreen({super.key});
+  const DigitizeScreen({super.key, this.initialImagePath});
+  final String? initialImagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,9 @@ class DigitizeScreen extends StatelessWidget {
         backgroundColor: AppColors.slate900,
         elevation: 0,
       ),
-      body: const DigitizeBlocProvider(
-        child: DigitizeBody(),
+      body: DigitizeBlocProvider(
+        initialImagePath: initialImagePath,
+        child: const DigitizeBody(),
       ),
     );
   }

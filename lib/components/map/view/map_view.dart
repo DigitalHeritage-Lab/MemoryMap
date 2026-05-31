@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:memory_map/components/map/bloc/map_bloc.dart';
 import 'package:memory_map/components/map/widget/body/map_body.dart';
 import 'package:memory_map/l10n/l10n.dart';
@@ -24,7 +25,7 @@ class MapScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) =>
-            getIt<MapBloc>()..add(const MapEvent.loadMarkers()),
+            GetIt.I.get<MapBloc>()..add(const MapEvent.loadMarkers()),
         child: const MapBody(),
       ),
     );

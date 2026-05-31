@@ -45,7 +45,10 @@ final appRouter = GoRouter(
         ),
         GoRoute(
           path: '/digitize',
-          builder: (context, state) => const DigitizeScreen(),
+          builder: (context, state) {
+            final imagePath = state.extra as String?;
+            return DigitizeScreen(initialImagePath: imagePath);
+          },
         ),
         GoRoute(
           path: '/profile',

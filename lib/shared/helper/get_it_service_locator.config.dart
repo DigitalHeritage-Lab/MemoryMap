@@ -22,6 +22,7 @@ import 'package:memory_map/components/graves/bloc/graves_bloc.dart' as _i841;
 import 'package:memory_map/components/map/bloc/map_bloc.dart' as _i597;
 import 'package:memory_map/shared/bloc/app_version/app_version_cubit.dart'
     as _i499;
+import 'package:memory_map/shared/bloc/camera/camera_cubit.dart' as _i269;
 import 'package:memory_map/shared/repositories/app_info_repository.dart'
     as _i225;
 import 'package:memory_map/shared/repositories/cemetery_repository.dart'
@@ -46,6 +47,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i225.AppInfoRepository>(() => _i225.AppInfoRepository());
+    gh.factory<_i269.CameraCubit>(() => _i269.CameraCubit());
     gh.lazySingleton<_i1004.OcrService>(() => _i1004.OcrService());
     gh.lazySingleton<_i175.GraveRepository>(
         () => _i299.SupabaseGraveRepository(gh<_i454.SupabaseClient>()));
