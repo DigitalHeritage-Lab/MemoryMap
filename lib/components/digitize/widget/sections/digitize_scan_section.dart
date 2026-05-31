@@ -18,33 +18,10 @@ class DigitizeScanSection extends StatelessWidget {
         return AppButton(
           onPressed: isReadOnly
               ? null
-              : () async {
-                  final imageEither = await CameraHelper.pickImage();
-
-                  imageEither.fold(
-                    (failure) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              failure.message.toLocalizedError(context) ??
-                                  failure.message,
-                            ),
-                            backgroundColor: AppColors.red,
-                          ),
-                        );
-                      }
-                    },
-                    (imagePath) {
-                      if (imagePath != null && context.mounted) {
-                        context.read<DigitizeBloc>().add(
-                              DigitizeEvent.recognizeTextFromImage(
-                                imagePath,
-                              ),
-                            );
-                      }
-                    },
-                  );
+              : () {
+                  context.read<DigitizeBloc>().add(
+                        const DigitizeEvent.pickImageAndRecognize(),
+                      );
                 },
           text: context.l10n.scanTextOcr,
           icon: Icons.document_scanner,

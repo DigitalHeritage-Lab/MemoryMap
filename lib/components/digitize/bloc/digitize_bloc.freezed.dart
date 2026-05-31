@@ -63,6 +63,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult Function(_GetCurrentGps value)? getCurrentGps,
     TResult Function(_SubmitGrave value)? submitGrave,
     TResult Function(_RecognizeTextFromImage value)? recognizeTextFromImage,
+    TResult Function(_PickImageAndRecognize value)? pickImageAndRecognize,
     TResult Function(_ResetForm value)? resetForm,
     required TResult orElse(),
   }) {
@@ -94,6 +95,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return submitGrave(_that);
       case _RecognizeTextFromImage() when recognizeTextFromImage != null:
         return recognizeTextFromImage(_that);
+      case _PickImageAndRecognize() when pickImageAndRecognize != null:
+        return pickImageAndRecognize(_that);
       case _ResetForm() when resetForm != null:
         return resetForm(_that);
       case _:
@@ -130,6 +133,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
     required TResult Function(_SubmitGrave value) submitGrave,
     required TResult Function(_RecognizeTextFromImage value)
         recognizeTextFromImage,
+    required TResult Function(_PickImageAndRecognize value)
+        pickImageAndRecognize,
     required TResult Function(_ResetForm value) resetForm,
   }) {
     final _that = this;
@@ -160,6 +165,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return submitGrave(_that);
       case _RecognizeTextFromImage():
         return recognizeTextFromImage(_that);
+      case _PickImageAndRecognize():
+        return pickImageAndRecognize(_that);
       case _ResetForm():
         return resetForm(_that);
     }
@@ -192,6 +199,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult? Function(_GetCurrentGps value)? getCurrentGps,
     TResult? Function(_SubmitGrave value)? submitGrave,
     TResult? Function(_RecognizeTextFromImage value)? recognizeTextFromImage,
+    TResult? Function(_PickImageAndRecognize value)? pickImageAndRecognize,
     TResult? Function(_ResetForm value)? resetForm,
   }) {
     final _that = this;
@@ -222,6 +230,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return submitGrave(_that);
       case _RecognizeTextFromImage() when recognizeTextFromImage != null:
         return recognizeTextFromImage(_that);
+      case _PickImageAndRecognize() when pickImageAndRecognize != null:
+        return pickImageAndRecognize(_that);
       case _ResetForm() when resetForm != null:
         return resetForm(_that);
       case _:
@@ -258,6 +268,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult Function()? getCurrentGps,
     TResult Function()? submitGrave,
     TResult Function(String imagePath)? recognizeTextFromImage,
+    TResult Function()? pickImageAndRecognize,
     TResult Function()? resetForm,
     required TResult orElse(),
   }) {
@@ -290,6 +301,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return submitGrave();
       case _RecognizeTextFromImage() when recognizeTextFromImage != null:
         return recognizeTextFromImage(_that.imagePath);
+      case _PickImageAndRecognize() when pickImageAndRecognize != null:
+        return pickImageAndRecognize();
       case _ResetForm() when resetForm != null:
         return resetForm();
       case _:
@@ -327,6 +340,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     required TResult Function() getCurrentGps,
     required TResult Function() submitGrave,
     required TResult Function(String imagePath) recognizeTextFromImage,
+    required TResult Function() pickImageAndRecognize,
     required TResult Function() resetForm,
   }) {
     final _that = this;
@@ -358,6 +372,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return submitGrave();
       case _RecognizeTextFromImage():
         return recognizeTextFromImage(_that.imagePath);
+      case _PickImageAndRecognize():
+        return pickImageAndRecognize();
       case _ResetForm():
         return resetForm();
     }
@@ -392,6 +408,7 @@ extension DigitizeEventPatterns on DigitizeEvent {
     TResult? Function()? getCurrentGps,
     TResult? Function()? submitGrave,
     TResult? Function(String imagePath)? recognizeTextFromImage,
+    TResult? Function()? pickImageAndRecognize,
     TResult? Function()? resetForm,
   }) {
     final _that = this;
@@ -423,6 +440,8 @@ extension DigitizeEventPatterns on DigitizeEvent {
         return submitGrave();
       case _RecognizeTextFromImage() when recognizeTextFromImage != null:
         return recognizeTextFromImage(_that.imagePath);
+      case _PickImageAndRecognize() when pickImageAndRecognize != null:
+        return pickImageAndRecognize();
       case _ResetForm() when resetForm != null:
         return resetForm();
       case _:
@@ -1184,6 +1203,26 @@ class __$RecognizeTextFromImageCopyWithImpl<$Res>
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
     ));
+  }
+}
+
+/// @nodoc
+
+class _PickImageAndRecognize implements DigitizeEvent {
+  const _PickImageAndRecognize();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _PickImageAndRecognize);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'DigitizeEvent.pickImageAndRecognize()';
   }
 }
 

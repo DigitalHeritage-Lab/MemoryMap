@@ -40,5 +40,6 @@ sealed class DigitizeEvent with _$DigitizeEvent {
   const factory DigitizeEvent.recognizeTextFromImage(
     String imagePath,
   ) = _RecognizeTextFromImage;
+  const factory DigitizeEvent.pickImageAndRecognize() = _PickImageAndRecognize;
   const factory DigitizeEvent.resetForm() = _ResetForm;
 }

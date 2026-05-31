@@ -29,6 +29,7 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
     on<_CemeterySelected>(_onCemeterySelected);
     on<_GetCurrentGps>(_onGetCurrentGps);
     on<_RecognizeTextFromImage>(_onRecognizeTextFromImage);
+    on<_PickImageAndRecognize>(_onPickImageAndRecognize);
     on<_SubmitGrave>(_onSubmitGrave);
     on<_ResetForm>(_onResetForm);
   }
@@ -348,6 +349,43 @@ class DigitizeBloc extends SafeBloc<DigitizeEvent, DigitizeState> {
           photoPath: null,
         ),
       ),
+    );
+  }
+
+  Future<void> _onPickImageAndRecognize(
+    _PickImageAndRecognize event,
+    Emitter<DigitizeState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        ocrStatus: OcrStatus.loading,
+      ),
+    );
+
+    final imageEither = await CameraHelper.pickImage();
+
+    await imageEither.fold(
+      (failure) async {
+        emit(
+          state.copyWith(
+            ocrStatus: OcrStatus.error,
+            errorMessage: failure.message,
+            showErrors: true,
+          ),
+        );
+      },
+      (imagePath) async {
+        if (imagePath != null) {
+          add(DigitizeEvent.recognizeTextFromImage(imagePath));
+        } else {
+          // User cancelled
+          emit(
+            state.copyWith(
+              ocrStatus: OcrStatus.idle,
+            ),
+          );
+        }
+      },
     );
   }
 
