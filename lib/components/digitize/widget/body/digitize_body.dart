@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart';
 import 'package:memory_map/components/digitize/widget/add_cemetery_dialog.dart';
@@ -79,8 +80,10 @@ class _DigitizeBodyState extends State<DigitizeBody> {
     return BlocListener<DigitizeBloc, DigitizeState>(
       listenWhen: (prev, curr) =>
           prev.status != curr.status ||
+          prev.ocrStatus != curr.ocrStatus ||
           prev.latitude != curr.latitude ||
           prev.longitude != curr.longitude ||
+          prev.fullName != curr.fullName ||
           prev.birthDate != curr.birthDate ||
           prev.deathDate != curr.deathDate,
       listener: (context, state) {
@@ -102,7 +105,10 @@ class _DigitizeBodyState extends State<DigitizeBody> {
           _gpsController.text = '${state.latitude!.toStringAsFixed(6)}, '
               '${state.longitude!.toStringAsFixed(6)}';
         }
-        // Sync date fields from state (needed after resetForm)
+        // Sync fields from state (needed after OCR or resetForm)
+        if (state.fullName != _nameController.text) {
+          _nameController.text = state.fullName;
+        }
         if (state.birthDate != _birthDateController.text) {
           _birthDateController.text = state.birthDate;
         }
@@ -119,6 +125,31 @@ class _DigitizeBodyState extends State<DigitizeBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // OCR Button
+                AppButton(
+                  onPressed: isReadOnly
+                      ? null
+                      : () async {
+                          final picker = ImagePicker();
+                          final image = await picker.pickImage(
+                            source: ImageSource.camera,
+                          );
+                          if (image != null && context.mounted) {
+                            context.read<DigitizeBloc>().add(
+                                  DigitizeEvent.recognizeTextFromImage(
+                                    image.path,
+                                  ),
+                                );
+                          }
+                        },
+                  text: context.l10n.scanTextOcr,
+                  icon: Icons.document_scanner,
+                  isLoading: state.ocrStatus == OcrStatus.loading,
+                  backgroundColor: AppColors.slate700,
+                  textColor: AppColors.slate50,
+                ),
+                const SizedBox(height: 18),
+
                 // Full name
                 TextFieldWidget(
                   controller: _nameController,

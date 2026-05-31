@@ -254,6 +254,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get inDevelopment => 'В розробці...';
 
   @override
+  String get scanTextOcr => 'Сканувати текст (OCR)';
+
+  @override
   String yearsOld(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

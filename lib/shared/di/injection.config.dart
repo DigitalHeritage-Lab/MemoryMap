@@ -17,6 +17,7 @@ import 'package:memory_map/components/cemeteries/bloc/cemetery_detail_bloc.dart'
     as _i119;
 import 'package:memory_map/components/digitize/bloc/digitize_bloc.dart'
     as _i603;
+import 'package:memory_map/components/digitize/ocr/ocr_service.dart' as _i1004;
 import 'package:memory_map/components/graves/bloc/graves_bloc.dart' as _i841;
 import 'package:memory_map/components/map/bloc/map_bloc.dart' as _i597;
 import 'package:memory_map/shared/bloc/app_version/app_version_cubit.dart'
@@ -45,6 +46,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i225.AppInfoRepository>(() => _i225.AppInfoRepository());
+    gh.lazySingleton<_i1004.OcrService>(() => _i1004.OcrService());
     gh.lazySingleton<_i175.GraveRepository>(
         () => _i299.SupabaseGraveRepository(gh<_i454.SupabaseClient>()));
     gh.factory<_i499.AppVersionCubit>(() =>
@@ -60,6 +62,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i603.DigitizeBloc>(() => _i603.DigitizeBloc(
           gh<_i473.CemeteryRepository>(),
           gh<_i473.GraveRepository>(),
+          gh<_i1004.OcrService>(),
         ));
     gh.factory<_i943.CemeteriesBloc>(
         () => _i943.CemeteriesBloc(gh<_i473.CemeteryRepository>()));
