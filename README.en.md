@@ -17,7 +17,7 @@
         <img src="https://img.shields.io/github/issues/DigitalHeritage-Lab/MemoryMap?style=flat&label=issues&labelColor=333940&color=red&logo=github" alt="Issues">
     </a>
     <a href="LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=github&labelColor=333940" alt="MIT License">
+        <img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg?logo=github&labelColor=333940" alt="PolyForm Noncommercial License">
     </a>
     <a href="README.md">
         <img src="https://img.shields.io/badge/lang-uk-blue.svg" alt="Ukrainian">
@@ -156,4 +156,4 @@ flutter test --coverage
 
 ## 📄 License
 
-Distributed under the [MIT License](LICENSE).
+Distributed under the [PolyForm Noncommercial 1.0.0 License](LICENSE).
