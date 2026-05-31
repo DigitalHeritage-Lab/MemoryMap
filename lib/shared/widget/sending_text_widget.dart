@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:memory_map/shared/constants/enum.dart';
+import 'package:memory_map/l10n/l10n.dart';
+import 'package:memory_map/shared/shared.dart';
 
 class SendingTextWidget extends StatelessWidget {
   const SendingTextWidget({
@@ -27,21 +28,19 @@ class SendingTextWidget extends StatelessWidget {
         content = Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(
-              width: 14,
-              height: 14,
-              child: CircularProgressIndicator(
+            SizedBox(
+              width: AppSpacing.m,
+              height: AppSpacing.m,
+              child: const CircularProgressIndicator(
                 strokeWidth: 2,
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(Color(0xFF10B981)), // Emerald
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.emerald),
               ),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: AppSpacing.xs),
             Text(
-              sendingText ?? 'Збереження...',
-              style: const TextStyle(
-                color: Color(0xFF94A3B8), // Slate 400
-                fontSize: 14,
+              sendingText ?? context.l10n.saving,
+              style: AppTextStyles.label.copyWith(
+                color: AppColors.slate400,
               ),
             ),
           ],
@@ -50,18 +49,16 @@ class SendingTextWidget extends StatelessWidget {
         content = Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.check_circle_outline,
-              color: Color(0xFF10B981), // Emerald
-              size: 16,
+              color: AppColors.emerald,
+              size: AppSpacing.m,
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: AppSpacing.xs),
             Text(
-              successText ?? 'Успішно збережено!',
-              style: const TextStyle(
-                color: Color(0xFF10B981),
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+              successText ?? context.l10n.saveSuccess,
+              style: AppTextStyles.label.copyWith(
+                color: AppColors.emerald,
               ),
             ),
           ],
@@ -71,19 +68,17 @@ class SendingTextWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(
+            Icon(
               Icons.error_outline,
-              color: Color(0xFFEF4444), // Red
-              size: 16,
+              color: AppColors.red,
+              size: AppSpacing.m,
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: AppSpacing.xs),
             Expanded(
               child: Text(
-                errorText ?? 'Помилка збереження',
-                style: const TextStyle(
-                  color: Color(0xFFEF4444),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                errorText ?? context.l10n.saveErrorGeneric,
+                style: AppTextStyles.label.copyWith(
+                  color: AppColors.red,
                 ),
               ),
             ),
@@ -94,7 +89,7 @@ class SendingTextWidget extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: AppSpacing.xs),
       child: content,
     );
   }

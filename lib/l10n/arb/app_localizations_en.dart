@@ -58,11 +58,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String saveError(String error) {
-    return 'Failed to save: $error';
+    return 'Save error: $error';
   }
 
   @override
-  String get fullName => 'Full Name';
+  String get saveErrorGeneric => 'Save error';
+
+  @override
+  String get fullName => 'Deceased Full Name';
 
   @override
   String get cemetery => 'Cemetery';
@@ -253,6 +256,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scanTextOcr => 'Scan text (OCR)';
+
+  @override
+  String get ocrSuccessMessage =>
+      'Data recognized! Please verify the correctness.';
 
   @override
   String yearsOld(int count) {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:memory_map/shared/constants/theme/app_colors.dart';
+import 'package:memory_map/shared/constants/theme/app_spacing.dart';
+import 'package:memory_map/shared/constants/theme/app_text_styles.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -26,7 +29,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isEnabled = onPressed != null && !isLoading;
 
-    const disabledBgColor = Color(0xFF1E293B);
+    const disabledBgColor = AppColors.slate800;
 
     return Container(
       width: width,
@@ -35,25 +38,25 @@ class AppButton extends StatelessWidget {
         gradient: isEnabled && backgroundColor == null
             ? const LinearGradient(
                 colors: [
-                  Color(0xFF064E3B),
-                  Color(0xFF0F766E),
+                  AppColors.deepEmerald,
+                  AppColors.teal,
                 ], // Emerald to Teal
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               )
             : null,
         color: isEnabled
-            ? (backgroundColor ?? const Color(0xFF064E3B))
+            ? (backgroundColor ?? AppColors.deepEmerald)
             : disabledBgColor,
         border: Border.all(
           color: isEnabled
-              ? const Color(0xFF10B981).withValues(alpha: 0.3)
-              : const Color(0xFF334155),
+              ? AppColors.emerald.withValues(alpha: 0.3)
+              : AppColors.slate700,
         ),
         boxShadow: isEnabled
             ? [
                 BoxShadow(
-                  color: const Color(0xFF10B981).withValues(alpha: 0.15),
+                  color: AppColors.emerald.withValues(alpha: 0.15),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -69,7 +72,10 @@ class AppButton extends StatelessWidget {
             // Internal padding to ensure the whole area is clickable and
             // feedback looks good
             padding: padding ??
-                const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                EdgeInsets.symmetric(
+                  vertical: AppSpacing.m,
+                  horizontal: AppSpacing.xl,
+                ),
             child: Center(
               child: isLoading
                   ? const SizedBox(
@@ -86,17 +92,14 @@ class AppButton extends StatelessWidget {
                       children: [
                         if (icon != null) ...[
                           Icon(icon, color: Colors.white, size: 18),
-                          const SizedBox(width: 8),
+                          SizedBox(width: AppSpacing.xs),
                         ],
                         Text(
                           text,
-                          style: TextStyle(
+                          style: AppTextStyles.button.copyWith(
                             color: isEnabled
                                 ? (textColor ?? Colors.white)
-                                : const Color(0xFF64748B),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.5,
+                                : AppColors.slate500,
                           ),
                         ),
                       ],

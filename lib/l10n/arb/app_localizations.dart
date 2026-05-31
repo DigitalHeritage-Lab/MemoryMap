@@ -197,13 +197,19 @@ abstract class AppLocalizations {
   /// No description provided for @saveError.
   ///
   /// In en, this message translates to:
-  /// **'Failed to save: {error}'**
+  /// **'Save error: {error}'**
   String saveError(String error);
+
+  /// No description provided for @saveErrorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Save error'**
+  String get saveErrorGeneric;
 
   /// No description provided for @fullName.
   ///
   /// In en, this message translates to:
-  /// **'Full Name'**
+  /// **'Deceased Full Name'**
   String get fullName;
 
   /// No description provided for @cemetery.
@@ -559,6 +565,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Scan text (OCR)'**
   String get scanTextOcr;
+
+  /// No description provided for @ocrSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Data recognized! Please verify the correctness.'**
+  String get ocrSuccessMessage;
 
   /// No description provided for @yearsOld.
   ///
